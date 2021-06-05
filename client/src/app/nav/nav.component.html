@@ -15,12 +15,16 @@
             </li>
         </ul>
 
-        <form class="form-inline mt-2 mt-md-0">
+        <form #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()">
             <input
+                name="username"
+                [(ngModel)]="model.username"
                 class="form-control mr-sm-2"
                 type="text"
                 placeholder="Username">
             <input
+                name="password"
+                [(ngModel)]="model.password"
                 class="form-control mr-sm-2"
                 type="password"
                 placeholder="Password">
