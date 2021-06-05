@@ -9,7 +9,7 @@ import { AccountService } from '../_services/account.service';
     styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-    model: any = []
+    model: any = {}
     currentUser$: Observable<User>
 
     constructor(private accountService: AccountService) { }

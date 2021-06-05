@@ -33,11 +33,13 @@ export class AccountService {
               localStorage.setItem('user', JSON.stringify(user));
               this.currentUserSource.next(user);
             }
-          })
+          }, error => {
+            console.log(error)
+        })
         )
     }
 
-    setCurrentUser(user: User) {
+    setCurrentUser(user: User) { console.log(user)
         this.currentUserSource.next(user)
     }
 
