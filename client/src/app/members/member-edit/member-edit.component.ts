@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
@@ -11,10 +13,11 @@ import { MembersService } from 'src/app/_services/members.service';
     styleUrls: ['./member-edit.component.scss']
 })
 export class MemberEditComponent implements OnInit {
+    @ViewChild('editForm') editForm: NgForm;
     member: Member;
     user: User;
 
-    constructor(private accountService: AccountService, private memberService: MembersService) {
+    constructor(private accountService: AccountService, private memberService: MembersService, private toastr: ToastrService) {
 
     }
 
@@ -28,6 +31,13 @@ export class MemberEditComponent implements OnInit {
     loadMember() {
         this.memberService.getMember(this.user.userName).subscribe(member => {
             this.member = member;
+        })
+    }
+
+    updateMember() {
+        this.memberService.updateMember(this.member).subscribe(() => {
+            this.toastr.success('Profile updated successfully');
+            this.editForm.reset(this.member);
         })
     }
 
