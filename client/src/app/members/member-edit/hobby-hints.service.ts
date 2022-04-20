@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,13 +15,26 @@ export class HobbyService {
     showHobbyHints = (text: string) => this.http.get(environment.apiUrl + 'editprofile/' + text)
 
     addHobby(hobby, username) { console.log(5)
-        this.http.post(environment.apiUrl + 'editprofile/addhobby', {
+        return this.http.post(environment.apiUrl + 'editprofile/addhobby', {
             'hobbyId': hobby.id,
             'hobbyname': hobby.name,
             'username' : username
-        }).subscribe((response: boolean) => {
-            console.log(response)
-            if(response) { }
-        })
+        }).pipe(
+            map(response => {
+                return response
+            })
+        )
+    }
+
+    removeHobby(hobby, username) { console.log(6)
+        return this.http.post(environment.apiUrl + 'editprofile/removeHobby', {
+            'hobbyId': hobby.id,
+            'hobbyname': hobby.name,
+            'username' : username
+        }).pipe(
+            map(response => {
+                return response
+            })
+        )
     }
 }

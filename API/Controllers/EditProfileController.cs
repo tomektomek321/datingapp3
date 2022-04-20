@@ -35,6 +35,17 @@ namespace API.Controllers
 
         }
 
+        [HttpPost("removehobby")]
+        public ActionResult<bool> removeHobby(AddHobbyDto hobby)
+        {
+            bool isAdded = _editProfileRepository.removeHobby(hobby);
+
+            if(isAdded) return Ok(isAdded);
+
+            return Unauthorized(false);
+
+        }
+
 
     }
 }

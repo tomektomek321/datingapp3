@@ -62,5 +62,22 @@ namespace API.Data
 
         }
 
+        public bool removeHobby(AddHobbyDto hobby) {
+
+            int userId = this._context.Users.FirstOrDefault(x => x.UserName == hobby.username).Id;
+
+            var x = this._context.UserHobbies
+                .Where(hobby_ => hobby_.Id == hobby.hobbyId)
+                .First();
+
+            this._context.UserHobbies.Remove(x);
+
+            if(this._context.SaveChanges() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 }

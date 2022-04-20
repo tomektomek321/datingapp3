@@ -45,7 +45,7 @@
                     <textarea class="form-control" [(ngModel)]="member.lookingFor" name="lookingFor" rows="4"></textarea>
                     <h4 class="mt-2">Hobbies</h4>
                     <div class="form-inline my-3">
-                        <h4><span *ngFor="let item of member.userHobbies" class="badge rounded-pill bg-warning text-dark mx-1">
+                        <h4><span *ngFor="let item of member.userHobbies" (click)="removeHobby(item)" class="hoverRemove badge rounded-pill bg-warning text-dark mx-1">
                             {{ item.name }}
                         </span></h4>
                     </div>

@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
-import { Member } from 'src/app/_models/member';
+import { Member, UserHobbies } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
@@ -18,7 +18,7 @@ export class MemberEditComponent implements OnInit {
     member: Member;
     user: User;
     hobbyToAdd: string
-    hobbyToAddObject: object
+    hobbyToAddObject: UserHobbies
 
     allHobbiesNames: any = []
     hobbiesNamesPromptsShow = false
@@ -108,6 +108,29 @@ export class MemberEditComponent implements OnInit {
         let user = this.accountService.currentUser$;
         console.log(user)
         this.hobbyService.addHobby(this.hobbyToAddObject, this.accountService.getUser().userName)
+        .subscribe((response: boolean) => {
+            if(response) {
+                this.member.userHobbies.push(this.hobbyToAddObject)
+                this.updateMember()
+            }
+        })
+
+    }
+
+    removeHobby(hobby) {
+
+        let user = this.accountService.currentUser$;
+        console.log(user)
+        this.hobbyService.removeHobby(hobby, this.accountService.getUser().userName)
+        .subscribe((response: boolean) => {
+            if(response) {
+                const index = this.member.userHobbies.findIndex(item => item.id == hobby.id)
+                this.member.userHobbies.splice(index, 1)
+                this.updateMember()
+            }
+        })
+
+
     }
 
 }

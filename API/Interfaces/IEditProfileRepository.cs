@@ -11,5 +11,6 @@ namespace API.Interfaces
     {
         IEnumerable<Hobby> getHobbyHint(string text, string username);
         bool addHobby(AddHobbyDto hobby);
+        bool removeHobby(AddHobbyDto hobby);
     }
 }
