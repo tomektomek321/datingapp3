@@ -17,11 +17,19 @@ namespace API.Data
             _context = context;
         }
 
-        public IEnumerable<Hobby> getHobbyHint(string text)
+        public IEnumerable<Hobby> getHobbyHint(string text, string username)
         {
-            return _context.Hobbies
+            var user = _context.Users
+                .Include(user => user.UserHobbies)
+                    .ThenInclude(x => x.Hobby)
+                .Where(user => user.UserName == username)
+                .FirstOrDefault();
+
+            var f = _context.Hobbies
                 .Where(x => x.Name.Contains(text))
                 .ToList();
+
+            return f;
         }
 
         public bool addHobby(AddHobbyDto hobby)
@@ -39,11 +47,11 @@ namespace API.Data
 
             if(y) { return false; }
 
+            var hobbyToAdd = _context.Hobbies.Find(hobby.hobbyId);
+
             this._context.UserHobbies.Add(new UserHobby() {
                 AppUserId = userId,
-                Hobby = new Hobby() {
-                    Name = hobby.hobbyname
-                },
+                Hobby = hobbyToAdd
             });
 
             if(this._context.SaveChanges() > 0) {

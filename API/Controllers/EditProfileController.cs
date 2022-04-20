@@ -19,7 +19,8 @@ namespace API.Controllers
         [HttpGet("{text}")]
         public IEnumerable<Hobby> getHobbyHint(string text)
         {
-            return _editProfileRepository.getHobbyHint(text);
+            var user = User.GetUsername();
+            return _editProfileRepository.getHobbyHint(text, user);
         }
 
 

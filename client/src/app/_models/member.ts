@@ -1,5 +1,10 @@
 import { Photo } from './photo';
 
+export interface UserHobbies {
+    id: number;
+    name: string;
+}
+
 export interface Member {
     id: number;
     username: string;
@@ -15,4 +20,5 @@ export interface Member {
     city: string;
     country: string;
     photos: Photo[];
+    userHobbies: UserHobbies[];
 }

@@ -20,9 +20,7 @@ export class HobbyService {
             'username' : username
         }).subscribe((response: boolean) => {
             console.log(response)
-            if(response) {
-
-            }
+            if(response) { }
         })
     }
 }

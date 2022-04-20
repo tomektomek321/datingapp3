@@ -9,7 +9,7 @@ namespace API.Interfaces
 {
     public interface IEditProfileRepository
     {
-        IEnumerable<Hobby> getHobbyHint(string text);
+        IEnumerable<Hobby> getHobbyHint(string text, string username);
         bool addHobby(AddHobbyDto hobby);
     }
 }

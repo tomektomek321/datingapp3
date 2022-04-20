@@ -42,12 +42,14 @@ export class MemberEditComponent implements OnInit {
     ngOnInit(): void {
         this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
             this.user = user
+            console.log(user)
             this.loadMember()
         });
     }
 
     loadMember() {
         this.memberService.getMember(this.user.userName).subscribe(member => {
+            console.log(member)
             this.member = member;
         })
     }
@@ -59,11 +61,18 @@ export class MemberEditComponent implements OnInit {
         })
     }
 
+    removeUsedHobbies(allHobbies) {
+        const allIds = allHobbies.map(item => item.name)
+        const userHobbiesIds = this.member.userHobbies.map(item => item.name)
+        const toShow = allIds.filter(item => !userHobbiesIds.includes(item))
+        const a = allHobbies.filter(item => toShow.includes(item.name))
+        return a;
+    }
+
     showHobbyHint() {
-        console.log(4)
         this.hobbyService.showHobbyHints(this.hobbyToAdd).subscribe( response => {
             console.log(response)
-            this.allHobbiesNames = response
+            this.allHobbiesNames = this.removeUsedHobbies(response)
             this.showCompaniesPrompt()
         })
     }
@@ -71,9 +80,6 @@ export class MemberEditComponent implements OnInit {
     showCompaniesPrompt() {
 
         this.hobbiesNamesPromptsShow = true
-
-
-
 
         /*console.log(this.model.Manufacturer)
         console.log(this.allHobbiesNames)

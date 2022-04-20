@@ -55,7 +55,7 @@
                             <input [(ngModel)]="hobbyToAdd" (keyup)="showHobbyHint()" type="text" name="hobbyToAdd" class="form-control mx-2">
                             <button (click)="addHobby()" class="btn btn-success px-3">Add</button>
                             <div class="hobbiesPrompts" *ngIf="hobbiesNamesPromptsShow">
-                                <div *ngFor="let hobby_ of allHobbiesNames | keyvalue" (mouseenter)="test(hobby_.value)" (click)="selectCompany(hobby_.value)">
+                                <div *ngFor="let hobby_ of allHobbiesNames | keyvalue" (click)="selectCompany(hobby_.value)">
                                     {{ hobby_.value.name }}
                                 </div>
                             </div>
