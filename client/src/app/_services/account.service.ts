@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AccountService {
     baseUrl = environment.apiUrl;
+    user: User;
     private currentUserSource = new ReplaySubject<User>(1)
     currentUser$ = this.currentUserSource.asObservable()
 
@@ -39,6 +40,7 @@ export class AccountService {
     }
 
     setCurrentUser(user: User) {
+        this.user = user;
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSource.next(user)
     }
@@ -47,4 +49,6 @@ export class AccountService {
         localStorage.removeItem('user')
         this.currentUserSource.next(null)
     }
+
+    getUser = () => this.user
 }

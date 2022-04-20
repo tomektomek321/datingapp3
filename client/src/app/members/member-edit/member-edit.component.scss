@@ -1,0 +1,34 @@
+.hobbyPrompt {
+    position: relative;
+
+    .hobbiesPrompts {
+        position: absolute;
+        top: 108%;
+        background-color: #ffffff;
+        left: 11%;
+
+        div {
+            background-color: #f1f1f1;
+            padding: 7px 15px;
+            margin-bottom: 2px;
+            box-shadow: 0px 0px 5px 3px #d6d6d6;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #e8e8e8;
+                box-shadow: 0px 0px 5px 3px #c9c9c9;
+            }
+        }
+    }
+
+}
+
+.form-control, .card  {
+    background-color: #707683;
+    color: white;
+}
+
+.img-thumbnail  {
+    padding: 0 !important;
+    border-color: #707683 !important;
+}
