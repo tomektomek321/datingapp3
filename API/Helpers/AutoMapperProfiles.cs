@@ -18,7 +18,8 @@ namespace API.Helpers
             CreateMap<UserHobby, HobbyDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Hobby.Name));
             CreateMap<MemberUpdateDto, AppUser>();
-            CreateMap<RegisterDto, AppUser>();
+            CreateMap<RegisterDto, AppUser>()
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country));
         }
     }
 }

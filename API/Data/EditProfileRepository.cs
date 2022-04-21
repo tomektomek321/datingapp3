@@ -26,28 +26,28 @@ namespace API.Data
                 .FirstOrDefault();
 
             var f = _context.Hobbies
-                .Where(x => x.Name.Contains(text))
+                .Where(x => x.Name.ToLower().Contains(text.ToLower()))
                 .ToList();
 
             return f;
         }
 
-        public bool addHobby(AddHobbyDto hobby)
+        public bool addHobby(AddHobbyDto hobbyDto)
         {
-            int userId = this._context.Users.FirstOrDefault(x => x.UserName == hobby.username).Id;
+            int userId = this._context.Users.FirstOrDefault(x => x.UserName == hobbyDto.username).Id;
 
             var x = this._context.Users
                 .Include(x => x.UserHobbies)
                     .ThenInclude(x => x.Hobby)
-                .FirstOrDefault(x => x.UserName == hobby.username);
+                .FirstOrDefault(x => x.UserName == hobbyDto.username);
 
             var hobbies = x.UserHobbies.ToList();
 
-            var y = x.UserHobbies.Any(x => x.Hobby.Name == hobby.hobbyname);
+            var y = x.UserHobbies.Any(x => x.Hobby.Name == hobbyDto.hobbyname);
 
             if(y) { return false; }
 
-            var hobbyToAdd = _context.Hobbies.Find(hobby.hobbyId);
+            var hobbyToAdd = _context.Hobbies.Find(hobbyDto.hobbyId);
 
             this._context.UserHobbies.Add(new UserHobby() {
                 AppUserId = userId,
@@ -62,12 +62,12 @@ namespace API.Data
 
         }
 
-        public bool removeHobby(AddHobbyDto hobby) {
+        public bool removeHobby(AddHobbyDto hobbyDto) {
 
-            int userId = this._context.Users.FirstOrDefault(x => x.UserName == hobby.username).Id;
+            int userId = this._context.Users.FirstOrDefault(x => x.UserName == hobbyDto.username).Id;
 
             var x = this._context.UserHobbies
-                .Where(hobby_ => hobby_.Id == hobby.hobbyId)
+                .Where(hobby_ => hobby_.Id == hobbyDto.hobbyId)
                 .First();
 
             this._context.UserHobbies.Remove(x);

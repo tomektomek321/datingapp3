@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -32,13 +33,21 @@ namespace API.Controllers
         {
             if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
 
-            var user = _mapper.Map<AppUser>(registerDto);
+            var cityToAdd = _context.Cities.Find(registerDto.City);
+            var countryToAdd = _context.Countries.Find(registerDto.Country);
 
             using var hmac = new HMACSHA512();
 
-            user.UserName = registerDto.Username.ToLower();
-            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
-            user.PasswordSalt = hmac.Key;
+            AppUser user = new AppUser() {
+                UserName = registerDto.Username.ToLower(),
+                KnownAs = registerDto.KnownAs,
+                City = cityToAdd,
+                Country = countryToAdd,
+                DateOfBirth = registerDto.DateOfBirth,
+                Gender = registerDto.Gender,
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+                PasswordSalt = hmac.Key,
+            };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -50,6 +59,22 @@ namespace API.Controllers
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
             };
+        }
+
+        [HttpGet("hintsForCities/{text}")]
+        public List<City> getHintsForCities(string text) {
+
+            var cities = _context.Cities.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList();
+
+            return cities;
+        }
+
+        [HttpGet("hintsForCountries/{text}")]
+        public List<Country> getHintsForCountries(string text) {
+
+            var countries = _context.Countries.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList();
+
+            return countries;
         }
 
 

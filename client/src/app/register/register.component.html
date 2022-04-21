@@ -15,8 +15,22 @@
     <app-text-input [formControl]='registerForm.controls["knownAs"]' [label]='"Known As"'></app-text-input>
     <app-date-input [formControl]='registerForm.controls["dateOfBirth"]' [label]='"Date Of Birth"' [maxDate]='maxDate'>
     </app-date-input>
-    <app-text-input [formControl]='registerForm.controls["city"]' [label]='"City"'></app-text-input>
-    <app-text-input [formControl]='registerForm.controls["country"]' [label]='"Country"'></app-text-input>
+    <div class="prompt">
+        <app-text-input (keyup)="showCitiesHints()" [formControl]='registerForm.controls["city"]' [label]='"City"'></app-text-input>
+        <div class="cityPrompts" *ngIf="citiesNamesPromptsShow">
+            <div *ngFor="let city_ of allCitiesNames | keyvalue" (click)="selectCity(city_.value)">
+                {{ city_.value.name }}
+            </div>
+        </div>
+    </div>
+    <div class="prompt">
+        <app-text-input (keyup)="showCountriesHints()" [formControl]='registerForm.controls["country"]' [label]='"Country"'></app-text-input>
+        <div class="countryPrompts" *ngIf="countriesNamesPromptsShow">
+            <div *ngFor="let country_ of allCountriesNames | keyvalue" (click)="selectCountry(country_.value)">
+                {{ country_.value.name }}
+            </div>
+        </div>
+    </div>
     <app-text-input [formControl]='registerForm.controls["password"]' [label]='"Password"' [type]='"password"'>
     </app-text-input>
     <app-text-input [formControl]='registerForm.controls["confirmPassword"]' [label]='"Confirm Password"'
