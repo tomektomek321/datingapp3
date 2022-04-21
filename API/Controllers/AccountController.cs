@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -24,6 +25,7 @@ namespace API.Controllers
             _context = context;
             _mapper = mapper;
         }
+
 
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)

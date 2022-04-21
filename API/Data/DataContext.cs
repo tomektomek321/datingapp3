@@ -14,6 +14,8 @@ namespace API.Data
         public DbSet<UserLike> Likes { get; set; }
         public DbSet<UserHobby> UserHobbies { get; set; }
         public DbSet<Hobby> Hobbies { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
