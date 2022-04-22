@@ -19,7 +19,7 @@ export class HobbyService {
 
     showHobbyHints = (text: string) => this.http.get(this.getHobbyHintsURL + text)
 
-    addHobby(hobby, username) { console.log(5)
+    addHobby(hobby, username) {
         return this.http.post(this.addHobbyURL, {
             'hobbyId': hobby.id,
             'hobbyname': hobby.name,
@@ -31,7 +31,7 @@ export class HobbyService {
         )
     }
 
-    removeHobby(hobby, username) { console.log(6)
+    removeHobby(hobby, username) {
         return this.http.post(this.removeHobbyURL, {
             'hobbyId': hobby.id,
             'hobbyname': hobby.name,

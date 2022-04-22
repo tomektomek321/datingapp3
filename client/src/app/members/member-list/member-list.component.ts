@@ -25,7 +25,7 @@ export class MemberListComponent implements OnInit {
         this.loadMembers()
     }
 
-    loadMembers() {
+    loadMembers(): void { console.log(this.userParams);
         this.memberService.setUserParams(this.userParams)
         this.memberService.getMembers(this.userParams).subscribe(response => {
             this.members = response.result
@@ -33,15 +33,25 @@ export class MemberListComponent implements OnInit {
         })
     }
 
-    resetFilters() {
+    resetFilters(): void {
         this.userParams = this.memberService.resetUserParams()
         this.loadMembers()
     }
 
-    pageChanged(event: any) {
+    pageChanged(event: any): void {
         this.userParams.pageNumber = event.page
         this.memberService.setUserParams(this.userParams)
         this.loadMembers()
+    }
+
+    getValue($event) {
+        console.log($event);
+        this.userParams.cities.push($event);
+        console.log(this.userParams);
+    }
+
+    addHobby() {
+
     }
 
 }
