@@ -28,7 +28,7 @@ export class TextInputWithHintsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-
+        console.log(this.allItems)
     }
 
     getHints() {

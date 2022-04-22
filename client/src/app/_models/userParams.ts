@@ -3,11 +3,11 @@ import { User } from './user'
 export class UserParams {
     gender: string
     minAge = 18
-    maxAge = 99
+    maxAge = 25
     pageNumber = 1
-    pageSize = 45
+    pageSize = 25
     orderBy = 'lastActive'
-    cities = [1,2]
+    cities = []
 
     constructor(user: User) {
         this.gender = user.gender === 'female' ? 'male' : 'female'
