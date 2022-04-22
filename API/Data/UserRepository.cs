@@ -48,6 +48,19 @@ namespace API.Data
                 _ => query.OrderByDescending(u => u.LastActive)
             };
 
+            if(userParams.Cities != null) {
+                List<string> stringCitiesId = userParams.Cities.Split("-").ToList();
+                int[] citiesId = new int[stringCitiesId.Count];
+                int coutner = 0;
+                foreach (var item in stringCitiesId)
+                {
+                    citiesId[coutner++] = int.Parse(item);
+                }
+
+                query = query.Where(u => citiesId.Contains(u.City.Id));
+
+            }
+
             return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper
                 .ConfigurationProvider).AsNoTracking(),
                     userParams.PageNumber, userParams.PageSize);

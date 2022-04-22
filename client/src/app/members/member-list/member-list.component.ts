@@ -46,7 +46,7 @@ export class MemberListComponent implements OnInit {
 
     getValue($event) {
         console.log($event);
-        this.userParams.cities.push($event);
+        this.userParams.cities.push($event.id);
         console.log(this.userParams);
     }
 

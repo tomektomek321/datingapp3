@@ -51,6 +51,11 @@ export class MembersService {
         params = params.append('maxAge', userParams.maxAge.toString());
         params = params.append('gender', userParams.gender);
         params = params.append('orderBy', userParams.orderBy);
+        console.log(userParams.cities)
+        console.log(userParams.cities.toString())
+        console.log(JSON.stringify(userParams.cities))
+        if(userParams.cities.length > 0)
+            params = params.append('cities', JSON.stringify(userParams.cities).replace(",", "-").replace("]", "").replace("[", ""));
 
         return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params)
             .pipe(map(response => {

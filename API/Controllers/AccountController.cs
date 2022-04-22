@@ -27,66 +27,6 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("testUsers")]
-        public void testUsers()
-        {
-
-            var random = new Random();
-
-            int maleLogin = 120000;
-            int famaleLogin = 120000;
-
-
-
-            for (int i = 0; i < 257000; i++)
-            {
-                AppUser registerDto;
-
-                int plecRand = random.Next(1, 2);
-
-                int cityRand = random.Next(1, 16);
-                //Console.WriteLine("cityRand");
-                //Console.WriteLine(cityRand);
-
-                int yearRand = random.Next(1972, 2005);
-                int yearMonth = random.Next(1, 13);
-                int yearDay = random.Next(1, 27);
-
-                //Console.WriteLine("yearRand");
-                //Console.WriteLine(yearRand);
-
-                    string username = plecRand == 0 ? "tom" + maleLogin : "ana" + famaleLogin;
-                    string knownAs = plecRand == 0 ? "tom" + maleLogin : "ana" + famaleLogin;
-                    string passwird = plecRand == 0 ? "tom" + maleLogin++ : "ana" + famaleLogin++;
-
-                    var cityToAdd = _context.Cities.Find(cityRand);
-                    var countryToAdd = _context.Countries.Find(1);
-
-
-                    using var hmac = new HMACSHA512();
-
-                    registerDto = new AppUser() {
-                        UserName = username.ToLower(),
-                        KnownAs = knownAs,
-                        City = cityToAdd,
-                        Country = countryToAdd,
-                        DateOfBirth = new DateTime(yearRand, yearMonth, yearDay),
-                        Gender = plecRand == 0 ? "male" : "female",
-                        PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(username)),
-                        PasswordSalt = hmac.Key,
-                    };
-
-                    _context.Users.Add(registerDto);
-
-
-            }
-
-            _context.SaveChanges();
-
-        }
-
-
-
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {

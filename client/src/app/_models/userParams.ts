@@ -7,7 +7,7 @@ export class UserParams {
     pageNumber = 1
     pageSize = 45
     orderBy = 'lastActive'
-    cities = []
+    cities = [1,2]
 
     constructor(user: User) {
         this.gender = user.gender === 'female' ? 'male' : 'female'
