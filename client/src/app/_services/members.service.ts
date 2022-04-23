@@ -8,6 +8,7 @@ import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
+import { createCitiesIdStringForRequest } from './utl';
 
 @Injectable({
     providedIn: 'root'
@@ -52,12 +53,7 @@ export class MembersService {
         params = params.append('gender', userParams.gender);
         params = params.append('orderBy', userParams.orderBy);
         if(userParams.cities.length > 0) {
-            let citiesString = ""
-            userParams.cities.forEach(element => {
-                citiesString += (element.id + "-")
-            });
-
-            citiesString = citiesString.slice(0, citiesString.length - 1);
+            const citiesString = createCitiesIdStringForRequest(userParams.cities)
             params = params.append('cities', citiesString);
         }
 
