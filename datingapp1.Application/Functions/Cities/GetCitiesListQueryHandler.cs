@@ -12,6 +12,11 @@ public class GetCitiesListQueryHandler : IRequestHandler<GetCitiesListQuery, Lis
 {
     private readonly IRepository<City> _cityRepository;
 
+    public GetCitiesListQueryHandler(IRepository<City> cityRepository)
+    {
+        _cityRepository = cityRepository;
+    }
+
     public async Task<List<City>> Handle(GetCitiesListQuery request, CancellationToken cancellationToken)
     {
         var allCities = await _cityRepository.GetAll();
