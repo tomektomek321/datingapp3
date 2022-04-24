@@ -6,7 +6,7 @@ using MediatR;
 
 namespace datingapp1.Application.Functions.Users.Commands.CreateAppUser
 {
-    public class CreateAppUserCommand: IRequest<int>
+    public class CreateAppUserCommand: IRequest<CreateAppUserCommandResponse>
     {
         public string UserName { get; set; }
         public string KnownAs { get; set; }
