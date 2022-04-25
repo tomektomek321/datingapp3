@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\datingapp1.Domain\datingapp1.Domain.csproj" />
+	  <ProjectReference Include="..\datingapp1.Domain\datingapp1.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,6 +12,16 @@ public class CityRepository : BaseRepository<City>, ICityRepository
     public CityRepository(DatingAppContext dbContext) : base(dbContext)
     { }
 
+    public List<City> GetCitiesByText(string text)
+    {
+        var cities = _dbContext
+            .City
+            .Where(city_ => city_.Name.ToLower().Contains(text.ToLower()))
+            .ToList();
+
+        return cities;
+    }
+
     public Task<bool> IsNameAndAuthorAlreadyExist(string name)
     {
         var matches = _dbContext.City.

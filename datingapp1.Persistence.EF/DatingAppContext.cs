@@ -16,6 +16,7 @@ public class DatingAppContext: DbContext
     }
 
     public DbSet<City> City { get; set; }
+    public DbSet<AppUser> AppUser { get; set; }
 
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -58,7 +59,7 @@ public class DatingAppContext: DbContext
 
         foreach (var item in DummyWebinars.Get())
         {
-            modelBuilder.Entity<Webinar>().HasData(item);*/
-        }
+            modelBuilder.Entity<Webinar>().HasData(item);
+        }*/
     }
 }

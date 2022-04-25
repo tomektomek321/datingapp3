@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using datingapp1.Domain.Entities;
 using MediatR;
 
-namespace datingapp1.Application.Functions.Cities
-{
-    public class GetCitiesListQuery: IRequest<List<City>>
-    {
+namespace datingapp1.Application.Functions.Cities;
 
-    }
+public class GetCityByIdQuery: IRequest<List<City>>
+{
+
 }

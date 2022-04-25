@@ -8,5 +8,5 @@ namespace datingapp1.Application.Contracts.Persistance;
 
 public interface ICityRepository: IRepository<City>
 {
-
+    List<City> GetCitiesByText(string text);
 }
