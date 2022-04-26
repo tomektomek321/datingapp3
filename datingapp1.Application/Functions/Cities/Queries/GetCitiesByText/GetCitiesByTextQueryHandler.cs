@@ -7,19 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace datingapp1.Application.Functions.Cities.Queries.GetCitiesByText
+namespace datingapp1.Application.Functions.Countries.Queries.GetCountriesByText
 {
-    public class GetCitiesByTextQueryHandler : IRequestHandler<GetCitiesByTextQuery, List<City>>
+    public class GetCountriesByTextQueryHandler : IRequestHandler<GetCountriesByTextQuery, List<Country>>
     {
-        private readonly ICityRepository _cityRepository;
+        private readonly ICountryRepository _countryRepository;
 
-        public GetCitiesByTextQueryHandler(ICityRepository cityRepository)
+        public GetCountriesByTextQueryHandler(ICountryRepository countryRepository)
         {
-            _cityRepository = cityRepository;
+            _countryRepository = countryRepository;
         }
-        public Task<List<City>> Handle(GetCitiesByTextQuery request, CancellationToken cancellationToken)
+        public Task<List<Country>> Handle(GetCountriesByTextQuery request, CancellationToken cancellationToken)
         {
-            var cities = _cityRepository.GetCitiesByText(request.searchText);
+            var cities = _countryRepository.GetCountriesByText(request.searchText);
             return Task.FromResult(cities);
         }
     }

@@ -14,11 +14,13 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
 {
     private readonly IAppUserRepository _appUserRepository;
     private readonly ICityRepository _cityRepository;
+    private readonly ICountryRepository _countryRepository;
 
-    public RegisterCommandHandler(IAppUserRepository appUserRepository, ICityRepository cityRepository)
+    public RegisterCommandHandler(IAppUserRepository appUserRepository, ICityRepository cityRepository, ICountryRepository countryRepository)
     {
         _appUserRepository = appUserRepository;
         _cityRepository = cityRepository;
+        _countryRepository = countryRepository;
     }
 
     public async Task<RegisterCommandHandlerResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -26,8 +28,9 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
         bool userExists = await _appUserRepository.DoesUserNameAlreadyExists(request.Username);
 
         City city = await _cityRepository.GetById(request.City);
+        Country country = await _countryRepository.GetById(request.City);
 
-        if(userExists) return new RegisterCommandHandlerResponse("User already exists", false);
+        if (userExists) return new RegisterCommandHandlerResponse("User already exists", false);
 
         var validator = new RegisterCommandHandlerValidator(_appUserRepository/*, request.Password*/);
         var validatorResult = await validator.ValidateAsync(request);
@@ -45,8 +48,10 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
         {
             UserName = request.Username,
             KnownAs = request.KnownAs,
+            Gender = request.Gender,
             DateOfBirth = request.DateOfBirth.ToUniversalTime(),
             City = city,
+            Country = country,
             PasswordHash = password,
             PasswordSalt = hmac.Key,
         };

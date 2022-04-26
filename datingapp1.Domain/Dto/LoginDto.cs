@@ -9,6 +9,5 @@ namespace datingapp1.Domain.Dto
     public class LoginDto
     {
         public string Username { get; set; }
-        public string Token { get; set; }
     }
 }

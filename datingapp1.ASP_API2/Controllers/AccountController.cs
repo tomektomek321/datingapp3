@@ -18,7 +18,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("Register")]
-    public async Task<ActionResult<RegisterDto>> Register(RegisterCommand registerCommand)
+    public async Task<ActionResult<RegisterCommandHandlerResponse>> Register(RegisterCommand registerCommand)
     {
         var user = await _mediator.Send(registerCommand);
 
@@ -26,7 +26,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("Login")]
-    public async Task<ActionResult<LoginQueryResponse>> Login(LoginQuery loginQuery)
+    public async Task<ActionResult<LoginQueryResponse<LoginDto>>> Login(LoginQuery loginQuery)
     {
         var user = await _mediator.Send(loginQuery);
 

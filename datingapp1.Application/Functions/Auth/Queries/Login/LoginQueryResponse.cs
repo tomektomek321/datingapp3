@@ -6,25 +6,25 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace datingapp1.Application.Functions.Auth.Queries.Login;
-public class LoginQueryResponse : BaseResponse
+public class LoginQueryResponse<T> : BaseResponse
 {
-    public int? AppUserId { get; set; }
+    public T Data { get; set; }
 
-    public LoginQueryResponse() : base()
+    public LoginQueryResponse(): base()
     { }
 
-    public LoginQueryResponse(ValidationResult validationResult) : base(validationResult)
+    public LoginQueryResponse(ValidationResult validationResult): base(validationResult)
     { }
 
-    public LoginQueryResponse(string message) : base(message)
+    public LoginQueryResponse(string message): base(message)
     { }
 
-    public LoginQueryResponse(string message, bool success) : base(message, success)
+    public LoginQueryResponse(string message, bool success): base(message, success)
     { }
 
-    public LoginQueryResponse(int _AppUserId)
+    public LoginQueryResponse(T Data_): base()
     {
-        AppUserId = _AppUserId;
+        Data = Data_;
     }
 }
 

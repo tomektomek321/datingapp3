@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using datingapp1.Persistence.EF;
@@ -11,9 +12,10 @@ using datingapp1.Persistence.EF;
 namespace datingapp1.Persistence.EF.Migrations
 {
     [DbContext(typeof(DatingAppContext))]
-    partial class DatingAppContextModelSnapshot : ModelSnapshot
+    [Migration("20220426181933_genderTest")]
+    partial class genderTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +40,6 @@ namespace datingapp1.Persistence.EF.Migrations
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("integer");
 
                     b.Property<string>("KnownAs")
                         .HasColumnType("text");

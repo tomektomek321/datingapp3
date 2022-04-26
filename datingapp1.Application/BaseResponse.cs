@@ -12,6 +12,7 @@ namespace datingapp1.Application
         public bool Success { get; set; }
         public string Message { get; set; }
         public List<string> ValidationErrors { get; set; }
+        //public T data { get; set; }
 
         public BaseResponse()
         {
@@ -41,5 +42,10 @@ namespace datingapp1.Application
                 ValidationErrors.Add(item.ErrorMessage);
             }
         }
+
+        /*public BaseResponse(T data_)
+        {
+            data = data_;
+        }*/
     }
 }

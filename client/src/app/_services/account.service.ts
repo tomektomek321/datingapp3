@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
+import { HttpResponse } from '../_models/HttpResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -18,10 +19,10 @@ export class AccountService {
 
     login(model: any) {
         return this.http.post(this.baseUrl + 'account/login', model).pipe(
-            map( (response: User) => {
+            map( (response: HttpResponse<User>) => {
                 const user = response
                 if(user) {
-                    this.setCurrentUser(user)
+                    this.setCurrentUser(response.Data)
                 }
             })
         )

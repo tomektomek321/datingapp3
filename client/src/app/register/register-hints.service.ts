@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RegisterHintsService {
 
-    showCitiesHintsUrl: string = environment.apiUrl + 'account/hintsForCities/'
-    showCountriesHintsUrl: string = environment.apiUrl + 'account/hintsForCountries/'
+    showCitiesHintsUrl: string = environment.apiUrl + 'City/searchByText?_searchText='
+    showCountriesHintsUrl: string = environment.apiUrl + 'Country/searchByText?_searchText='
 
     constructor(
         private http: HttpClient

@@ -1,5 +1,6 @@
 ﻿using datingapp1.Application.Contracts.Persistance;
 using datingapp1.Application.Functions.Auth.Queries.Login;
+using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using FluentValidation;
 using MediatR;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace datingapp1.Application.Functions.Users.Queries.Login;
 
-public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse>
+public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse<LoginDto>>
 {
     private readonly IAppUserRepository _appUserRepository;
 
@@ -19,22 +20,22 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse>
     {
         _appUserRepository = appUserRepository;
     }
-    public async Task<LoginQueryResponse> Handle(LoginQuery request, CancellationToken cancellationToken)
+    public async Task<LoginQueryResponse<LoginDto>> Handle(LoginQuery request, CancellationToken cancellationToken)
     {
         var user = _appUserRepository.GetUserByUsername(request.Username).Result;
 
 
-        if (user == null) return new LoginQueryResponse("No Such User", false);
+        if (user == null) return new LoginQueryResponse<LoginDto>("No Such User", false);
 
         var validator = new LoginQueryHandlerValidator(_appUserRepository, user, request.Password);
         var validatorResult = await validator.ValidateAsync(request);
 
         if (!validatorResult.IsValid)
         {
-            return new LoginQueryResponse(validatorResult);
+            return new LoginQueryResponse<LoginDto>(validatorResult);
         }
 
-        return new LoginQueryResponse(user.Id);
+        return new LoginQueryResponse<LoginDto>(new LoginDto() { Username = user.UserName});
     }
 }
 

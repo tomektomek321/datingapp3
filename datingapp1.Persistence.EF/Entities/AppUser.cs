@@ -11,7 +11,8 @@ public class AppUser
     public byte[] PasswordSalt { get; set; }
     public DateTime DateOfBirth { get; set; }
     public string KnownAs { get; set; }
-    public string Gender { get; set; }
+    public int Gender { get; set; }
     public City City { get; set; }
     public Country Country { get; set; }
+    public ICollection<UserHobby> UserHobbies { get; set; }
 }
