@@ -13,4 +13,5 @@ public class AppUser
     public string KnownAs { get; set; }
     public string Gender { get; set; }
     public City City { get; set; }
+    public Country Country { get; set; }
 }

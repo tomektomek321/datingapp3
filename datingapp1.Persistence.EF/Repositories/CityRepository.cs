@@ -15,7 +15,7 @@ public class CityRepository : BaseRepository<City>, ICityRepository
     public List<City> GetCitiesByText(string text)
     {
         var cities = _dbContext
-            .City
+            .Cities
             .Where(city_ => city_.Name.ToLower().Contains(text.ToLower()))
             .ToList();
 
@@ -24,7 +24,7 @@ public class CityRepository : BaseRepository<City>, ICityRepository
 
     public Task<bool> IsNameAndAuthorAlreadyExist(string name)
     {
-        var matches = _dbContext.City.
+        var matches = _dbContext.Cities.
             Any(a => a.Name.Equals(name));
 
         return Task.FromResult(matches);

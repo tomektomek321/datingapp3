@@ -15,8 +15,9 @@ public class DatingAppContext: DbContext
     {
     }
 
-    public DbSet<City> City { get; set; }
-    public DbSet<AppUser> AppUser { get; set; }
+    public DbSet<City> Cities { get; set; }
+    public DbSet<Country> Countries { get; set; }
+    public DbSet<AppUser> AppUsers { get; set; }
 
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
