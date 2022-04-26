@@ -23,25 +23,28 @@ namespace datingapp1.Persistence.EF.Repositories
 
         }
 
-        public Task<AppUser> GetAppUser(RegisterDto loginDto)
+        public async Task<AppUser> GetUserByUsername(string username)
         {
+
             AppUser user = _dbContext
                             .AppUser
-                            .Where(x => x.UserName == loginDto.Username)
+                            .Where(x => x.UserName == username)
                             .FirstOrDefault();
 
-            if (user == null) return null;
+            return user;
 
-            using var hmac = new HMACSHA512(user.PasswordSalt);
+            /*
 
-            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+            
+
+            
 
             for (int i = 0; i < computedHash.Length; i++)
             {
                 if (computedHash[i] != user.PasswordHash[i]) return null;
             }
-
-            return Task.FromResult(user);
+            */
+            
 
             
         }

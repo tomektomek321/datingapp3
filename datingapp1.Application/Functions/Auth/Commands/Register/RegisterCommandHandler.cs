@@ -9,8 +9,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace datingapp1.Application.Functions.Users.Commands.Register;
-public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterDto>
+namespace datingapp1.Application.Functions.Auth.Commands.Register;
+public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterCommandHandlerResponse>
 {
     private readonly IAppUserRepository _appUserRepository;
     private readonly ICityRepository _cityRepository;
@@ -21,13 +21,21 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterD
         _cityRepository = cityRepository;
     }
 
-    public async Task<RegisterDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
+    public async Task<RegisterCommandHandlerResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
         bool userExists = await _appUserRepository.DoesUserNameAlreadyExists(request.Username);
 
         City city = await _cityRepository.GetById(request.City);
 
-        if(userExists) return null;
+        if(userExists) return new RegisterCommandHandlerResponse("User already exists", false);
+
+        var validator = new RegisterCommandHandlerValidator(_appUserRepository/*, request.Password*/);
+        var validatorResult = await validator.ValidateAsync(request);
+
+        if (!validatorResult.IsValid)
+        {
+            return new RegisterCommandHandlerResponse(validatorResult);
+        }
 
         using var hmac = new HMACSHA512();
 
@@ -45,15 +53,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterD
 
         await _appUserRepository.Add(user);
 
-        return new RegisterDto
-        {
-            Username = user.UserName,
-        };
-
-
-
-
-        throw new NotImplementedException();
+        return new RegisterCommandHandlerResponse(request.KnownAs);
     }
 }
 

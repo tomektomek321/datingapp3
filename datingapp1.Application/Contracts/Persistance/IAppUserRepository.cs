@@ -10,5 +10,5 @@ public interface IAppUserRepository: IRepository<AppUser>
 {
     Task<List<AppUser>> GetAppUsersList();
     Task<bool> DoesUserNameAlreadyExists(string UserName);
-    Task<AppUser> GetAppUser(RegisterDto loginDto);
+    Task<AppUser> GetUserByUsername(string username);
 }
