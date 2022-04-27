@@ -11,4 +11,5 @@ public interface IAppUserRepository: IRepository<AppUser>
     Task<List<AppUser>> GetAppUsersList();
     Task<bool> DoesUserNameAlreadyExists(string UserName);
     Task<AppUser> GetUserByUsername(string username);
+    Task<List<AppUser>> GetAppUsersByFilter(int MingAge, int MaxAge, int Gender, string OrderBy);
 }

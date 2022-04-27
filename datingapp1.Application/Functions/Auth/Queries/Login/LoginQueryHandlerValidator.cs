@@ -13,14 +13,7 @@ public class LoginQueryHandlerValidator : AbstractValidator<LoginQuery>
 {
     private readonly IAppUserRepository _appUserRepository;
     private readonly AppUser _user;
-    //private readonly string _username;
     private readonly string _password;
-
-    /*public LoginQueryHandlerValidator(string username, string password)
-    {
-        _username = username;
-        _password = password;
-    }*/
 
     public LoginQueryHandlerValidator(IAppUserRepository appUserRepository, AppUser user, string password)
     {

@@ -19,7 +19,8 @@ export class NavComponent implements OnInit {
         private accountService: AccountService,
         private userService: UserService,
         private router: Router,
-        private toastr: ToastrService) { }
+        private toastr: ToastrService
+        ) {}
 
     ngOnInit(): void {
         this.currentUser$ = this.userService.getUserObs()

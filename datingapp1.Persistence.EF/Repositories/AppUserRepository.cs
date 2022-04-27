@@ -33,5 +33,18 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
     {
         throw new NotImplementedException();
     }
+
+    public Task<List<AppUser>> GetAppUsersByFilter(int MingAge, int MaxAge, int Gender, string OrderBy)
+    {
+
+        var users = _dbContext.AppUsers
+            .Where(user => user.Gender == Gender)
+            .ToList();
+
+        return Task.FromResult(users);
+
+
+
+    }
 }
 

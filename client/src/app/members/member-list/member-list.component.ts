@@ -27,10 +27,11 @@ export class MemberListComponent implements OnInit {
 
     loadMembers(): void { console.log(this.userParams);
         this.memberService.setUserParams(this.userParams)
-        this.memberService.getMembers(this.userParams).subscribe(response => {
+        this.memberService.getMembers(this.userParams)
+        /*.subscribe(response => {
             this.members = response.result
             this.pagination = response.pagination
-        })
+        })*/
     }
 
     resetFilters(): void {
