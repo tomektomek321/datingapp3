@@ -9,6 +9,7 @@ import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { createCitiesIdStringForRequest } from './utl';
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root'
@@ -20,8 +21,10 @@ export class MembersService {
     user: User
     userParams: UserParams
 
-    constructor(private http: HttpClient, private accountService: AccountService) {
-        this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+    constructor(
+        private http: HttpClient,
+        private userService: UserService) {
+        this.userService.getUserObs().subscribe(user => {
             this.user = user;
             this.userParams = new UserParams(user);
         })

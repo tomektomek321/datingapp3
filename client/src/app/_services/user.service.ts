@@ -7,22 +7,18 @@ import { User } from '../_models/user';
 })
 export class UserService {
 
-    private user: User = {
-        userName: null,
-        gender: null,
-        photoUrl: null,
-        knownAs: null,
-        token: null,
-    };
+    private user: User = null;
 
     currentUser = new BehaviorSubject<User>(this.user)
 
     constructor() { }
 
-    getUser = () => this.currentUser.asObservable()
+    getUserObs = () => this.currentUser.asObservable()
+    getUser = (): User => this.user
 
     setUser = (user_: User) => {
         this.user = user_;
+        localStorage.setItem('user', JSON.stringify(this.user));
         this.currentUser.next(this.user);
     }
 

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
     selector: 'app-nav',
@@ -16,11 +17,12 @@ export class NavComponent implements OnInit {
 
     constructor(
         private accountService: AccountService,
+        private userService: UserService,
         private router: Router,
         private toastr: ToastrService) { }
 
     ngOnInit(): void {
-        this.currentUser$ = this.accountService.currentUser$
+        this.currentUser$ = this.userService.getUserObs()
     }
 
     login() {

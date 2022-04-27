@@ -1,4 +1,5 @@
-﻿using datingapp1.Application.Contracts.Persistance;
+﻿using datingapp1.Application.Contracts.Identity;
+using datingapp1.Application.Contracts.Persistance;
 using datingapp1.Application.Functions.Auth.Queries.Login;
 using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
@@ -15,10 +16,12 @@ namespace datingapp1.Application.Functions.Users.Queries.Login;
 public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse<LoginDto>>
 {
     private readonly IAppUserRepository _appUserRepository;
+    private readonly ITokenService _tokenService;
 
-    public LoginQueryHandler(IAppUserRepository appUserRepository)
+    public LoginQueryHandler(IAppUserRepository appUserRepository, ITokenService tokenService)
     {
         _appUserRepository = appUserRepository;
+        _tokenService = tokenService;
     }
     public async Task<LoginQueryResponse<LoginDto>> Handle(LoginQuery request, CancellationToken cancellationToken)
     {
@@ -35,7 +38,14 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse<
             return new LoginQueryResponse<LoginDto>(validatorResult);
         }
 
-        return new LoginQueryResponse<LoginDto>(new LoginDto() { Username = user.UserName});
+        LoginDto loginDto = new LoginDto() {
+            Username = user.UserName,
+            Gender = user.Gender,
+            KnownAs = user.KnownAs,
+            Token = _tokenService.CreateToken(user),
+        };
+
+        return new LoginQueryResponse<LoginDto>(loginDto);
     }
 }
 

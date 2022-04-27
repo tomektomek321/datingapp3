@@ -6,6 +6,7 @@ import { Member, UserHobbies } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
+import { UserService } from 'src/app/_services/user.service';
 import { HobbyService } from './hobby-hints.service';
 
 @Component({
@@ -32,6 +33,7 @@ export class MemberEditComponent implements OnInit {
     }
 
     constructor(
+        private userService: UserService,
         private accountService: AccountService,
         private memberService: MembersService,
         private toastr: ToastrService,
@@ -40,7 +42,7 @@ export class MemberEditComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+        this.userService.getUserObs().subscribe(user => {
             this.user = user
             console.log(user)
             this.loadMember()
@@ -48,7 +50,7 @@ export class MemberEditComponent implements OnInit {
     }
 
     loadMember() {
-        this.memberService.getMember(this.user.userName).subscribe(member => {
+        this.memberService.getMember(this.user.username).subscribe(member => {
             console.log(member)
             this.member = member;
         })
@@ -107,7 +109,7 @@ export class MemberEditComponent implements OnInit {
     addHobby() {
         let user = this.accountService.currentUser$;
         console.log(user)
-        this.hobbyService.addHobby(this.hobbyToAddObject, this.accountService.getUser().userName)
+        this.hobbyService.addHobby(this.hobbyToAddObject, this.accountService.getUser().username)
         .subscribe((response: boolean) => {
             if(response) {
                 this.member.userHobbies.push(this.hobbyToAddObject)
@@ -121,7 +123,7 @@ export class MemberEditComponent implements OnInit {
 
         let user = this.accountService.currentUser$;
         console.log(user)
-        this.hobbyService.removeHobby(hobby, this.accountService.getUser().userName)
+        this.hobbyService.removeHobby(hobby, this.accountService.getUser().username)
         .subscribe((response: boolean) => {
             if(response) {
                 const index = this.member.userHobbies.findIndex(item => item.id == hobby.id)

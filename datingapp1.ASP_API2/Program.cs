@@ -3,6 +3,7 @@ using datingapp1.Application;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
+using datingapp1.Persistence.EF.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.DatingAppInstallation();
+
+builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddCors(options =>
     {
@@ -36,6 +39,7 @@ app.UseCors("Open");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

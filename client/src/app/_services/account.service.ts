@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators'
 import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
 import { HttpResponse } from '../_models/HttpResponse';
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,40 +16,43 @@ export class AccountService {
     private currentUserSource = new ReplaySubject<User>(1)
     currentUser$ = this.currentUserSource.asObservable()
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private userService: UserService) { }
 
     login(model: any) {
         return this.http.post(this.baseUrl + 'account/login', model).pipe(
             map( (response: HttpResponse<User>) => {
                 const user = response
-                if(user) {
-                    this.setCurrentUser(response.Data)
+                if(user.success) {
+                    this.userService.setUser(response.data);
                 }
+                return 1;
             })
         )
     }
 
     register(model: any) {
         return this.http.post(this.baseUrl + 'account/register', model).pipe(
-          map((user: User) => {
-            if (user) {
-                this.setCurrentUser(user)
-            }
-          }, error => {
-            console.log(error)
-        })
+            map((response: HttpResponse<User>) => {
+                const user = response
+                if(user.success) {
+                    this.userService.setUser(response.data);
+                }
+            }, error => {
+                console.log(error)
+            })
         )
     }
 
     setCurrentUser(user: User) {
         this.user = user;
-        localStorage.setItem('user', JSON.stringify(user));
-        this.currentUserSource.next(user)
+        this.userService.setUser(user);
     }
 
     logout() {
         localStorage.removeItem('user')
-        this.currentUserSource.next(null)
+        this.userService.setUser(null);
     }
 
     getUser = () => this.user

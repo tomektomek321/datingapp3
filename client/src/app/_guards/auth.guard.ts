@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AccountService } from '../_services/account.service';
 import { map } from 'rxjs/operators';
+import { UserService } from '../_services/user.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,11 +12,11 @@ import { map } from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
 
     constructor(
-        private accountService: AccountService,
+        private userService: UserService,
         private toastr: ToastrService) { }
 
     canActivate(): Observable<boolean> {
-        return this.accountService.currentUser$.pipe(
+        return this.userService.getUserObs().pipe(
             map(user => {
               if (user) return true;
               this.toastr.error('You shall not pass!')

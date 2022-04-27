@@ -42,10 +42,5 @@ namespace datingapp1.Application
                 ValidationErrors.Add(item.ErrorMessage);
             }
         }
-
-        /*public BaseResponse(T data_)
-        {
-            data = data_;
-        }*/
     }
 }

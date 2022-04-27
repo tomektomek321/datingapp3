@@ -1,10 +1,10 @@
 
 export interface HttpResponse<T> {
-    Status: number;
-    Success: boolean;
-    Massage: string;
-    ValidationErrors: string[];
-    Data: T
+    status: number;
+    success: boolean;
+    massage: string;
+    validationErrors: string[];
+    data: T
 }
 
 

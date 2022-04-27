@@ -8,7 +8,7 @@ namespace datingapp1.ASP_API2.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AccountController : ControllerBase 
+public class AccountController : ControllerBase
 {
     private readonly IMediator _mediator;
 
