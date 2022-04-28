@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace datingapp1.Application.Functions.Auth.Commands.Register;
 
-public class RegisterCommand : IRequest<RegisterCommandHandlerResponse>
+public class RegisterCommand : IRequest<RegisterCommandHandlerResponse<LoginDto>>
 {
     public string Username { get; set; }
     public string Password { get; set; }

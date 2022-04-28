@@ -6,6 +6,7 @@ import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
 import { HttpResponse } from '../_models/HttpResponse';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,7 @@ export class AccountService {
     currentUser$ = this.currentUserSource.asObservable()
 
     constructor(
+        private router: Router,
         private http: HttpClient,
         private userService: UserService) { }
 
@@ -26,6 +28,7 @@ export class AccountService {
                 const user = response
                 if(user.success) {
                     this.userService.setUser(response.data);
+                    this.router.navigateByUrl('/members');
                 }
                 return 1;
             })
@@ -34,10 +37,11 @@ export class AccountService {
 
     register(model: any) {
         return this.http.post(this.baseUrl + 'account/register', model).pipe(
-            map((response: HttpResponse<User>) => {
+            map((response: HttpResponse<User>) => { console.log(response)
                 const user = response
                 if(user.success) {
                     this.userService.setUser(response.data);
+                    this.router.navigateByUrl('/members');
                 }
             }, error => {
                 console.log(error)
@@ -53,6 +57,7 @@ export class AccountService {
     logout() {
         localStorage.removeItem('user')
         this.userService.setUser(null);
+        this.router.navigateByUrl('/');
     }
 
     getUser = () => this.user

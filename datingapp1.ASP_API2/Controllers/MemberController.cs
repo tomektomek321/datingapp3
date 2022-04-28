@@ -16,11 +16,10 @@ public class MemberController : ControllerBase
         _mediator = mediator;
     }
 
-
-
     [HttpPost("FilterMembers")]
     public async Task<ActionResult<IEnumerable<List<AppUser>>>> FilterMembers(GetMembersByFilterQuery _filter)
     {
+        Console.WriteLine(_filter.gender);
         var cities = await _mediator.Send(_filter);
 
         return Ok(cities);

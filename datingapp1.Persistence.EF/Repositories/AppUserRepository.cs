@@ -1,6 +1,7 @@
 ﻿using datingapp1.Application.Contracts.Persistance;
 using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace datingapp1.Persistence.EF.Repositories;
+
 public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 {
     public AppUserRepository(DatingAppContext dbContext) : base(dbContext)  
@@ -38,13 +40,11 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
     {
 
         var users = _dbContext.AppUsers
+            .Include(p => p.City)
             .Where(user => user.Gender == Gender)
             .ToList();
 
         return Task.FromResult(users);
-
-
-
     }
 }
 

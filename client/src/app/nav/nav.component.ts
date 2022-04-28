@@ -18,9 +18,7 @@ export class NavComponent implements OnInit {
     constructor(
         private accountService: AccountService,
         private userService: UserService,
-        private router: Router,
-        private toastr: ToastrService
-        ) {}
+        private toastr: ToastrService) {}
 
     ngOnInit(): void {
         this.currentUser$ = this.userService.getUserObs()
@@ -29,7 +27,6 @@ export class NavComponent implements OnInit {
     login() {
         this.accountService.login(this.model).subscribe(response => {
             console.log(response)
-            this.router.navigateByUrl('/members')
         }, error => {
             console.log(error)
             this.toastr.error(error.error);
@@ -38,7 +35,6 @@ export class NavComponent implements OnInit {
 
     logout() {
         this.accountService.logout()
-        this.router.navigateByUrl('/')
     }
 
 }

@@ -10,6 +10,6 @@ export class UserParams {
     cities = []
 
     constructor(user: User) {
-        this.gender = user.gender === 'female' ? 'male' : 'female'
+        this.gender = user.gender === '0' ? '1' : '0'
     }
 }

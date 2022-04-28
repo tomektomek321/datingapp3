@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of, pipe } from 'rxjs';
+import { BehaviorSubject, of, pipe } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { PaginatedResult } from '../_models/pagination';
 import { UserParams } from '../_models/userParams';
@@ -8,6 +8,7 @@ import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { UserService } from './user.service';
+import { HttpResponse } from '../_models/HttpResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,7 @@ export class MembersService {
     memberCache = new Map()
     user: User
     userParams: UserParams
+    membersObs = new BehaviorSubject<Member[]>(this.members);
 
     constructor(
         private http: HttpClient,
@@ -28,11 +30,16 @@ export class MembersService {
         })
     }
 
-    getUserParams() {
-        return this.userParams;
+    getMembersObs = () => this.membersObs;
+
+    setMembers = (members_: Member[]) => {
+        this.members = members_;
+        this.membersObs.next(this.members);
     }
 
-    setUserParams(params: UserParams) {
+    getUserParams = (): UserParams => this.userParams;
+
+    setUserParams(params: UserParams): void {
         this.userParams = params;
     }
 
@@ -41,10 +48,11 @@ export class MembersService {
         return this.userParams;
     }
 
-    getMembers(userParams: UserParams) {
-
-        this.http.post(this.baseUrl + 'Member/FilterMembers', userParams).subscribe(response => {
+    getMembers() {
+        console.log(this.userParams);
+        this.http.post(this.baseUrl + 'Member/FilterMembers', this.userParams).subscribe((response: HttpResponse<Member[]>) => {
             console.log(response)
+            this.setMembers(response.data)
         })
 
 

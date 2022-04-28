@@ -116,7 +116,6 @@ export class RegisterComponent implements OnInit {
         this.registerForm.controls.city.setValue(this.cityToAddObject.id)
 
         this.accountService.register(this.registerForm.value).subscribe(response => {
-            this.router.navigateByUrl('/members');
         }, error => {
             this.validationErrors = error;
             this.registerForm.controls.country.setValue(this.countryToAddObject.name)

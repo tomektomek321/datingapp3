@@ -18,10 +18,10 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("Register")]
-    public async Task<ActionResult<RegisterCommandHandlerResponse>> Register(RegisterCommand registerCommand)
+    public async Task<ActionResult<RegisterCommandHandlerResponse<LoginDto>>> Register(RegisterCommand registerCommand)
     {
         var user = await _mediator.Send(registerCommand);
-
+        Console.WriteLine(user);
         return Ok(user);
     }
 
