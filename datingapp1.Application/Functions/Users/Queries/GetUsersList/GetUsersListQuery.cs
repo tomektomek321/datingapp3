@@ -9,6 +9,6 @@ namespace datingapp1.Application.Functions.Users.Queries.GetUsersList
 {
     public class GetUsersListQuery: IRequest<List<AppUser>>
     {
-        //public
+        
     }
 }

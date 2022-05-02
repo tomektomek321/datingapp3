@@ -1,4 +1,5 @@
 ﻿using datingapp1.Application.Contracts.Persistance;
+using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using MediatR;
 using System;
@@ -20,11 +21,9 @@ public class GetMembersByFilterQueryHandler : IRequestHandler<GetMembersByFilter
 
     public async Task<GetMembersByFilterQueryResponse> Handle(GetMembersByFilterQuery request, CancellationToken cancellationToken)
     {
-        List<AppUser> users = _appUserRepository.GetAppUsersByFilter(request.minAge, request.maxAge, request.gender, request.orderBy).Result;
+        List<MemberDto> users = _appUserRepository.GetAppUsersByFilter(request.minAge, request.maxAge, request.gender, request.orderBy, request.cities).Result;
 
         return new GetMembersByFilterQueryResponse(users);
-
-        throw new NotImplementedException();
     }
 }
 

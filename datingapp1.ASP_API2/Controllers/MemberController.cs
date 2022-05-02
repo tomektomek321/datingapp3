@@ -1,4 +1,9 @@
-﻿using datingapp1.Application.Functions.Members.Queries.GetMembersByFilter;
+﻿using datingapp1.Application.Functions.Members.Queries.GetLikedByMembers;
+using datingapp1.Application.Functions.Members.Queries.GetLikedMembers;
+using datingapp1.Application.Functions.Members.Queries.GetMembersByFilter;
+using datingapp1.Application.Functions.Users.Commands.UpdateUserProfile;
+using datingapp1.Application.Functions.Users.Queries.GetProfile;
+using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +22,46 @@ public class MemberController : ControllerBase
     }
 
     [HttpPost("FilterMembers")]
-    public async Task<ActionResult<IEnumerable<List<AppUser>>>> FilterMembers(GetMembersByFilterQuery _filter)
+    public async Task<ActionResult<IEnumerable<List<MemberDto>>>> FilterMembers(GetMembersByFilterQuery _filter)
     {
         Console.WriteLine(_filter.gender);
-        var cities = await _mediator.Send(_filter);
+        var users = await _mediator.Send(_filter);
 
-        return Ok(cities);
+        return Ok(users);
     }
 
+
+    [HttpPost("GetLikedMembers")]
+    public async Task<ActionResult<IEnumerable<List<MemberDto>>>> GetLikedMembers(GetLikedMembersQuery UserId)
+    {
+        var users = await _mediator.Send(UserId);
+
+        return Ok(users);
+    }
+
+
+    [HttpPost("GetLikedByMembers")]
+    public async Task<ActionResult<IEnumerable<List<MemberDto>>>> GetLikedByMembers(GetLikedByMembersQuery UserId)
+    {
+        var users = await _mediator.Send(UserId);
+
+        return Ok(users);
+    }
+
+
+    [HttpPost("GetUserProfile")]
+    public async Task<ActionResult<AppUserDto>> GetUserProfile(GetProfileQuery UserId)
+    {
+        var users = await _mediator.Send(UserId);
+
+        return Ok(users);
+    }
+
+    [HttpPost("UpdateUserProfile")]
+    public async Task<ActionResult<AppUserDto>> UpdateUserProfile(AppUserDto UserDto)
+    {
+        var users = await _mediator.Send(new UpdateUserProfileCommand() { AppUserDto = UserDto });
+
+        return Ok(users);
+    }
 }

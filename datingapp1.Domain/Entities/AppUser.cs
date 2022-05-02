@@ -15,4 +15,8 @@ public class AppUser
     public City City { get; set; }
     public Country Country { get; set; }
     public ICollection<UserHobby> UserHobbies { get; set; }
+    public ICollection<UserLike> LikedByUsers { get; set; }
+    public ICollection<UserLike> LikedUsers { get; set; }
+    public DateTime Created { get; set; } = DateTime.Now;
+    public DateTime LastActive { get; set; } = DateTime.Now;
 }

@@ -14,13 +14,21 @@ import { Router } from '@angular/router';
 export class AccountService {
     baseUrl = environment.apiUrl;
     user: User;
-    private currentUserSource = new ReplaySubject<User>(1)
-    currentUser$ = this.currentUserSource.asObservable()
+    private currentUserSource = new ReplaySubject<User>(1);
+    currentUser$ = this.currentUserSource.asObservable();
 
     constructor(
         private router: Router,
         private http: HttpClient,
-        private userService: UserService) { }
+        private userService: UserService
+    ) {
+
+        const savedUser = JSON.parse(localStorage.getItem('user'));
+        if(savedUser) {
+            this.userService.setUser(savedUser);
+        }
+
+    }
 
     login(model: any) {
         return this.http.post(this.baseUrl + 'account/login', model).pipe(
@@ -38,7 +46,7 @@ export class AccountService {
     register(model: any) {
         return this.http.post(this.baseUrl + 'account/register', model).pipe(
             map((response: HttpResponse<User>) => { console.log(response)
-                const user = response
+                const user = response;
                 if(user.success) {
                     this.userService.setUser(response.data);
                     this.router.navigateByUrl('/members');
@@ -50,15 +58,15 @@ export class AccountService {
     }
 
     setCurrentUser(user: User) {
-        this.user = user;
+        //this.user = user;
         this.userService.setUser(user);
     }
 
     logout() {
-        localStorage.removeItem('user')
+        localStorage.removeItem('user');
         this.userService.setUser(null);
         this.router.navigateByUrl('/');
     }
 
-    getUser = () => this.user
+    getUser = () => this.user;
 }

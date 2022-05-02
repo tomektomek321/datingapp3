@@ -1,6 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { HttpResponse } from '../_models/HttpResponse';
+
+interface IdName {
+    id: number;
+    name: number;
+}
 
 @Component({
     selector: 'app-text-input-with-hints',
@@ -11,14 +17,16 @@ export class TextInputWithHintsComponent implements OnInit {
 
     @Input('URL') URL: string;
 
-    @Output() valueEmitter = new EventEmitter<{ id: number, name: string }>();
+    @Input('placeholder') placeholder: string;
 
-    allItems: { id: number, name: string }[] = [];
+    @Output() valueEmitter = new EventEmitter<IdName>();
+
+    allItems: IdName[] = [];
 
     inputValue: string;
 
     itemToAdd: string;
-    itemToAddObject: { id: number, name: string };
+    itemToAddObject: IdName;
 
     promptShow: boolean = false;
 
@@ -32,9 +40,9 @@ export class TextInputWithHintsComponent implements OnInit {
     }
 
     getHints() {
-        this.http.get(environment.apiUrl + this.URL + this.inputValue).subscribe( (response: { id: number, name: string }[]) => {
+        this.http.get(environment.apiUrl + this.URL + this.inputValue).subscribe( (response: HttpResponse<IdName[]>) => {
             console.log(response);
-            this.allItems = response;
+            this.allItems = response.data;
             this.promptShow = true;
         })
     }

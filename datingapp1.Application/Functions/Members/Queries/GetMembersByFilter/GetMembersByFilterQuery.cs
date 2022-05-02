@@ -13,5 +13,6 @@ public class GetMembersByFilterQuery: IRequest<GetMembersByFilterQueryResponse>
     public int maxAge { get; set; }
     public int gender { get; set; }
     public string orderBy { get; set; }
+    public string cities { get; set; }
 }
 

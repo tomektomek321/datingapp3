@@ -1,7 +1,17 @@
 
 <div class="autocomplete" style="width:210px;">
 
-    <input id="myInput" class="form-control ml-1" style="width: 200px;" [(ngModel)]="inputValue" (keyup)="getHints();" autocomplete="off" type="text" name="myCity" placeholder="City">
+    <input
+        id="myInput"
+        class="form-control ml-1"
+        style="width: 200px;"
+        [(ngModel)]="inputValue"
+        (keyup)="getHints();"
+        autocomplete="off"
+        type="text"
+        name="myCity"
+        placeholder="{{placeholder}}"
+    />
 
     <div id="autocomplete-list" class="autocomplete-items" *ngIf="promptShow">
 

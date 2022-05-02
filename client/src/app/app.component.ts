@@ -10,24 +10,13 @@ import { AccountService } from './_services/account.service';
 })
 export class AppComponent implements OnInit {
     title = 'client'
-    users: any
 
-    constructor(private http: HttpClient, private accountService: AccountService) { }
-
-
-    ngOnInit(): void {
-        this.getUsers()
-        this.setCurrentUser()
-    }
-
-    setCurrentUser() {
-        const user: User = JSON.parse(localStorage.getItem('user'));
-        this.accountService.setCurrentUser(user);
-    }
-
-    getUsers() {
-    }
+    constructor(
+        private http: HttpClient,
+        private accountService: AccountService
+    ) { }
 
 
+    ngOnInit(): void { }
 
 }

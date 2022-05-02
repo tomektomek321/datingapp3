@@ -11,11 +11,10 @@ namespace datingapp1.Persistence.EF;
 public class DatingAppContext: DbContext
 {
     public DatingAppContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<City> Cities { get; set; }
+    public DbSet<UserLike> UserLikes { get; set; }
     public DbSet<Country> Countries { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<Hobby> Hobbies { get; set; }
@@ -45,6 +44,22 @@ public class DatingAppContext: DbContext
         modelBuilder.
             ApplyConfigurationsFromAssembly
             (typeof(DatingAppContext).Assembly);
+
+        modelBuilder.Entity<UserLike>()
+            .HasKey(key => new { key.SourceUserId, key.LikedUserId });
+
+        modelBuilder.Entity<UserLike>()
+            .HasOne(user => user.SourceUser)
+            .WithMany(user => user.LikedUsers)
+            .HasForeignKey(user => user.SourceUserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<UserLike>()
+            .HasOne(user => user.LikedUser)
+            .WithMany(user => user.LikedByUsers)
+            .HasForeignKey(s => s.LikedUserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
 
 
         /*foreach (var item in DummyCities.Get())

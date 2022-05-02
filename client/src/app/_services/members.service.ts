@@ -9,30 +9,45 @@ import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { UserService } from './user.service';
 import { HttpResponse } from '../_models/HttpResponse';
+import { createCitiesIdStringForRequest } from './utl';
+import { ToastrService } from 'ngx-toastr';
+
+export interface FilterParams {
+    gender: string;
+    minAge: number;
+    maxAge: number;
+    pageNumber: number;
+    pageSize: number;
+    orderBy: string;
+    cities: string;
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class MembersService {
-    baseUrl = environment.apiUrl
-    members: Member[] = []
-    memberCache = new Map()
-    user: User
-    userParams: UserParams
+    baseUrl = environment.apiUrl;
+    members: Member[] = [];
+
+    user: User;
+    userParams: UserParams;
     membersObs = new BehaviorSubject<Member[]>(this.members);
 
     constructor(
         private http: HttpClient,
-        private userService: UserService) {
+        private userService: UserService,
+        private toastr: ToastrService) {
+
         this.userService.getUserObs().subscribe(user => {
             this.user = user;
             this.userParams = new UserParams(user);
-        })
+        });
+
     }
 
     getMembersObs = () => this.membersObs;
 
-    setMembers = (members_: Member[]) => {
+    setMembers = (members_: Member[]) => { console.log(members_);
         this.members = members_;
         this.membersObs.next(this.members);
     }
@@ -48,61 +63,48 @@ export class MembersService {
         return this.userParams;
     }
 
-    getMembers() {
-        console.log(this.userParams);
-        this.http.post(this.baseUrl + 'Member/FilterMembers', this.userParams).subscribe((response: HttpResponse<Member[]>) => {
-            console.log(response)
+
+    createFilterParams(): FilterParams {
+        return {
+            gender: this.userParams.gender,
+            maxAge: this.userParams.maxAge,
+            minAge: this.userParams.minAge,
+            orderBy: this.userParams.orderBy,
+            pageSize: this.userParams.pageSize,
+            pageNumber: this.userParams.pageNumber,
+            cities: createCitiesIdStringForRequest(this.userParams.cities)
+        }
+    }
+
+
+    getMembers(): void {
+        const filterParams = this.createFilterParams();
+
+        this.http.post(this.baseUrl + 'Member/FilterMembers', filterParams)
+        .subscribe((response: HttpResponse<Member[]>) => {
             this.setMembers(response.data)
         })
 
-
-
-
-
-
-
-        /*var response = this.memberCache.get(Object.values(userParams).join('-'));
-        if (response) {
-            return of(response);
-        }*/
-
-        //let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
-        /*let params = new HttpParams();
-        params = params.append('minAge', userParams.minAge.toString());
-        params = params.append('maxAge', userParams.maxAge.toString());
-        params = params.append('gender', "0");
-        params = params.append('orderBy', userParams.orderBy);
-        if(userParams.cities.length > 0) {
-            const citiesString = createCitiesIdStringForRequest(userParams.cities)
-            params = params.append('cities', citiesString);
-        }*/
-
-        /*return this.getPaginatedResult<Member[]>(this.baseUrl + 'Member/FilterMembers', params)
-            .pipe(map(response => {
-                //this.memberCache.set(Object.values(userParams).join('-'), response);
-                return response;
-            }))*/
     }
 
 
-    getMember(username: string) {
-        const member = [...this.memberCache.values()]
-            .reduce((arr, elem) => arr.concat(elem.result), [])
-            .find((member: Member) => member.username === username);
+    GetUserDetails() {
+        const UserId =  this.userService.getUser().id;
 
-        if (member) {
-            return of(member);
-        }
-        return this.http.get<Member>(this.baseUrl + 'users/' + username);
+        this.http.post(this.baseUrl + 'Member/GetUserProfile', {UserId}).subscribe((response: HttpResponse<User>) => {console.log(response.data);
+            this.userService.setUserProfileDetails(response.data);
+        });
     }
 
-    updateMember(member: Member) {
-        return this.http.put(this.baseUrl + 'users', member).pipe(
+    updateMember(member: User) {
+        console.log(member); return;
+        /*return this.http.post(this.baseUrl + 'Member/UpdateMember', member)
+        .pipe(
             map(() => {
                 const index = this.members.indexOf(member);
                 this.members[index] = member;
             })
-        )
+        );*/
     }
 
     setMainPhoto(photoId: number) {
@@ -113,36 +115,39 @@ export class MembersService {
         return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
     }
 
-    private getPaginatedResult<T>(url, params) {
-        const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
-        return this.http.get<T>(url, { observe: 'response', params }).pipe(
-            map(response => {
-                paginatedResult.result = response.body;
-                if (response.headers.get('Pagination') !== null) {
-                    paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-                }
-                return paginatedResult;
-            })
-        );
+    toggleLike(memberId: number): void {
+        const userId = this.userService.getUser().id;
+
+        this.http.post(this.baseUrl + 'Like/LikeUser', {
+            sourceUserId: userId,
+            targetUserId: memberId
+        }).subscribe((response: HttpResponse<number>) => {
+            console.log(response)
+            if(response.success) {
+                this.userService.toggleLike(memberId);
+                this.toastr.info("Userlike toggled");
+
+            } else {
+                this.toastr.error("Something bad happened.");
+            }
+        })
     }
 
-    private getPaginationHeaders(pageNumber: number, pageSize: number) {
-        let params = new HttpParams();
+    getLikedMembers(): void {
+        const userId = this.userService.getUser().id;
 
-        params = params.append('pageNumber', pageNumber.toString());
-        params = params.append('pageSize', pageSize.toString());
-
-        return params;
+        this.http.post(this.baseUrl + 'Member/GetLikedMembers', { userId })
+        .subscribe((response: HttpResponse<Member[]>) => {
+            this.setMembers(response.data);
+        });
     }
 
-    addLike(username: string) {
-        return this.http.post(this.baseUrl + 'likes/' + username, {})
-    }
+    getLikedByMembers(): void {
+        const userId = this.userService.getUser().id;
 
-    getLikes(predicate: string, pageNumber, pageSize) {
-        let params = this.getPaginationHeaders(pageNumber, pageSize)
-        params = params.append('predicate', predicate)
-        return this.getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes', params)
+        this.http.post(this.baseUrl + 'Member/GetLikedByMembers', { userId })
+        .subscribe((response: HttpResponse<Member[]>) => {
+            this.setMembers(response.data);
+        });
     }
-
 }

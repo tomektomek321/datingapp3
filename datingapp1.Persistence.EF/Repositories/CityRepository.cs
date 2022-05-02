@@ -22,6 +22,16 @@ public class CityRepository : BaseRepository<City>, ICityRepository
         return cities;
     }
 
+    public City GetCityByName(string text)
+    {
+        var city = _dbContext
+            .Cities
+            .Where(city_ => city_.Name.ToLower() == text.ToLower())
+            .FirstOrDefault();
+
+        return city;
+    }
+
     public Task<bool> IsNameAndAuthorAlreadyExist(string name)
     {
         var matches = _dbContext.Cities.

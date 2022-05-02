@@ -60,13 +60,14 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
             PasswordSalt = hmac.Key,
         };
 
-        await _appUserRepository.Add(user);
+        AppUser newUser = await _appUserRepository.Add(user);
 
         LoginDto loginDto = new LoginDto()
         {
-            Username = request.Username,
-            KnownAs = user.KnownAs,
-            Gender = user.Gender,
+            Id = newUser.Id,
+            Username = newUser.UserName,
+            KnownAs = newUser.KnownAs,
+            Gender = newUser.Gender,
             Token = _tokenService.CreateToken(user),
         };
 

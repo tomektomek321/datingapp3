@@ -39,10 +39,12 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse<
         }
 
         LoginDto loginDto = new LoginDto() {
+            Id = user.Id,
             Username = user.UserName,
             Gender = user.Gender,
             KnownAs = user.KnownAs,
             Token = _tokenService.CreateToken(user),
+            LikedUsers = user.LikedUsers,
         };
 
         return new LoginQueryResponse<LoginDto>(loginDto);

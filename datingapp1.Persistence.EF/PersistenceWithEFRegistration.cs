@@ -28,7 +28,8 @@ public static class PersistenceWithEFRegistration
         services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<IAppUserRepository, AppUserRepository>();
         services.AddScoped<ICountryRepository, CountryRepository>();
-        //services.AddScoped<IPostRepository, IPostRepository>();
+        services.AddScoped<ILikeRepository, LikeRepository>();
+        services.AddScoped<IHobbyRepository, HobbyRepository>();
 
         return services;
     }

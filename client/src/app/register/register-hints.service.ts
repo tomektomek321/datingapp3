@@ -7,15 +7,14 @@ import { environment } from 'src/environments/environment';
 })
 export class RegisterHintsService {
 
-    showCitiesHintsUrl: string = environment.apiUrl + 'City/searchByText?_searchText='
-    showCountriesHintsUrl: string = environment.apiUrl + 'Country/searchByText?_searchText='
+    showCitiesHintsUrl: string = environment.apiUrl + 'City/searchByText?_searchText=';
+    showCountriesHintsUrl: string = environment.apiUrl + 'Country/searchByText?_searchText=';
 
     constructor(
         private http: HttpClient
     ) { }
 
-    showCitiesHints = (text: string) => this.http.get(this.showCitiesHintsUrl + text)
+    showCitiesHints = (text: string) => this.http.get(this.showCitiesHintsUrl + text);
 
-    showCountriesHints = (text: string) => this.http.get(this.showCountriesHintsUrl + text)
-
+    showCountriesHints = (text: string) => this.http.get(this.showCountriesHintsUrl + text);
 }

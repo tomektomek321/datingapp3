@@ -5,6 +5,11 @@ export interface UserHobbies {
     name: string;
 }
 
+export interface City {
+    id: number;
+    name: string;
+}
+
 export interface Member {
     id: number;
     username: string;

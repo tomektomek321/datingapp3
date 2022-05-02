@@ -15,15 +15,16 @@ import { HobbyService } from './hobby-hints.service';
     styleUrls: ['./member-edit.component.scss']
 })
 export class MemberEditComponent implements OnInit {
+
     @ViewChild('editForm') editForm: NgForm;
     member: Member;
     user: User;
-    hobbyToAdd: string
-    hobbyToAddObject: UserHobbies
+    hobbyToAdd: string;
+    hobbyToAddObject: UserHobbies;
 
-    allHobbiesNames: any = []
-    hobbiesNamesPromptsShow = false
-    companiesNamesPrompts: any = []
+    allHobbiesNames: any = [];
+    hobbiesNamesPromptsShow = false;
+    companiesNamesPrompts: any = [];
 
 
     @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
@@ -42,46 +43,42 @@ export class MemberEditComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.loadMember();
+
         this.userService.getUserObs().subscribe(user => {
-            this.user = user
-            console.log(user)
-            this.loadMember()
+            this.user = user;
         });
     }
 
     loadMember() {
-        this.memberService.getMember(this.user.username).subscribe(member => {
-            console.log(member)
-            this.member = member;
-        })
+        this.memberService.GetUserDetails();
     }
 
     updateMember() {
-        this.memberService.updateMember(this.member).subscribe(() => {
+        this.memberService.updateMember(this.user)/*.subscribe(() => {
             this.toastr.success('Profile updated successfully');
             this.editForm.reset(this.member);
-        })
+        })*/
     }
 
     removeUsedHobbies(allHobbies) {
-        const allIds = allHobbies.map(item => item.name)
-        const userHobbiesIds = this.member.userHobbies.map(item => item.name)
-        const toShow = allIds.filter(item => !userHobbiesIds.includes(item))
-        const a = allHobbies.filter(item => toShow.includes(item.name))
+        const allIds = allHobbies.map(item => item.name);
+        const userHobbiesIds = this.member.userHobbies.map(item => item.name);
+        const toShow = allIds.filter(item => !userHobbiesIds.includes(item));
+        const a = allHobbies.filter(item => toShow.includes(item.name));
         return a;
     }
 
     showHobbyHint() {
         this.hobbyService.showHobbyHints(this.hobbyToAdd).subscribe( response => {
-            console.log(response)
-            this.allHobbiesNames = this.removeUsedHobbies(response)
-            this.showCompaniesPrompt()
+            this.allHobbiesNames = this.removeUsedHobbies(response);
+            this.showCompaniesPrompt();
         })
     }
 
     showCompaniesPrompt() {
 
-        this.hobbiesNamesPromptsShow = true
+        this.hobbiesNamesPromptsShow = true;
 
         /*console.log(this.model.Manufacturer)
         console.log(this.allHobbiesNames)
@@ -96,24 +93,24 @@ export class MemberEditComponent implements OnInit {
       }
 
     selectCompany(hobby_: any) {
-        this.hobbiesNamesPromptsShow = false
+        this.hobbiesNamesPromptsShow = false;
 
-        this.hobbyToAdd = hobby_.name
-        this.hobbyToAddObject = hobby_
+        this.hobbyToAdd = hobby_.name;
+        this.hobbyToAddObject = hobby_;
     }
 
     test(hobby_) {
-        console.log(hobby_)
+        console.log(hobby_);
     }
 
     addHobby() {
-        let user = this.accountService.currentUser$;
-        console.log(user)
+        let user = this.accountService.currentUser$;;
+        console.log(user);
         this.hobbyService.addHobby(this.hobbyToAddObject, this.accountService.getUser().username)
         .subscribe((response: boolean) => {
             if(response) {
-                this.member.userHobbies.push(this.hobbyToAddObject)
-                this.updateMember()
+                this.member.userHobbies.push(this.hobbyToAddObject);
+                this.updateMember();
             }
         })
 
@@ -122,17 +119,19 @@ export class MemberEditComponent implements OnInit {
     removeHobby(hobby) {
 
         let user = this.accountService.currentUser$;
-        console.log(user)
+
         this.hobbyService.removeHobby(hobby, this.accountService.getUser().username)
         .subscribe((response: boolean) => {
             if(response) {
-                const index = this.member.userHobbies.findIndex(item => item.id == hobby.id)
-                this.member.userHobbies.splice(index, 1)
-                this.updateMember()
+                const index = this.member.userHobbies.findIndex(item => item.id == hobby.id);
+                this.member.userHobbies.splice(index, 1);
+                this.updateMember();
             }
-        })
+        });
+    }
 
-
+    getValue($event) {
+        console.log($event);
     }
 
 }

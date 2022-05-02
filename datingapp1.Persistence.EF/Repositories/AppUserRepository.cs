@@ -1,4 +1,5 @@
 ﻿using datingapp1.Application.Contracts.Persistance;
+using datingapp1.Application.Extensions;
 using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
     {
         AppUser user = _dbContext
                         .AppUsers
+                        .Include(x => x.LikedUsers)
                         .Where(x => x.UserName == username)
                         .FirstOrDefault();
         return user;  
@@ -36,15 +38,143 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<AppUser>> GetAppUsersByFilter(int MingAge, int MaxAge, int Gender, string OrderBy)
+    public async Task<List<MemberDto>> GetAppUsersByFilter(int MinAge, int MaxAge, int Gender, string OrderBy, string cities)
     {
+        
+        var minDob = DateTime.Today.AddYears(-MaxAge - 1);
+        var maxDob = DateTime.Today.AddYears(-MinAge);
 
-        var users = _dbContext.AppUsers
-            .Include(p => p.City)
-            .Where(user => user.Gender == Gender)
+        List<AppUser> users = _dbContext.AppUsers
+            .Include(user => user.City)
             .ToList();
 
-        return Task.FromResult(users);
+
+        users = users.Where(user => user.Gender == Gender).ToList();
+
+        users = users.Where(user => user.DateOfBirth > minDob && user.DateOfBirth <= maxDob).ToList();
+
+        if (cities != "")
+        {
+            List<string> stringCitiesId = cities.Split("-").ToList();
+            int[] citiesId = new int[stringCitiesId.Count];
+            int coutner = 0;
+            foreach (var item in stringCitiesId)
+            {
+                citiesId[coutner++] = int.Parse(item);
+            }
+
+            users = users.Where(u => citiesId.Contains(u.City.Id)).ToList();
+        }
+
+        List<MemberDto> returnDto = new List<MemberDto>();
+
+        foreach (var x in users)
+        {
+            returnDto.Add(new MemberDto()
+                {
+                    Id = x.Id,
+                    Username = x.UserName,
+                    KnownAs = x.KnownAs,
+                    Gender = x.Gender,
+                    City = x.City.Name,
+                    LikedUsers = x.LikedUsers
+                }
+            );
+        }
+
+        return returnDto;
+    }
+
+    public Task<List<MemberDto>> GetLikedMembers(int UserId)
+    {
+        AppUser user = _dbContext.AppUsers
+            .Include(u => u.City)
+            .Include(u => u.LikedUsers)
+            .Where(user_ => user_.Id == UserId)
+            .FirstOrDefault();
+
+        List<MemberDto> returnMembers = new List<MemberDto>();
+
+        foreach (var user_ in user.LikedUsers)
+        {
+            var likedUser = _dbContext.AppUsers.Where(u => u.Id == user_.LikedUserId).FirstOrDefault();
+
+            returnMembers.Add(new MemberDto()
+            {
+                Id = likedUser.Id,
+                Username = likedUser.UserName,
+                KnownAs = likedUser.KnownAs,
+                Gender = likedUser.Gender,
+                City = likedUser.City.Name,
+            });
+        }
+
+        return Task.FromResult(returnMembers);
+    }
+
+    public Task<List<MemberDto>> GetLikedByMembers(int UserId)
+    {
+        AppUser user = _dbContext.AppUsers
+            .Include(u => u.City)
+            .Include(u => u.LikedByUsers)
+            .Where(user_ => user_.Id == UserId)
+            .FirstOrDefault();
+
+        List<MemberDto> returnMembers = new List<MemberDto>();
+
+        foreach (var user_ in user.LikedByUsers)
+        {
+            var likedUser = _dbContext.AppUsers
+                .Where(u => u.Id == user_.SourceUserId)
+                .FirstOrDefault();
+
+            returnMembers.Add(new MemberDto()
+            {
+                Id = likedUser.Id,
+                Username = likedUser.UserName,
+                KnownAs = likedUser.KnownAs,
+                Gender = likedUser.Gender,
+                City = likedUser.City.Name,
+            });
+        }
+
+        return Task.FromResult(returnMembers);
+    }
+
+
+    public Task<AppUserDto> GetUserProfile(int UserId)
+    {
+        AppUser user = _dbContext.AppUsers
+            .Include(u => u.City)
+            .Include(u => u.Country)
+            .Include(u => u.UserHobbies)
+                .ThenInclude(h => h.Hobby)
+            .Where(user_ => user_.Id == UserId)
+            .FirstOrDefault();
+
+        List<Hobby> hobbies = new List<Hobby>();
+
+
+        foreach (var hobby_ in user.UserHobbies)
+        {
+            hobbies.Add(hobby_.Hobby);
+        }
+
+
+        AppUserDto returnUserDto = new AppUserDto()
+        {
+            UserName = user.UserName,
+            KnownAs = user.KnownAs,
+            Gender = user.Gender,
+            City = user.City.Name,
+            Country = user.Country.Name,
+            Hobbies = hobbies,
+            LastActive = user.LastActive,
+            Age = user.DateOfBirth.ToUniversalTime().CalculateAge(),
+        };
+        
+
+        return Task.FromResult(returnUserDto);
     }
 }
 

@@ -136,6 +136,21 @@ namespace datingapp1.Persistence.EF.Migrations
                     b.ToTable("UserHobbies");
                 });
 
+            modelBuilder.Entity("datingapp1.Domain.Entities.UserLike", b =>
+                {
+                    b.Property<int>("SourceUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LikedUserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("SourceUserId", "LikedUserId");
+
+                    b.HasIndex("LikedUserId");
+
+                    b.ToTable("UserLikes");
+                });
+
             modelBuilder.Entity("datingapp1.Domain.Entities.AppUser", b =>
                 {
                     b.HasOne("datingapp1.Domain.Entities.City", "City")
@@ -170,8 +185,31 @@ namespace datingapp1.Persistence.EF.Migrations
                     b.Navigation("Hobby");
                 });
 
+            modelBuilder.Entity("datingapp1.Domain.Entities.UserLike", b =>
+                {
+                    b.HasOne("datingapp1.Domain.Entities.AppUser", "LikedUser")
+                        .WithMany("LikedByUsers")
+                        .HasForeignKey("LikedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("datingapp1.Domain.Entities.AppUser", "SourceUser")
+                        .WithMany("LikedUsers")
+                        .HasForeignKey("SourceUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LikedUser");
+
+                    b.Navigation("SourceUser");
+                });
+
             modelBuilder.Entity("datingapp1.Domain.Entities.AppUser", b =>
                 {
+                    b.Navigation("LikedByUsers");
+
+                    b.Navigation("LikedUsers");
+
                     b.Navigation("UserHobbies");
                 });
 #pragma warning restore 612, 618
