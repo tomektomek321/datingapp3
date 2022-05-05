@@ -22,17 +22,12 @@ public class UpdateUserProfileCommandHandler : IRequestHandler<UpdateUserProfile
 
     public Task<Unit> Handle(UpdateUserProfileCommand request, CancellationToken cancellationToken)
     {
-
         AppUser user = _appUserRepository.GetUserByUsername(request.AppUserDto.UserName).Result;
 
         City city = _cityRepository.GetCityByName(request.AppUserDto.City);
 
         user.City = city;
         user.UserHobbies = (ICollection<UserHobby>)request.AppUserDto.Hobbies;
-
-
-
-
 
         throw new NotImplementedException();
     }

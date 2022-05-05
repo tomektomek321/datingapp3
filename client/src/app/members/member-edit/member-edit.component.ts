@@ -1,7 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs/operators';
 import { Member, UserHobbies } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -38,9 +37,8 @@ export class MemberEditComponent implements OnInit {
         private accountService: AccountService,
         private memberService: MembersService,
         private toastr: ToastrService,
-        private hobbyService: HobbyService) {
-
-    }
+        private hobbyService: HobbyService
+    ) {  }
 
     ngOnInit(): void {
         this.loadMember();
@@ -50,15 +48,12 @@ export class MemberEditComponent implements OnInit {
         });
     }
 
-    loadMember() {
+    loadMember(): void {
         this.memberService.GetUserDetails();
     }
 
-    updateMember() {
-        this.memberService.updateMember(this.user)/*.subscribe(() => {
-            this.toastr.success('Profile updated successfully');
-            this.editForm.reset(this.member);
-        })*/
+    updateMember(): void {
+        this.memberService.updateMember(this.user);
     }
 
     removeUsedHobbies(allHobbies) {
@@ -69,69 +64,33 @@ export class MemberEditComponent implements OnInit {
         return a;
     }
 
-    showHobbyHint() {
-        this.hobbyService.showHobbyHints(this.hobbyToAdd).subscribe( response => {
-            this.allHobbiesNames = this.removeUsedHobbies(response);
-            this.showCompaniesPrompt();
-        })
-    }
+    addHobby(): void {
+        let userId = this.userService.getUser().id
 
-    showCompaniesPrompt() {
-
-        this.hobbiesNamesPromptsShow = true;
-
-        /*console.log(this.model.Manufacturer)
-        console.log(this.allHobbiesNames)
-        if(this.model.Manufacturer.length == 0) {
-          this.companiesNamesPrompts = this.allHobbiesNames
-        } else {
-          this.companiesNamesPrompts = Object.values(this.allHobbiesNames)
-                                          .filter((c: any) => { console.log(c); return c.toLowerCase().includes(this.model.Manufacturer.toLowerCase())} )
-        }
-
-        this.companiesNamesPromptsShow = true*/
-      }
-
-    selectCompany(hobby_: any) {
-        this.hobbiesNamesPromptsShow = false;
-
-        this.hobbyToAdd = hobby_.name;
-        this.hobbyToAddObject = hobby_;
-    }
-
-    test(hobby_) {
-        console.log(hobby_);
-    }
-
-    addHobby() {
-        let user = this.accountService.currentUser$;;
-        console.log(user);
-        this.hobbyService.addHobby(this.hobbyToAddObject, this.accountService.getUser().username)
+        this.hobbyService.addHobby(this.hobbyToAddObject.id, userId)
         .subscribe((response: boolean) => {
             if(response) {
-                this.member.userHobbies.push(this.hobbyToAddObject);
+                this.user.hobbies.push(this.hobbyToAddObject);
                 this.updateMember();
             }
         })
-
     }
 
-    removeHobby(hobby) {
+    removeHobby(hobbyId: number): void {
+        let userId = this.userService.getUser().id
 
-        let user = this.accountService.currentUser$;
-
-        this.hobbyService.removeHobby(hobby, this.accountService.getUser().username)
+        this.hobbyService.removeHobby(hobbyId, userId)
         .subscribe((response: boolean) => {
             if(response) {
-                const index = this.member.userHobbies.findIndex(item => item.id == hobby.id);
-                this.member.userHobbies.splice(index, 1);
+                const index = this.user.hobbies.findIndex(item => item.id == hobbyId);
+                this.user.hobbies.splice(index, 1);
                 this.updateMember();
             }
         });
     }
 
-    getValue($event) {
-        console.log($event);
+    getValue($event): void {
+        this.hobbyToAddObject = $event;
+        this.addHobby();
     }
-
 }

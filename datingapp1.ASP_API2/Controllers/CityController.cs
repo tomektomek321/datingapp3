@@ -27,7 +27,7 @@ public class CityController : ControllerBase
         return Ok(cities);
     }
 
-    [HttpGet("getById")]
+    [HttpGet("getById/{id}")]
     public async Task<ActionResult<IEnumerable<City>>> GetById(int id)
     {
         var cities = await _mediator.Send(new GetCityByIdQuery() { CityId = id });
@@ -35,10 +35,10 @@ public class CityController : ControllerBase
         return Ok(cities);
     }
 
-    [HttpGet("searchByText")]
-    public async Task<ActionResult<IEnumerable<City>>> SearchByText(string _searchText)
+    [HttpGet("searchByText/{text}")]
+    public async Task<ActionResult<IEnumerable<City>>> SearchByText(string text)
     {
-        var cities = await _mediator.Send(new GetCitiesByTextQuery() { searchText = _searchText });
+        var cities = await _mediator.Send(new GetCitiesByTextQuery() { searchText = text });
 
         return Ok(cities);
     }

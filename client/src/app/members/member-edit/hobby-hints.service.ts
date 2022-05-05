@@ -9,21 +9,20 @@ import { environment } from 'src/environments/environment';
 })
 export class HobbyService {
 
-    addHobbyURL: string = environment.apiUrl + 'editprofile/addhobby'
-    removeHobbyURL: string = environment.apiUrl + 'editprofile/removeHobby'
+    addHobbyURL: string = environment.apiUrl + 'UserHobby/AddUserHobby'
+    removeHobbyURL: string = environment.apiUrl + 'UserHobby/RemoveUserHobby'
     getHobbyHintsURL: string = environment.apiUrl + 'editprofile/'
 
     constructor(
         private http: HttpClient,
-        ) { }
+    ) { }
 
     showHobbyHints = (text: string) => this.http.get(this.getHobbyHintsURL + text)
 
-    addHobby(hobby, username) {
+    addHobby(hobbyId, userId) {
         return this.http.post(this.addHobbyURL, {
-            'hobbyId': hobby.id,
-            'hobbyname': hobby.name,
-            'username' : username
+            'UserId' : userId,
+            'HobbyId': hobbyId,
         }).pipe(
             map(response => {
                 return response
@@ -31,11 +30,10 @@ export class HobbyService {
         )
     }
 
-    removeHobby(hobby, username) {
+    removeHobby(hobbyId: number, userId: number) {
         return this.http.post(this.removeHobbyURL, {
-            'hobbyId': hobby.id,
-            'hobbyname': hobby.name,
-            'username' : username
+            'UserId' : userId,
+            'HobbyId': hobbyId,
         }).pipe(
             map(response => {
                 return response
