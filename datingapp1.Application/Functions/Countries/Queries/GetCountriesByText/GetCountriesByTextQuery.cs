@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace datingapp1.Application.Functions.Countries.Queries.GetCountriesByText;
 
-public class GetCountriesByTextQuery: IRequest<List<Country>>
+public class GetCountriesByTextQuery: IRequest<TBaseResponse<List<Country>>>
 {
     public string searchText { get; set; }
 }

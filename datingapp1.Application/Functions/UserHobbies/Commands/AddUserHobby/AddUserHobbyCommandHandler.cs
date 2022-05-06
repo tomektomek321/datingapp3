@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace datingapp1.Application.Functions.UserHobbies.Commands.AddUserHobby;
 
-public class AddUserHobbyCommandHandler : IRequestHandler<AddUserHobbyCommand>
+public class AddUserHobbyCommandHandler : IRequestHandler<AddUserHobbyCommand, BaseResponse>
 {
     private readonly IUserHobbyRepository _UserHobbyRepository;
 
@@ -19,10 +19,19 @@ public class AddUserHobbyCommandHandler : IRequestHandler<AddUserHobbyCommand>
     }
 
 
-    public async Task<Unit> Handle(AddUserHobbyCommand request, CancellationToken cancellationToken)
+    public async Task<BaseResponse> Handle(AddUserHobbyCommand request, CancellationToken cancellationToken)
     {
-        var x = await _UserHobbyRepository.Add(new UserHobby() { AppUserId = request.UserId, HobbyId = request.HobbyId });
-        return Unit.Value;
+        var alreadyAdded = _UserHobbyRepository.GetUserHobbyByUserIdAndHobbyId(request.UserId, request.HobbyId);
+
+        if (alreadyAdded != null)
+        {
+            Console.WriteLine("added");
+            return new BaseResponse("Already Added", false);
+        }
+
+
+        await _UserHobbyRepository.Add(new UserHobby() { AppUserId = request.UserId, HobbyId = request.HobbyId });
+        return new BaseResponse();
     }
 }
 

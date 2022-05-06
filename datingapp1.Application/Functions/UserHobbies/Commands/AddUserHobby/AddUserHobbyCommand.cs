@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace datingapp1.Application.Functions.UserHobbies.Commands.AddUserHobby;
 
-public class AddUserHobbyCommand: IRequest
+public class AddUserHobbyCommand: IRequest<BaseResponse>
 {
     public int UserId { get; set; }
     public int HobbyId { get; set; }

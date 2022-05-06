@@ -61,7 +61,9 @@
             <div class="form-group">
 
                 <app-text-input-with-hints
-                    [URL]="'City/searchByText?_searchText='"
+                    [URL]="'City/searchByText/'"
+                    [placeholder]="'City'"
+                    [autoAdd]="true"
                     (valueEmitter)="getValue($event)"
                 ></app-text-input-with-hints>
 

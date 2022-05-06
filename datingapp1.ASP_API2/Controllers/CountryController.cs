@@ -16,10 +16,10 @@ public class CountryController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("searchByText")]
-    public async Task<ActionResult<IEnumerable<Country>>> SearchByText(string _searchText)
+    [HttpGet("searchByText/{text}")]
+    public async Task<ActionResult<IEnumerable<Country>>> SearchByText(string text)
     {
-        var countries = await _mediator.Send(new GetCountriesByTextQuery() { searchText = _searchText });
+        var countries = await _mediator.Send(new GetCountriesByTextQuery() { searchText = text });
 
         return Ok(countries);
     }

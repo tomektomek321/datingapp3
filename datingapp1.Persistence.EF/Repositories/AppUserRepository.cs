@@ -176,5 +176,16 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
         return Task.FromResult(returnUserDto);
     }
+
+
+    public Task<AppUser> GetUserWithCity(int UserId)
+    {
+        AppUser user = _dbContext.AppUsers
+            .Include(u => u.City)
+            .Where(user_ => user_.Id == UserId)
+            .FirstOrDefault();
+
+        return Task.FromResult(user);
+    }
 }
 

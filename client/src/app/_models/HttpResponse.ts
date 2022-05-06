@@ -2,7 +2,7 @@
 export interface HttpResponse<T> {
     status: number;
     success: boolean;
-    massage: string;
+    message: string;
     validationErrors: string[];
     data: T
 }

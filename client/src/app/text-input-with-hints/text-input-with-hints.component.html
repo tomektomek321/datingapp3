@@ -2,13 +2,13 @@
 <div class="autocomplete" style="width:210px;">
 
     <input
+        #textInput
+        type="text"
         id="myInput"
         class="form-control ml-1"
         style="width: 200px;"
-        [(ngModel)]="inputValue"
-        (keyup)="getHints();"
+        [(ngModel)]="valueInput"
         autocomplete="off"
-        type="text"
         name="myCity"
         placeholder="{{placeholder}}"
     />
@@ -23,4 +23,4 @@
 
 </div>
 
-<input class="btn btn-primary mr-3" (click)="addValue()" type="button" value="Add">
+<input *ngIf="!autoAdd" class="btn btn-primary mr-3" (click)="addValue()" type="button" value="Add">

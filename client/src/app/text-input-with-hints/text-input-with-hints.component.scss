@@ -1,6 +1,15 @@
 .autocomplete {
     position: relative;
     display: inline-block;
+
+    input {
+        background-color: #707683;
+        color: white;
+
+        &::placeholder {
+            color: rgb(201, 198, 198);
+        }
+    }
 }
 
 .autocomplete-items {

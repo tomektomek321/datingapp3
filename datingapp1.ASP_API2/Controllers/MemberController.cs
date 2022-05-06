@@ -57,10 +57,18 @@ public class MemberController : ControllerBase
         return Ok(users);
     }
 
-    [HttpPost("UpdateUserProfile")]
-    public async Task<ActionResult<AppUserDto>> UpdateUserProfile(AppUserDto UserDto)
+    [HttpPost("UpdateUserProfileCity")]
+    public async Task<ActionResult<int>> UpdateUserProfileCity(UpdateUserProfileCityCommand dto)
     {
-        var users = await _mediator.Send(new UpdateUserProfileCommand() { AppUserDto = UserDto });
+        var users = await _mediator.Send(new UpdateUserProfileCityCommand() { CityId = dto.CityId, UserId = dto.UserId });
+
+        return Ok(users);
+    }
+
+    [HttpPost("UpdateUserProfileCountry")]
+    public async Task<ActionResult<int>> UpdateUserProfileCountry(UpdateUserProfileCountryCommand dto)
+    {
+        var users = await _mediator.Send(new UpdateUserProfileCountryCommand() { CountryId = dto.CountryId, UserId = dto.UserId });
 
         return Ok(users);
     }

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace datingapp1.Application.Functions.Cities.Queries.GetCitiesByText
+namespace datingapp1.Application.Functions.Cities.Queries.GetCitiesByText;
+
+public class GetCitiesByTextQuery: IRequest<TBaseResponse<List<City>>>
 {
-    public class GetCitiesByTextQuery: IRequest<List<City>>
-    {
-        public string searchText { get; set; }
-    }
+    public string searchText { get; set; }
 }
+

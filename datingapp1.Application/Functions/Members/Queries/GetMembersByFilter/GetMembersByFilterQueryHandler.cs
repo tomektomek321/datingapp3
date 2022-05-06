@@ -21,6 +21,7 @@ public class GetMembersByFilterQueryHandler : IRequestHandler<GetMembersByFilter
 
     public async Task<GetMembersByFilterQueryResponse> Handle(GetMembersByFilterQuery request, CancellationToken cancellationToken)
     {
+
         List<MemberDto> users = _appUserRepository.GetAppUsersByFilter(request.minAge, request.maxAge, request.gender, request.orderBy, request.cities).Result;
 
         return new GetMembersByFilterQueryResponse(users);

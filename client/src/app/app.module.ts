@@ -27,6 +27,7 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { TextInputWithHintsComponent } from './text-input-with-hints/text-input-with-hints.component';
+import { HintsForInputComponent } from './text-input-with-hints/hints-for-input/hints-for-input.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { TextInputWithHintsComponent } from './text-input-with-hints/text-input-
     TextInputComponent,
     DateInputComponent,
     TextInputWithHintsComponent,
+    HintsForInputComponent,
 
   ],
   imports: [

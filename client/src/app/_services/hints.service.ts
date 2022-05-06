@@ -9,7 +9,7 @@ export class HintsService {
 
     showCitiesHintsUrl: string = environment.apiUrl + 'City/searchByText?_searchText='
     showCountriesHintsUrl: string = environment.apiUrl + 'Country/searchByText?_searchText='
-    showHobbiesHintsUrl: string = environment.apiUrl + 'Hobby/searchByText?_searchText='
+    showHobbiesHintsUrl: string = environment.apiUrl + 'Hobby/searchByText/'
 
     constructor(
         private http: HttpClient

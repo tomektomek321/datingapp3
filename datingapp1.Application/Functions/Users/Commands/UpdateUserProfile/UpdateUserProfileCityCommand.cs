@@ -7,8 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace datingapp1.Application.Functions.Users.Commands.UpdateUserProfile;
-public class UpdateUserProfileCommand : IRequest
+public class UpdateUserProfileCityCommand : IRequest<BaseResponse>
 {
-    public AppUserDto AppUserDto;
+    public int UserId { get; set; }
+    public int CityId { get; set; }
 }
 

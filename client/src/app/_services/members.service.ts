@@ -1,8 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of, pipe } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { PaginatedResult } from '../_models/pagination';
 import { UserParams } from '../_models/userParams';
 import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
@@ -42,7 +40,6 @@ export class MembersService {
             this.user = user;
             this.userParams = new UserParams(user);
         });
-
     }
 
     getMembersObs = () => this.membersObs;
@@ -63,7 +60,6 @@ export class MembersService {
         return this.userParams;
     }
 
-
     createFilterParams(): FilterParams {
         return {
             gender: this.userParams.gender,
@@ -76,7 +72,6 @@ export class MembersService {
         }
     }
 
-
     getMembers(): void {
         const filterParams = this.createFilterParams();
 
@@ -84,9 +79,7 @@ export class MembersService {
         .subscribe((response: HttpResponse<Member[]>) => {
             this.setMembers(response.data)
         })
-
     }
-
 
     GetUserDetails() {
         const UserId =  this.userService.getUser().id;
@@ -94,17 +87,6 @@ export class MembersService {
         this.http.post(this.baseUrl + 'Member/GetUserProfile', {UserId}).subscribe((response: HttpResponse<User>) => {console.log(response.data);
             this.userService.setUserProfileDetails(response.data);
         });
-    }
-
-    updateMember(member: User) {
-        console.log(member); return;
-        /*return this.http.post(this.baseUrl + 'Member/UpdateMember', member)
-        .pipe(
-            map(() => {
-                const index = this.members.indexOf(member);
-                this.members[index] = member;
-            })
-        );*/
     }
 
     setMainPhoto(photoId: number) {
@@ -125,7 +107,7 @@ export class MembersService {
             console.log(response)
             if(response.success) {
                 this.userService.toggleLike(memberId);
-                this.toastr.info("Userlike toggled");
+                this.toastr.success("Userlike toggled");
 
             } else {
                 this.toastr.error("Something bad happened.");

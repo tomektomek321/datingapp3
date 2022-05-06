@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../_models/user';
@@ -11,7 +12,9 @@ export class UserService {
 
     currentUser = new BehaviorSubject<User>(this.user);
 
-    constructor() { }
+    constructor(
+
+    ) { }
 
     getUserObs = () => this.currentUser.asObservable();
 
@@ -50,4 +53,21 @@ export class UserService {
     }
 
     isLikedByUser = (memberId: number): boolean => this.user.likedUsers.some(user_ => user_.targetId == memberId);
+
+    updateCity(cityObject) {
+        this.user.city = cityObject;
+        this.currentUser.next(this.user);
+    }
+
+    updateCountry(countryObject) {
+        this.user.country = countryObject;
+        this.currentUser.next(this.user);
+    }
+
+
+
+
+
+
+
 }
