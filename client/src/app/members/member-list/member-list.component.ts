@@ -45,12 +45,7 @@ export class MemberListComponent implements OnInit {
         this.loadMembers();
     }
 
-    getValue($event) {
+    addCity($event): void {
         this.userParams.cities.push($event);
     }
-
-    addHobby() {
-
-    }
-
 }

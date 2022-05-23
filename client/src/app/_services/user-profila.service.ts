@@ -14,16 +14,11 @@ export class UserProfilaService {
     updateCityURL = 'Member/UpdateUserProfileCity'
     updateCountryURL = 'Member/UpdateUserProfileCountry'
 
-
     constructor(
         private http: HttpClient,
         private userService: UserService,
         private toastr: ToastrService,
     ) { }
-
-
-
-
 
     updateCity(cityObject) {
         const userId = this.userService.getUser();
@@ -41,8 +36,6 @@ export class UserProfilaService {
         })
     }
 
-
-
     updateCountry(countryObject) {
         const userId = this.userService.getUser().id;
 
@@ -59,20 +52,5 @@ export class UserProfilaService {
 
         })
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

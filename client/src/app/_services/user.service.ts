@@ -12,9 +12,7 @@ export class UserService {
 
     currentUser = new BehaviorSubject<User>(this.user);
 
-    constructor(
-
-    ) { }
+    constructor() { }
 
     getUserObs = () => this.currentUser.asObservable();
 
@@ -56,18 +54,14 @@ export class UserService {
 
     updateCity(cityObject) {
         this.user.city = cityObject;
+        localStorage.setItem('user', JSON.stringify(this.user));
         this.currentUser.next(this.user);
     }
 
     updateCountry(countryObject) {
         this.user.country = countryObject;
+        localStorage.setItem('user', JSON.stringify(this.user));
         this.currentUser.next(this.user);
     }
-
-
-
-
-
-
 
 }

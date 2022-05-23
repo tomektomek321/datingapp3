@@ -58,7 +58,6 @@ export class AccountService {
     }
 
     setCurrentUser(user: User) {
-        //this.user = user;
         this.userService.setUser(user);
     }
 

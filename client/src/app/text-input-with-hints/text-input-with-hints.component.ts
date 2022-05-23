@@ -17,12 +17,12 @@ interface IdName {
 })
 export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
 
-
-    @ViewChild('textInput') textInput: ElementRef; // (keyup)="getHints();"
+    @ViewChild('textInput') textInput: ElementRef;
 
     @Input('URL') URL: string;
 
     @Input('autoAdd') autoAdd: boolean;
+
     @Input('setValueToInput') setValueToInput: boolean;
 
     @Input('valueInput') valueInput: string;
@@ -58,19 +58,8 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
         })
     }
 
-    getHints(): void {
-
-
-
-
-
-
-
-    }
-
     request() {
         const url = environment.apiUrl + this.URL + this.valueInput; console.log(url)
-
 
         this.http.get(url).subscribe( (response: HttpResponse<IdName[]>) => {
             console.log(response);
@@ -88,14 +77,12 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
             this.valueInput = value_.name;
         }
 
-
         if(this.autoAdd) {
             this.callback.emit(this.itemToAddObject);
             this.valueInput = null;
             this.itemToAdd = null;
             this.itemToAddObject = null;
         }
-
     }
 
     addValue(): void {
