@@ -20,17 +20,17 @@ public class UpdateUserProfileCityCommandHandler : IRequestHandler<UpdateUserPro
         _appUserRepository = appUserRepository;
     }
 
-    public Task<BaseResponse> Handle(UpdateUserProfileCityCommand request, CancellationToken cancellationToken)
+    public async Task<BaseResponse> Handle(UpdateUserProfileCityCommand request, CancellationToken cancellationToken)
     {
-        AppUser user = _appUserRepository.GetUserWithCity(request.UserId).Result;
+        AppUser user = await _appUserRepository.GetUserWithCity(request.UserId);
 
-        City city = _cityRepository.GetById(request.CityId).Result;
+        City city = await _cityRepository.GetById(request.CityId);
 
         user.City = city;
 
-        _appUserRepository.Update(user);
+        await _appUserRepository.Update(user);
 
-        return Task.FromResult(new BaseResponse());
+        return new BaseResponse();
     }
 }
 

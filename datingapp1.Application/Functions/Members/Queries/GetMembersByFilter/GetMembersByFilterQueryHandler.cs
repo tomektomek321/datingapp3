@@ -21,10 +21,40 @@ public class GetMembersByFilterQueryHandler : IRequestHandler<GetMembersByFilter
 
     public async Task<GetMembersByFilterQueryResponse> Handle(GetMembersByFilterQuery request, CancellationToken cancellationToken)
     {
+        var minDob = DateTime.Today.AddYears(-request.maxAge - 1);
+        var maxDob = DateTime.Today.AddYears(-request.minAge);
 
-        List<MemberDto> users = _appUserRepository.GetAppUsersByFilter(request.minAge, request.maxAge, request.gender, request.orderBy, request.cities).Result;
+        int[] citiesId = null;
 
-        return new GetMembersByFilterQueryResponse(users);
+        if (request.cities != "")
+        {
+            List<string> stringCitiesId = request.cities.Split("-").ToList();
+            citiesId = new int[stringCitiesId.Count];
+            int coutner = 0;
+            foreach (var item in stringCitiesId)
+            {
+                citiesId[coutner++] = int.Parse(item);
+            }
+        }
+
+        List<AppUser> users = await _appUserRepository.GetAppUsersByFilter(minDob, maxDob, request.gender, request.orderBy, citiesId);
+
+        List<MemberDto> returnDto = new List<MemberDto>();
+
+        foreach (var x in users)
+        {
+            returnDto.Add(new MemberDto()
+            {
+                Id = x.Id,
+                Username = x.UserName,
+                KnownAs = x.KnownAs,
+                Gender = x.Gender,
+                City = x.City.Name,
+                LikedUsers = x.LikedUsers
+            });
+        }
+
+        return new GetMembersByFilterQueryResponse(returnDto);
     }
 }
 
