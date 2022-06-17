@@ -16,5 +16,5 @@ export interface User {
 
 export interface LikedUsers {
     sourceId: number;
-    targetId: number;
+    likedUserId: number;
 }

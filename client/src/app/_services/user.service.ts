@@ -38,19 +38,19 @@ export class UserService {
 
     toggleLike(memberId: number): void {
         if(this.isLikedByUser(memberId)) {
-            const index = this.user.likedUsers.findIndex(user_ => user_.targetId == memberId);
+            const index = this.user.likedUsers.findIndex(user_ => user_.likedUserId == memberId);
             this.user.likedUsers.splice(index, 1);
             this.setUser(this.user);
         } else {
             this.user.likedUsers.push({
                 sourceId: this.user.id,
-                targetId: memberId
+                likedUserId: memberId
             });
             this.setUser(this.user);
         }
     }
 
-    isLikedByUser = (memberId: number): boolean => this.user.likedUsers.some(user_ => user_.targetId == memberId);
+    isLikedByUser = (memberId: number): boolean => this.user.likedUsers.some(user_ => user_.likedUserId == memberId);
 
     updateCity(cityObject) {
         this.user.city = cityObject;

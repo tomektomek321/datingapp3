@@ -7,17 +7,17 @@ import { environment } from 'src/environments/environment';
 })
 export class HintsService {
 
-    showCitiesHintsUrl: string = environment.apiUrl + 'City/searchByText?_searchText='
-    showCountriesHintsUrl: string = environment.apiUrl + 'Country/searchByText?_searchText='
-    showHobbiesHintsUrl: string = environment.apiUrl + 'Hobby/searchByText/'
+    showCitiesHintsUrl: string = environment.apiUrl + 'City/searchByText?_searchText=';
+    showCountriesHintsUrl: string = environment.apiUrl + 'Country/searchByText?_searchText=';
+    showHobbiesHintsUrl: string = environment.apiUrl + 'Hobby/searchByText/';
 
     constructor(
         private http: HttpClient
     ) { }
 
-    showCitiesHints = (text: string) => this.http.get(this.showCitiesHintsUrl + text)
+    showCitiesHints = (text: string) => this.http.get(this.showCitiesHintsUrl + text);
 
-    showCountriesHints = (text: string) => this.http.get(this.showCountriesHintsUrl + text)
+    showCountriesHints = (text: string) => this.http.get(this.showCountriesHintsUrl + text);
 
-    showHobbiesHints = (text: string) => this.http.get(this.showHobbiesHintsUrl + text)
+    showHobbiesHints = (text: string) => this.http.get(this.showHobbiesHintsUrl + text);
 }

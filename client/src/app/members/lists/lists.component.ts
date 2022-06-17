@@ -25,25 +25,24 @@ export class ListsComponent implements OnInit {
         ) { }
 
     ngOnInit(): void {
-        this.memberService.getMembersObs().subscribe(response => {
-            console.log(response);
-            this.members = JSON.parse(JSON.stringify(response));
-        })
+        this.memberService.getMembersObs().subscribe((members_) => {
 
-        this.userService.getUserObs().subscribe((response: User) => {
-            console.log(response);
+            this.members = JSON.parse(JSON.stringify(members_));
+        });
+
+        this.userService.getUserObs().subscribe((user_: User) => {
+
             if(this.predicate == "likedBy") return;
-            this.removedDislikedMembers(response.likedUsers);
-        })
+            this.removedDislikedMembers(user_.likedUsers);
+        });
 
         this.loadLikes();
     }
 
     removedDislikedMembers(likedUsers: LikedUsers[]) {
 
-        const likedIds: number[] = likedUsers.map((item, idx) => item.targetId);
+        const likedIds: number[] = likedUsers.map((item, idx) => item.likedUserId);
 
-        console.log(likedIds);
         let foundIndex: number;
         this.members.forEach((member_, index_) => {
             if(!likedIds.includes(member_.id)) {
