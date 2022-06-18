@@ -86,7 +86,7 @@ export class MembersService {
         })
     }
 
-    GetUserDetails(): void {
+    GetUserDetails() {
         const UserId =  this.userService.getUser().id;
 
         this.http.post(this.baseUrl + 'Member/GetUserProfile', {UserId}).subscribe((response: HttpResponse<User>) => {console.log(response.data);

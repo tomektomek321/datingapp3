@@ -31,12 +31,12 @@ import { TimeagoModule } from 'ngx-timeago';
         TimeagoModule,
     ],
     exports: [
-      BsDropdownModule,
-      ToastrModule,
-      TabsModule,
-      NgxGalleryModule,
-      FileUploadModule,
-      BsDatepickerModule,
+        BsDropdownModule,
+        ToastrModule,
+        TabsModule,
+        NgxGalleryModule,
+        FileUploadModule,
+        BsDatepickerModule,
     ]
 })
 export class SharedModule { }

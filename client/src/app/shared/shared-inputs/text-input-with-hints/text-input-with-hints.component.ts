@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { fromEvent } from 'rxjs';
 import { debounceTime, pluck } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { HttpResponse } from '../_models/HttpResponse';
+import { HttpResponse } from '../../../_models/HttpResponse';
 
 interface IdName {
     id: number;

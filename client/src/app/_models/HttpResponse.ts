@@ -6,16 +6,3 @@ export interface HttpResponse<T> {
     validationErrors: string[];
     data: T
 }
-
-
-export interface RegisterResponse<T> extends HttpResponse<T> {
-
-}
-
-
-
-
-
-
-
-
