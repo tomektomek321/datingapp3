@@ -9,6 +9,7 @@ import { UserService } from 'src/app/_services/user.service';
     styleUrls: ['./member-card.component.scss']
 })
 export class MemberCardComponent implements OnInit {
+
     @Input() member: Member;
 
     constructor(
@@ -19,9 +20,9 @@ export class MemberCardComponent implements OnInit {
     ngOnInit(): void { }
 
     addLike(): void {
-        this.memberService.toggleLike(this.member.id)
+        this.memberService.toggleLike(this.member.id);
     }
 
-    isLikedByUser = (): string => this.userServuce.isLikedByUser(this.member.id) ? "btn-success" : "btn-primary"
+    isLikedByUser = (): string => this.userServuce.isLikedByUser(this.member.id) ? "btn-success" : "btn-primary";
 
 }
