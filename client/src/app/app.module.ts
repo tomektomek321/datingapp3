@@ -19,7 +19,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { SharedInputsModule } from './shared/shared-inputs/shared-inputs.module';
-import { ListsComponent } from './likesList/lists.component';
+import { LikesPagesModule } from './components/likes-pages/likes-pages.module';
 
 @NgModule({
     declarations: [
@@ -31,9 +31,9 @@ import { ListsComponent } from './likesList/lists.component';
         RegisterComponent,
         MemberListComponent,
         MemberDetailComponent,
-        ListsComponent,
     ],
     imports: [
+        LikesPagesModule,
         SharedInputsModule,
         BrowserModule,
         AppRoutingModule,

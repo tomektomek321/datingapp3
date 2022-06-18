@@ -6,11 +6,11 @@ import { MembersService } from 'src/app/_services/members.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
-    selector: 'app-lists',
-    templateUrl: './lists.component.html',
-    styleUrls: ['./lists.component.scss']
+  selector: 'app-likes-list',
+  templateUrl: './likes-list.component.html',
+  styleUrls: ['./likes-list.component.scss']
 })
-export class ListsComponent implements OnInit {
+export class LikesListComponent implements OnInit {
 
     members: Partial<Member[]>;
     user: User;
@@ -62,5 +62,6 @@ export class ListsComponent implements OnInit {
         this.predicate = 'likedBy';
         this.memberService.getLikedByMembers();
     }
+
 
 }

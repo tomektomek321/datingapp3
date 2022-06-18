@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { ListsComponent } from './likesList/lists.component';
+import { LikesListComponent } from './components/likes-pages/likes-list/likes-list.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
         children: [
             {path: 'members', component: MemberListComponent, canActivate: [AuthGuard]},
             {path: 'members/:username', component: MemberDetailComponent},
-            {path: 'lists', component: ListsComponent},
+            {path: 'lists', component: LikesListComponent},
             {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
         ]
     },
