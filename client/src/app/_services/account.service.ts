@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { HttpResponse } from '../_models/HttpResponse';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,8 @@ export class AccountService {
     constructor(
         private router: Router,
         private http: HttpClient,
-        private userService: UserService
+        private userService: UserService,
+        private toastr: ToastrService,
     ) {
 
         const savedUser = JSON.parse(localStorage.getItem('user'));
@@ -37,6 +39,8 @@ export class AccountService {
                 if(user.success) {
                     this.userService.setUser(response.data);
                     this.router.navigateByUrl('/members');
+                } else {
+                    this.toastr.error(user.message);
                 }
                 return 1;
             })
@@ -45,7 +49,7 @@ export class AccountService {
 
     register(model: any) {
         return this.http.post(this.baseUrl + 'account/register', model).pipe(
-            map((response: HttpResponse<User>) => { console.log(response)
+            map((response: HttpResponse<User>) => {
                 const user = response;
                 if(user.success) {
                     this.userService.setUser(response.data);

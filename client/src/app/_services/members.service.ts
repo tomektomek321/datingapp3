@@ -24,17 +24,22 @@ export interface FilterParams {
     providedIn: 'root'
 })
 export class MembersService {
+
     baseUrl = environment.apiUrl;
+
     members: Member[] = [];
 
     user: User;
+
     userParams: UserParams;
+
     membersObs = new BehaviorSubject<Member[]>(this.members);
 
     constructor(
         private http: HttpClient,
         private userService: UserService,
-        private toastr: ToastrService) {
+        private toastr: ToastrService
+    ) {
 
         this.userService.getUserObs().subscribe(user => {
             this.user = user;
@@ -44,7 +49,7 @@ export class MembersService {
 
     getMembersObs = () => this.membersObs;
 
-    setMembers = (members_: Member[]) => { console.log(members_);
+    setMembers = (members_: Member[]): void => {
         this.members = members_;
         this.membersObs.next(this.members);
     }
@@ -77,11 +82,11 @@ export class MembersService {
 
         this.http.post(this.baseUrl + 'Member/FilterMembers', filterParams)
         .subscribe((response: HttpResponse<Member[]>) => {
-            this.setMembers(response.data)
+            this.setMembers(response.data);
         })
     }
 
-    GetUserDetails() {
+    GetUserDetails(): void {
         const UserId =  this.userService.getUser().id;
 
         this.http.post(this.baseUrl + 'Member/GetUserProfile', {UserId}).subscribe((response: HttpResponse<User>) => {console.log(response.data);
@@ -89,13 +94,10 @@ export class MembersService {
         });
     }
 
-    setMainPhoto(photoId: number) {
-        return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
-    }
+    setMainPhoto = (photoId: number) => this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
 
-    deletePhoto(photoId: number) {
-        return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
-    }
+    deletePhoto = (photoId: number) => this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
+
 
     toggleLike(memberId: number): void {
         const userId = this.userService.getUser().id;
@@ -104,7 +106,7 @@ export class MembersService {
             sourceUserId: userId,
             targetUserId: memberId
         }).subscribe((response: HttpResponse<number>) => {
-            console.log(response)
+
             if(response.success) {
                 this.userService.toggleLike(memberId);
                 this.toastr.success("Userlike toggled");

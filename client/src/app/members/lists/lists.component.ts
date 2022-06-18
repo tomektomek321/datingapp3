@@ -22,7 +22,7 @@ export class ListsComponent implements OnInit {
     constructor(
         private memberService: MembersService,
         private userService: UserService,
-        ) { }
+    ) { }
 
     ngOnInit(): void {
         this.memberService.getMembersObs().subscribe((members_) => {
@@ -39,7 +39,7 @@ export class ListsComponent implements OnInit {
         this.loadLikes();
     }
 
-    removedDislikedMembers(likedUsers: LikedUsers[]) {
+    removedDislikedMembers(likedUsers: LikedUsers[]): void {
 
         const likedIds: number[] = likedUsers.map((item, idx) => item.likedUserId);
 
@@ -53,19 +53,14 @@ export class ListsComponent implements OnInit {
         this.members.splice(foundIndex, 1);
     }
 
-    loadLikes() {
+    loadLikes(): void {
         this.predicate = 'liked';
         this.memberService.getLikedMembers();
     }
 
-    loadLikedBy() {
+    loadLikedBy(): void {
         this.predicate = 'likedBy';
         this.memberService.getLikedByMembers();
-    }
-
-    pageChanged(event: any) {
-        this.pageNumber = event.page;
-        this.loadLikes();
     }
 
 }

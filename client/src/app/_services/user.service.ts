@@ -52,13 +52,13 @@ export class UserService {
 
     isLikedByUser = (memberId: number): boolean => this.user.likedUsers.some(user_ => user_.likedUserId == memberId);
 
-    updateCity(cityObject) {
+    updateCity(cityObject): void {
         this.user.city = cityObject;
         localStorage.setItem('user', JSON.stringify(this.user));
         this.currentUser.next(this.user);
     }
 
-    updateCountry(countryObject) {
+    updateCountry(countryObject): void {
         this.user.country = countryObject;
         localStorage.setItem('user', JSON.stringify(this.user));
         this.currentUser.next(this.user);

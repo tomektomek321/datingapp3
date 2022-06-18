@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, pluck } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -41,8 +41,6 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
 
     promptShow: boolean = false;
 
-    testObs;
-
     constructor(
         protected http: HttpClient,
     ) { }
@@ -50,7 +48,7 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {}
 
     ngAfterViewInit() {
-        this.testObs = fromEvent(this.textInput.nativeElement, 'input').pipe(
+        fromEvent(this.textInput.nativeElement, 'input').pipe(
             pluck("target", "value"),
             debounceTime(800),
         ).subscribe((data: KeyboardEvent) => {
@@ -59,10 +57,9 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
     }
 
     request() {
-        const url = environment.apiUrl + this.URL + this.valueInput; console.log(url)
+        const url = environment.apiUrl + this.URL + this.valueInput;
 
         this.http.get(url).subscribe( (response: HttpResponse<IdName[]>) => {
-            console.log(response);
             this.allItems = response.data;
             this.promptShow = true;
         })
