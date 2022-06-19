@@ -1,0 +1,57 @@
+
+<div class="row justify-content-center">
+    <div class="col-3">
+        <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" autocomplete="off">
+            <h2 class="text-center text-primary">Sign up</h2>
+            <hr>
+            <div class="form-group radio-div">
+                <label class="control-label" style="margin-right: 10px;">I am a: </label>
+                <label class="radio-inline">
+                    <input type="radio" value='1' formControlName='gender'> Male
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value='0' formControlName='gender' class="ml-3"> Female
+                </label>
+            </div>
+
+            <app-text-input [formControl]='$any(registerForm).controls["username"]' [label]='"Username"'></app-text-input>
+            <app-text-input [formControl]='$any(registerForm).controls["knownAs"]' [label]='"Known As"'></app-text-input>
+
+            <div class="form-group">
+
+                <app-text-input-with-hints
+                    [URL]="'City/searchByText/'"
+                    [setValueToInput]="true"
+                    [autoAdd]="true"
+                    [placeholder]="'City'"
+                    (callback)="selectCity($event)"
+                ></app-text-input-with-hints>
+
+            </div>
+
+            <div class="form-group">
+
+                <app-text-input-with-hints
+                    [URL]="'Country/searchByText/'"
+                    [setValueToInput]="true"
+                    [autoAdd]="true"
+                    [placeholder]="'Country'"
+                    (callback)="selectCountry($event)"
+                ></app-text-input-with-hints>
+
+            </div>
+
+            <app-date-input [formControl]='$any(registerForm).controls["dateOfBirth"]' [label]='"Date Of Birth"'>
+            </app-date-input>
+
+            <app-text-input [formControl]='$any(registerForm).controls["password"]' [label]='"Password"' [type]='"password"'>
+            </app-text-input>
+            <app-text-input [formControl]='$any(registerForm).controls["confirmPassword"]' [label]='"Confirm Password"'
+                [type]='"password"'></app-text-input>
+
+            <div class="form-group text-center">
+                <button [disabled]='!registerForm.valid' class="btn btn-success mr-2" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+
+<div class="autocomplete" [ngClass]="[getCSS()]">
+
+    <input
+        #textInput
+        type="text"
+        id="myInput"
+        class="form-control ml-0"
+        [(ngModel)]="valueInput"
+        autocomplete="off"
+        name="myCity"
+        placeholder="{{placeholder}}"
+    />
+
+    <div id="autocomplete-list" class="autocomplete-items" *ngIf="promptShow">
+
+        <div *ngFor="let item of allItems" (click)="setValue(item)">
+            {{ item.name }}
+        </div>
+
+    </div>
+
+</div>
+
+<input *ngIf="!autoAdd" class="btn btn-primary mr-3" (click)="addValue()" type="button" value="Add">
