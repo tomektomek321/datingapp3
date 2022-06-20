@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { SharedInputsModule } from './shared/shared-inputs/shared-inputs.module';
+import { MembersListModule } from './components/members-list/members-list.module';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,11 @@ import { SharedInputsModule } from './shared/shared-inputs/shared-inputs.module'
         ReactiveFormsModule,
         HttpClientModule,
         SharedModule,
+
+
         HeaderModule,
+        MembersListModule,
+
         SharedInputsModule,
     ],
     providers: [],

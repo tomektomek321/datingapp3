@@ -28,6 +28,8 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
 
     @Input('placeholder') placeholder: string = "";
 
+    @Input('label') label: string | false = false;
+
     @Input('fullWidth') fullWidth: boolean = true;
 
     @Input('darkMode') darkMode: boolean = false;
@@ -50,7 +52,7 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {}
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         fromEvent(this.textInput.nativeElement, 'input').pipe(
             pluck("target", "value"),
             debounceTime(800),
@@ -59,7 +61,7 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
         })
     }
 
-    request() {
+    request(): void {
         const url = environment.apiUrl + this.URL + this.valueInput;
 
         this.http.get(url).subscribe( (response: any) => {
@@ -87,7 +89,7 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
         this.callback.emit(this.itemToAddObject);
     }
 
-    getCSS() {
+    getCSS(): string {
         let response = "";
         if(this.fullWidth) { response += "fullWidth" }
 

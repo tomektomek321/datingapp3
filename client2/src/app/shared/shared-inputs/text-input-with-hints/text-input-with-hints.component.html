@@ -1,6 +1,10 @@
 
 <div class="autocomplete" [ngClass]="[getCSS()]">
 
+    <span *ngIf="label != false">
+        {{ label }}
+    </span>
+
     <input
         #textInput
         type="text"

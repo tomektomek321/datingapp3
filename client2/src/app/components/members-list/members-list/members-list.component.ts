@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-members-list',
-  templateUrl: './members-list.component.html',
-  styleUrls: ['./members-list.component.scss']
+    selector: 'app-members-list',
+    templateUrl: './members-list.component.html',
+    styleUrls: ['./members-list.component.scss']
 })
 export class MembersListComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+
+    }
 
 }

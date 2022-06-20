@@ -1,3 +1,4 @@
+import { IdName } from "../IdName";
 import { likedUsers } from "../LikedUsers";
 
 export interface User {
@@ -7,5 +8,9 @@ export interface User {
     token?: string;
     photoUrl?: string;
     gender?: string;
-    likedUsers?: likedUsers;
+    likedUsers?: likedUsers[];
+    hobbies?: IdName[],
+    city?: string;
+    country?: string;
+    age?: number;
 }
