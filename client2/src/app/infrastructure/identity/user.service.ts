@@ -8,7 +8,9 @@ import { LocalstoragePersistenceService } from '../persistence/auth/localstorage
 })
 export class UserService {
 
-    user: User = {};
+    user: User = {
+        id: 0,
+    };
 
     user$ = new BehaviorSubject<User>(this.user);
 
@@ -25,6 +27,12 @@ export class UserService {
     getUser = (): User => this.user;
 
     setUser = (user_: User) => {
+        if(user_.id == 0) {
+            this._localstoragePersistenceService.removeUser();
+        } else {
+            this._localstoragePersistenceService.storeUser(user_);
+
+        }
         this.user = user_;
         this.user$.next(this.user);
     }

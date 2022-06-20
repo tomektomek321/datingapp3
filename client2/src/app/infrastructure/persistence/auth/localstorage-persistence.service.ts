@@ -23,4 +23,8 @@ export class LocalstoragePersistenceService {
         localStorage.setItem('user', JSON.stringify(user_));
     }
 
+    removeUser() {
+        localStorage.removeItem('user');
+    }
+
 }

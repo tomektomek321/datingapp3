@@ -34,4 +34,8 @@ export class LoginService {
             })
         )
     }
+
+    logout() {
+        this.userService.setUser({id: 0});
+    }
 }

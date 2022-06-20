@@ -21,7 +21,7 @@
 
         </ul>
 
-        <app-login></app-login>
+        <app-login *ngIf="(user$ | async)?.id == 0"></app-login>
 
     </div>
 

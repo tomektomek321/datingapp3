@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LoginService } from 'src/app/infrastructure/auth/login/login.service';
+import { UserService } from 'src/app/infrastructure/identity/user.service';
+import { User } from 'src/app/shared/models/identity/User';
 
 @Component({
     selector: 'app-header',
@@ -7,10 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-    constructor() { }
+    user$: Observable<User>;
+
+    constructor(
+        private userService: UserService,
+        private loginService: LoginService,
+    ) {
+        this.user$ = this.userService.getUser$();
+    }
 
     ngOnInit(): void {
 
+    }
+
+    logout() {
+        this.loginService.logout();
     }
 
 }
