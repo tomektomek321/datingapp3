@@ -24,6 +24,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         TextInputWithHintsComponent,
         TextInputComponent,
         DateInputComponent,
+        BsDatepickerModule,
     ]
 })
 export class SharedInputsModule { }

@@ -23,6 +23,22 @@
 
         <app-login *ngIf="(user$ | async)?.id == 0"></app-login>
 
+        <div class="dropdown" *ngIf="(user$ | async)?.id != 0">
+
+            <img src="{{ './assets/user.png' }}" alt="{{ 'nophoto' }}" />
+
+            <button class="ml-3 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Welcome
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a routerLink='/member/edit' class="dropdown-item">Edit Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="logout()" href="#">Log out</a>
+            </div>
+
+        </div>
+
     </div>
 
 </nav>

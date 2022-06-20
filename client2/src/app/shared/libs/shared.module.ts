@@ -13,9 +13,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
         BsDropdownModule.forRoot(),
 
     ],
-    providers: [
-
-    ],
     exports: [
         ToastrModule,
         BsDropdownModule,

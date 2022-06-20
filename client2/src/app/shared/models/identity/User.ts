@@ -2,8 +2,10 @@ import { likedUsers } from "../LikedUsers";
 
 export interface User {
     id: number;
-    username?: string;
+    userName?: string;
     knownAs?: string;
     token?: string;
+    photoUrl?: string;
+    gender?: string;
     likedUsers?: likedUsers;
 }

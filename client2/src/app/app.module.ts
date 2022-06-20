@@ -17,7 +17,6 @@ import { SharedInputsModule } from './shared/shared-inputs/shared-inputs.module'
         AppComponent,
         HomeComponent,
         RegisterComponent,
-
     ],
     imports: [
         BrowserModule,
@@ -26,11 +25,9 @@ import { SharedInputsModule } from './shared/shared-inputs/shared-inputs.module'
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-
         SharedModule,
         HeaderModule,
         SharedInputsModule,
-
     ],
     providers: [],
     bootstrap: [AppComponent]
