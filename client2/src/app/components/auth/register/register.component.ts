@@ -1,8 +1,6 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { RegisterService } from 'src/app/infrastructure/auth/register/register.service';
-import { RegisterDto } from 'src/app/shared/models/Dtos/RegisterDto';
 
 @Component({
     selector: 'app-register',

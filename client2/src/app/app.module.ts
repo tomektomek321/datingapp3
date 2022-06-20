@@ -16,7 +16,8 @@ import { SharedInputsModule } from './shared/shared-inputs/shared-inputs.module'
     declarations: [
         AppComponent,
         HomeComponent,
-        RegisterComponent
+        RegisterComponent,
+
     ],
     imports: [
         BrowserModule,
