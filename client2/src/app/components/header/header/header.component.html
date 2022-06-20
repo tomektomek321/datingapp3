@@ -7,14 +7,14 @@
 
         <ul class="navbar-nav mr-auto">
 
-            <ng-container>
+            <ng-container *ngIf="(user$ | async)?.id != 0">
 
                 <li class="nav-item">
-                    <a class="nav-link" routerLinkActive='active'> FIND </a>
+                    <a class="nav-link" [routerLink]="['/searchMembers']" routerLinkActive='active'> Find </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" routerLinkActive='active'> My Likes / Liked By </a>
+                    <a class="nav-link" routerLink='/' routerLinkActive='active'> My Likes / Liked By </a>
                 </li>
 
             </ng-container>
@@ -27,8 +27,8 @@
 
             <img src="{{ './assets/user.png' }}" alt="{{ 'nophoto' }}" />
 
-            <button class="ml-3 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Welcome
+            <button class="ml-3 px-4 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Welcome {{ (user$ | async)?.userName }}
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
