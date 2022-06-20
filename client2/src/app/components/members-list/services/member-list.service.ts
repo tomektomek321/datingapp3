@@ -22,5 +22,4 @@ export class MemberListService {
 
     getSearchedMembers$ = () => this.searchedMembers$.asObservable();
 
-
 }

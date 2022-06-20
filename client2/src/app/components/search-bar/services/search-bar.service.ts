@@ -25,7 +25,7 @@ export class SearchBarService {
 
     getSearchUserParams$ = () => this.searchUserParams$.asObservable();
 
-    addCity(city_: IdName) {
+    addCity(city_: IdName): void {
         const added = this.searchUserParams.cities.filter(item => item.id == city_.id);
         if(added.length > 0) {
             console.log("Already added");
@@ -34,5 +34,12 @@ export class SearchBarService {
 
         this.searchUserParams.cities.push(city_);
         this.searchUserParams$.next(this.searchUserParams);
+    }
+
+    removeCity(city_: IdName): void{
+        const added = this.searchUserParams.cities.filter(item => item.id != city_.id);
+        this.searchUserParams.cities = added;
+        this.searchUserParams$.next(this.searchUserParams);
+
     }
 }

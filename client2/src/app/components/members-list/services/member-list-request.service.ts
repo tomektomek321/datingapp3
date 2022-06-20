@@ -13,7 +13,6 @@ import { MemberListService } from './member-list.service';
 })
 export class MemberListRequestService {
 
-
     constructor(
         private searchBarService: SearchBarService,
         private mMemberListService: MemberListService,
@@ -25,7 +24,6 @@ export class MemberListRequestService {
 
         const citiesString = this.createCitiesIdStringForRequest(params.cities);
 
-
         return {
             gender: params.gender,
             maxAge: params.maxAge,
@@ -34,7 +32,6 @@ export class MemberListRequestService {
             cities: citiesString,
         }
     }
-
 
     loadMembers(): void {
         const filterParams = this.createFilterParams();
@@ -59,8 +56,5 @@ export class MemberListRequestService {
         return citiesString;
 
     }
-
-
-
 
 }

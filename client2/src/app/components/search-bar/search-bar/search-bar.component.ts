@@ -34,11 +34,11 @@ export class SearchBarComponent implements OnInit {
 
     }
 
-    loadMembers() {
+    loadMembers(): void {
         this.memberListRequestService.loadMembers();
     }
 
-    resetFilters() {
+    resetFilters(): void {
 
     }
 
