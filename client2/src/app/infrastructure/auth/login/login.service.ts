@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { UserService } from '../identity/user.service';
+import { UserService } from '../../identity/user.service';
 import { map } from 'rxjs/operators'
 import { User } from 'src/app/shared/models/identity/User';
 import { HttpResponse } from 'src/app/shared/models/http/HttpResponse';
@@ -21,7 +21,7 @@ export class LoginService {
     login(model: any) {
         return this.http.post(environment.apiUrl + 'account/login', model).pipe(
 
-            map((response: any) => {
+            map((response: any) => { console.log(response)
                 const user: HttpResponse<User> = response;
                 if(user.success) {
                     this.userService.setUser(response.data);

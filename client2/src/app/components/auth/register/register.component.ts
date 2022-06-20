@@ -42,15 +42,15 @@ export class RegisterComponent implements OnInit {
         }
     }
 
-    selectCity($event: any) {
+    selectCity($event: any): void {
         this.registerForm.controls['city'].setValue($event.id);
     }
 
-    selectCountry($event: any) {
+    selectCountry($event: any): void {
         this.registerForm.controls['country'].setValue($event.id);
     }
 
-    register() {
+    register(): void {
         this.registerService.register(this.registerForm.value).subscribe(response => {
         }, error => {
             this.validationErrors = error;
