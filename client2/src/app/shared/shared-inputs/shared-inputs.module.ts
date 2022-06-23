@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './text-input/text-input.component';
 import { DateInputComponent } from './date-input/date-input.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BadgeItemComponent } from './badge-item/badge-item.component';
 
 
 
@@ -13,6 +14,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         TextInputWithHintsComponent,
         TextInputComponent,
         DateInputComponent,
+        BadgeItemComponent,
     ],
     imports: [
         CommonModule,
@@ -24,6 +26,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         TextInputWithHintsComponent,
         TextInputComponent,
         DateInputComponent,
+        BadgeItemComponent,
         BsDatepickerModule,
     ]
 })

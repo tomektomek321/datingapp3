@@ -48,4 +48,10 @@ export class SearchBarComponent implements OnInit {
         }
     }
 
+    removeCity(city_: any) {
+        console.log(city_);
+        this.searchBarService.removeCity(city_);
+
+    }
+
 }

@@ -33,9 +33,9 @@
 
             </div>
 
-            <button class="btn btn-primary ml-1" name="testApply" type="submit">Apply Filters</button>
+            <button class="btn btn-primary ml-1" name="testApply" type="submit">Find</button>
 
-            <button (click)="resetFilters()" name="submitTest" class="btn btn-info ml-1" type="submit">Reset Filters</button>
+            <button (click)="resetFilters()" name="submitTest" class="btn btn-info ml-2" type="submit">Reset Filters</button>
 
         </div>
 
@@ -51,9 +51,20 @@
                     (callback)="addCity($event)"
                 ></app-text-input-with-hints>
 
-                <h4><span *ngFor="let item of searchUserParams.cities" (click)="removeHobby(item)" class="hoverRemove badge rounded-pill bg-warning text-dark mx-1 mt-2">
+                <ng-container *ngFor="let city_ of searchUserParams.cities">
+                    <app-badge-item
+                        [city_]="city_"
+                        (callback)="removeCity($event)"
+
+                    ></app-badge-item>
+
+                </ng-container>
+
+
+
+                <!-- <h4><span *ngFor="let item of searchUserParams.cities" (click)="removeHobby(item)" class="hoverRemove badge rounded-pill bg-warning text-dark mx-1 mt-2">
                     {{ item.name }}
-                </span></h4>
+                </span></h4> -->
 
             </div>
 
