@@ -14,7 +14,7 @@ export class SearchBarService {
         minAge: 18,
         maxAge: 50,
         cities: [],
-        orderBy: SearchUserOrderByEnum.lastACtive
+        orderBy: SearchUserOrderByEnum.lastACtive,
     };
 
     searchUserParams$ = new BehaviorSubject<SearchUserParams>(this.searchUserParams);
@@ -41,5 +41,17 @@ export class SearchBarService {
         this.searchUserParams.cities = added;
         this.searchUserParams$.next(this.searchUserParams);
 
+    }
+
+    resetParams(): void {
+        this.searchUserParams = {
+            gender: 1,
+            minAge: 18,
+            maxAge: 50,
+            cities: [],
+            orderBy: SearchUserOrderByEnum.lastACtive,
+        };
+
+        this.searchUserParams$.next(this.searchUserParams);
     }
 }

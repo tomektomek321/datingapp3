@@ -39,7 +39,7 @@ export class SearchBarComponent implements OnInit {
     }
 
     resetFilters(): void {
-
+        this.searchBarService.resetParams();
     }
 
     addCity(city_: any): void {

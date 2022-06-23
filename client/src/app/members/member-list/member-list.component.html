@@ -31,7 +31,7 @@
 
                 <select name="gender" style="width: 130px" [(ngModel)]="userParams.gender" class="form-control ml-1">
                     <option *ngFor="let gender of genderList; let i = index" name="testGender{{i}}" [value]="gender.value">
-                        {{gender.display}}
+                        {{ gender.display }}
                     </option>
                 </select>
 
