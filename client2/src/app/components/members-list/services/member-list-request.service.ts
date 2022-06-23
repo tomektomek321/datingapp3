@@ -15,7 +15,7 @@ export class MemberListRequestService {
 
     constructor(
         private searchBarService: SearchBarService,
-        private mMemberListService: MemberListService,
+        private memberListService: MemberListService,
         private http: HttpClient,
     ) { }
 
@@ -40,8 +40,8 @@ export class MemberListRequestService {
         .subscribe((response: any) => {
             const members: Member[] = response.data;
             console.log(members);
-            this.mMemberListService.setSearchedMembers(members);
-        })
+            this.memberListService.setSearchedMembers(members);
+        });
     }
 
     createCitiesIdStringForRequest(cities: IdName[]) {
