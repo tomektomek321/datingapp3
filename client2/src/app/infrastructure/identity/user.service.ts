@@ -19,9 +19,7 @@ export class UserService {
     ) {
         const user = this._localstoragePersistenceService.getUser();
 
-        if(user) {
-            this.setUser(user);
-        }
+        if(user) this.setUser(user);
     }
 
     getUser = (): User => this.user;

@@ -12,16 +12,5 @@ export class MemberCardComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit(): void {
-
-    }
-
-    isLikedByUser() {
-        return ""
-    }
-
-    likeUser() {
-
-    }
-
+    ngOnInit(): void { }
 }

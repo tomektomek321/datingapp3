@@ -20,9 +20,7 @@ export class SearchBarComponent implements OnInit {
     constructor(
         private searchBarService: SearchBarService,
         private memberListRequestService: MemberListRequestService,
-    ) {
-
-    }
+    ) { }
 
     ngOnInit(): void {
         this.searchBarService.getSearchUserParams$().subscribe( (params_: SearchUserParams) => {
@@ -30,16 +28,8 @@ export class SearchBarComponent implements OnInit {
         });
     }
 
-    removeHobby(item: any) {
-
-    }
-
     loadMembers(): void {
         this.memberListRequestService.loadMembers();
-    }
-
-    resetFilters(): void {
-        this.searchBarService.resetParams();
     }
 
     addCity(city_: any): void {
@@ -49,9 +39,7 @@ export class SearchBarComponent implements OnInit {
     }
 
     removeCity(city_: any) {
-        console.log(city_);
         this.searchBarService.removeCity(city_);
-
     }
 
 }

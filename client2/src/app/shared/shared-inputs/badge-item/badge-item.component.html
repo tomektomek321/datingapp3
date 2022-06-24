@@ -1,8 +1,10 @@
 
-<a class="badge rounded-pill bg-warning text-dark mx-1">
-    {{ city_.name }}
-    <span (click)="remove()">
-        <div><i class="fa fa-trash-o" aria-hidden="true"></i></div>
-    </span>
-</a>
+<div class="item rounded-pill bg-warning text-dark mr-1" (click)="remove()">
+    <div class="item__name">
+        {{ item.name }}
+    </div>
 
+    <div class="item__remove">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </div>
+</div>

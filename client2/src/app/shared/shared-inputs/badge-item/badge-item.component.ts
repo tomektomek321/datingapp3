@@ -8,18 +8,16 @@ import { IdName } from '../../models/IdName';
 })
 export class BadgeItemComponent implements OnInit {
 
-    @Input('city_') city_!: IdName
+    @Input('item') item!: IdName;
 
     @Output() callback = new EventEmitter<any>();
 
     constructor() { }
 
-    ngOnInit(): void {
-
-    }
+    ngOnInit(): void { }
 
     remove() {
-        this.callback.emit(this.city_);
+        this.callback.emit(this.item);
     }
 
 }
