@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { MemberListRequestService } from './member-list-request.service';
+// import { MemberListRequestService } from './member-list-request.service';
 
-describe('MemberListRequestService', () => {
-  let service: MemberListRequestService;
+// describe('MemberListRequestService', () => {
+//   let service: MemberListRequestService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(MemberListRequestService);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     service = TestBed.inject(MemberListRequestService);
+//   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(service).toBeTruthy();
+//   });
+// });
