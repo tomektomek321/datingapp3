@@ -21,15 +21,16 @@ export class LoginService {
     login(model: any) {
         return this.http.post(environment.apiUrl + 'account/login', model).pipe(
 
-            map((response: any) => { console.log(response)
+            map((response: any) => {
                 const user: HttpResponse<User> = response;
                 if(user.success) {
                     this.userService.setUser(response.data);
                     this.router.navigateByUrl('/searchMembers');
                 }
 
+                return response.data;
+
             }, (error: any) => {
-                console.log(error);
                 return "error";
             })
         )

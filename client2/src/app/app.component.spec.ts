@@ -63,4 +63,9 @@ describe('AppComponent', () => {
     // element.dataset.widget
     // element['data'widget'] .. // ???
 
+    //TestBed.get(someServvice);
+    //spyOn(someService, 'someMethod').and.returnValue(true); // before invoke
+    //expect(someReturnValueFromSomeMethod).toEqual(value);
+    //expect(someService.someMethod)toHaveBeenCalled();
+
 });
