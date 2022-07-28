@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { LoginService } from 'src/app/infrastructure/auth/login/login.service';
+import { LoginService } from 'src/app/infrastructure/auth/services/login/login.service';
 import { UserService } from 'src/app/infrastructure/identity/user.service';
 import { User } from 'src/app/shared/models/identity/User';
 
