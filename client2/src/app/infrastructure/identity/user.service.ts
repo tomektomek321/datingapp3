@@ -35,5 +35,11 @@ export class UserService {
         this.user$.next(this.user);
     }
 
+    logout() {
+        this._localstoragePersistenceService.removeUser();
+        this.user = {id: 0};
+        this.user$.next(this.user);
+    }
+
     getUser$ = () => this.user$.asObservable();
 }

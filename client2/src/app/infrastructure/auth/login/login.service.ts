@@ -37,6 +37,6 @@ export class LoginService {
     }
 
     logout() {
-        this.userService.setUser({id: 0});
+        this.userService.logout();
     }
 }
