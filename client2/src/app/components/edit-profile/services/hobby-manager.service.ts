@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { HttpResponse } from 'src/app/shared/models/http/HttpResponse';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

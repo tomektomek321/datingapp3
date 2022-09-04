@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/models/identity/User';
+import { IdName } from 'src/app/shared/models/IdName';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
 
@@ -35,8 +36,6 @@ export class UserManagerService {
         user.hobbies = user_.hobbies;
 
         this.userService.setUser(user);
-
-
     }
 
     addHobby(hobby_: any) {
@@ -58,12 +57,20 @@ export class UserManagerService {
         }
     }
 
-    updateCity(name: string): void {
+    updateCity(cityObject: IdName): void {
+        const user: User = this.userService.getUser();
 
+        user.city = cityObject.name;
+
+        this.userService.setUser(user);
     }
 
-    updateCountry(name: string): void {
+    updateCountry(countryObject: IdName): void {
+        const user: User = this.userService.getUser();
 
+        user.country = countryObject.name;
+
+        this.userService.setUser(user);
     }
 
 }

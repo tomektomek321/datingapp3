@@ -3,7 +3,9 @@ import { NgForm } from '@angular/forms';
 import { UserManagerService } from 'src/app/infrastructure/identity/user-manager.service';
 import { UserService } from 'src/app/infrastructure/identity/user.service';
 import { User } from 'src/app/shared/models/identity/User';
+import { IdName } from 'src/app/shared/models/IdName';
 import { HobbyManagerService } from '../services/hobby-manager.service';
+import { UserProfileManagerService } from '../services/user-profile-manager.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -20,6 +22,7 @@ export class EditProfileComponent implements OnInit, AfterViewInit {
         private userService: UserService,
         private userManagerService: UserManagerService,
         private hobbyManager: HobbyManagerService,
+        private userProfileManagerService: UserProfileManagerService,
     ) {
 
     }
@@ -60,5 +63,21 @@ export class EditProfileComponent implements OnInit, AfterViewInit {
                 this.userManagerService.addHobby(hobbyObject);
             };
         })
+    }
+
+    getCity(cityObject: any): void {
+        this.changeCity(cityObject);
+    }
+
+    changeCity(cityObject: any): void {
+
+
+
+
+        this.userProfileManagerService.updateCity(cityObject);
+    }
+
+    getCountry(cityObject: any): void {
+        this.userProfileManagerService.updateCountry(cityObject);
     }
 }

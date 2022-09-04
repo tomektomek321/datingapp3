@@ -24,7 +24,7 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
 
     @Input('setValueToInput') setValueToInput: boolean = false;
 
-    @Input('valueInput') valueInput:  null | string = "";
+    @Input('valueInput') valueInput:  undefined | string = "";
 
     @Input('placeholder') placeholder: string = "";
 
