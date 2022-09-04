@@ -4,11 +4,13 @@ import { RegisterComponent } from './infrastructure/auth/components/register/reg
 import { HomeComponent } from './components/home/home.component';
 import { MembersListComponent } from './components/members-list/members-list/members-list.component';
 import { LikesListComponent } from './components/likes-list/likes-list/likes-list.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile/edit-profile.component';
 
 const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'searchMembers', component: MembersListComponent },
-    { path: 'likesList', component: LikesListComponent},
+    { path: 'likesList', component: LikesListComponent },
+    { path: 'member/edit', component: EditProfileComponent },
     { path: '', component: HomeComponent },
 ];
 

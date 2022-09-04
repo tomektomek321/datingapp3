@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SharedInputsModule } from './shared/shared-inputs/shared-inputs.module';
 import { MembersListModule } from './components/members-list/members-list.module';
 import { LikesListModule } from './components/likes-list/likes-list.module';
+import { EditProfileModule } from './components/edit-profile/edit-profile.module';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { LikesListModule } from './components/likes-list/likes-list.module';
         HeaderModule,
         MembersListModule,
         LikesListModule,
+        EditProfileModule,
 
         SharedInputsModule,
     ],
