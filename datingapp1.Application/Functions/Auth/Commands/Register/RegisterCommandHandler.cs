@@ -18,7 +18,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
     private readonly ICountryRepository _countryRepository;
     private readonly ITokenService _tokenService;
 
-    public RegisterCommandHandler(IAppUserRepository appUserRepository, ICityRepository cityRepository, 
+    public RegisterCommandHandler(IAppUserRepository appUserRepository, ICityRepository cityRepository,
         ICountryRepository countryRepository, ITokenService tokenService)
     {
         _appUserRepository = appUserRepository;
@@ -48,12 +48,20 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
 
         var password = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
 
+        int day1 = request.DateOfBirth.Day;
+        int year = request.DateOfBirth.Year;
+        int mon = request.DateOfBirth.Month;
+        //int day1 = request.DateOfBirth.Day;
+
+        DateTime x = DateTime.SpecifyKind(new DateTime(year, mon, day1), DateTimeKind.Local);
+        string a = TimeZone.CurrentTimeZone.StandardName;
+
         AppUser user = new AppUser()
         {
             UserName = request.Username,
             KnownAs = request.KnownAs,
             Gender = request.Gender,
-            DateOfBirth = request.DateOfBirth.ToUniversalTime(),
+            DateOfBirth =  request.DateOfBirth, // new DateTime(year, mon, day1), //request.DateOfBirth.ToUniversalTime(), // DateTime.SpecifyKind(new DateTime(year, mon, day1), DateTimeKind.Local), //  , // request.DateOfBirth,
             City = city,
             Country = country,
             PasswordHash = password,

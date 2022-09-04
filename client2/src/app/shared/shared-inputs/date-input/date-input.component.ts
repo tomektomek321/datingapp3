@@ -20,7 +20,7 @@ export class DateInputComponent implements ControlValueAccessor {
             dateInputFormat: 'DD MMMM YYYY'
         }
 
-        this.maxDate = new Date();
+        //this.maxDate = new Date();
     }
 
     writeValue(obj: any): void {

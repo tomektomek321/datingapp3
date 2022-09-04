@@ -18,7 +18,19 @@ export class RegisterService {
         private userService: UserService,
     ) { }
 
-    register(model: any) {
+    register(model: any) {debugger
+
+        console.log(model.dateOfBirth.toString());
+        console.log(model.dateOfBirth.getDate());
+        console.log(model.dateOfBirth.toUTCString());
+
+
+
+        //new Date().toLocaleDateString()
+
+        //model.dateOfBirth = model.dateOfBirth.toUTCString();
+        //model.dateOfBirth = model.dateOfBirth.replace(",", "");
+
         return this.http.post(environment.apiUrl + 'account/register', model).pipe(
 
             map((response: any) => {
