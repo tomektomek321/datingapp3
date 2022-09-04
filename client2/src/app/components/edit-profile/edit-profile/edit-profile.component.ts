@@ -37,7 +37,15 @@ export class EditProfileComponent implements OnInit, AfterViewInit {
     }
 
     updateMember() {}
-    removeHobby(id_: number) {}
+    removeHobby(hobbyId_: number) {
+        let userId = this.userService.getUser().id
+
+        this.hobbyManager.removeHobby(hobbyId_, userId).subscribe((response: any) => {
+            if(response) {
+                this.userManagerService.removeHobby(hobbyId_);
+            }
+        });
+    }
 
     getHobby(hobbyObject: any): void {
         this.addHobby(hobbyObject);
@@ -50,7 +58,6 @@ export class EditProfileComponent implements OnInit, AfterViewInit {
             console.log(response)
             if(response.success) {
                 this.userManagerService.addHobby(hobbyObject);
-                //this.user.hobbies.push(hobbyObject);
             };
         })
     }

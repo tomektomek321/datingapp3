@@ -47,6 +47,17 @@ export class UserManagerService {
         this.userService.setUser(user);
     }
 
+    removeHobby(hobbyId_: any) {
+        const user: User = this.userService.getUser();
+        if(user.hobbies) {
+            const index = user.hobbies.findIndex(item => item.id == hobbyId_);
+            if(index != -1) {
+                user.hobbies.splice(index, 1);
+                this.userService.setUser(user);
+            }
+        }
+    }
+
     updateCity(name: string): void {
 
     }
