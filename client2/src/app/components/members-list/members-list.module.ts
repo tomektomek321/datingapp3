@@ -17,6 +17,7 @@ import { MemberCardComponent } from './member-card/member-card.component';
     ],
     exports: [
         MembersListComponent,
+        MemberCardComponent,
     ]
 })
 export class MembersListModule { }

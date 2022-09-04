@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { SharedInputsModule } from './shared/shared-inputs/shared-inputs.module';
 import { MembersListModule } from './components/members-list/members-list.module';
+import { LikesListModule } from './components/likes-list/likes-list.module';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { MembersListModule } from './components/members-list/members-list.module
 
         HeaderModule,
         MembersListModule,
+        LikesListModule,
 
         SharedInputsModule,
     ],
