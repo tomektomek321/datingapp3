@@ -31,7 +31,7 @@ describe('AppComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should render title', () => {
+    /*it('should render title', () => {
         const selector = fixture.nativeElement as HTMLElement;
         expect(selector.querySelector('h1')?.textContent).toContain('Hello');
     });
@@ -54,7 +54,7 @@ describe('AppComponent', () => {
             expect(newValue).toEqual("Hello2");
             done();
         });
-    });
+    });*/
 
 
 

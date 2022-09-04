@@ -7,6 +7,7 @@ import { MembersListComponent } from './components/members-list/members-list/mem
 const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'searchMembers', component: MembersListComponent },
+    // {path: 'lists', component: LikesListComponent},
     { path: '', component: HomeComponent },
 ];
 

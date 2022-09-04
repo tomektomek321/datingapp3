@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LikesListComponent } from './likes-list/likes-list.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LikesListComponent
+  ],
   imports: [
     CommonModule
   ]
