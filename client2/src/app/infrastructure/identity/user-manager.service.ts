@@ -73,4 +73,41 @@ export class UserManagerService {
         this.userService.setUser(user);
     }
 
+    isLikedByUser(memberId: number): boolean {
+        const user: User = this.userService.getUser();
+
+        if(user.likedUsers) {
+            const liked = user.likedUsers.some(user_ => user_.likedUserId == memberId);
+            if(liked) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    toggleLike(memberId: number): void {
+        const user: User = this.userService.getUser();
+
+        if(this.isLikedByUser(memberId)) {
+            if(user.likedUsers) {
+                const index = user.likedUsers.findIndex(user_ => user_.likedUserId == memberId);
+                user.likedUsers.splice(index, 1);
+                this.userService.setUser(user);
+
+            }
+        } else {
+            if(user.likedUsers) {
+                user.likedUsers.push({
+                    sourceUserId: user.id,
+                    likedUserId: memberId
+                });
+                this.userService.setUser(user);
+
+            }
+        }
+    }
+
 }

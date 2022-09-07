@@ -30,7 +30,7 @@ export class RegisterService {
 
         //model.dateOfBirth = model.dateOfBirth.toUTCString();
         //model.dateOfBirth = model.dateOfBirth.replace(",", "");
-
+        const newDate = new Date()
         return this.http.post(environment.apiUrl + 'account/register', model).pipe(
 
             map((response: any) => {

@@ -11,8 +11,8 @@ export class SearchBarService {
 
     searchUserParams: SearchUserParams = {
         gender: 1,
-        minAge: 18,
-        maxAge: 50,
+        minAge: 21,
+        maxAge: 21,
         cities: [],
         orderBy: SearchUserOrderByEnum.lastACtive,
     };
