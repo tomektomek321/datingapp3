@@ -46,7 +46,7 @@ export class MemberDetailComponent implements OnInit {
     }
 
     selectTab(num: number) {
-
+        this.memberTabs.tabs[num].active = true;
     }
 
     toggleLike() {
