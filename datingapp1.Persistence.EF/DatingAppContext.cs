@@ -10,6 +10,8 @@ namespace datingapp1.Persistence.EF;
 
 public class DatingAppContext: DbContext
 {
+    public DatingAppContext() {}
+
     public DatingAppContext(DbContextOptions options)
         : base(options) { }
 

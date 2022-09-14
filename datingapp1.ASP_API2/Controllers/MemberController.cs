@@ -3,6 +3,7 @@ using datingapp1.Application.Functions.Members.Queries.GetLikedMembers;
 using datingapp1.Application.Functions.Members.Queries.GetMembersByFilter;
 using datingapp1.Application.Functions.Users.Commands.UpdateUserProfile;
 using datingapp1.Application.Functions.Users.Queries.GetProfile;
+using datingapp1.Application.Functions.Users.Queries.GetProfileByUsername;
 using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using MediatR;
@@ -53,6 +54,14 @@ public class MemberController : ControllerBase
     public async Task<ActionResult<AppUserDto>> GetUserProfile(GetProfileQuery UserId)
     {
         var users = await _mediator.Send(UserId);
+
+        return Ok(users);
+    }
+
+    [HttpPost("GetUserProfileByUsername")]
+    public async Task<ActionResult<AppUserDto>> GetUserProfileByUsername(GetProfileByUsernameQuery Username)
+    {
+        var users = await _mediator.Send(Username);
 
         return Ok(users);
     }

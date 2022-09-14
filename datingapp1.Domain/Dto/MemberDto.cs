@@ -15,6 +15,11 @@ public class MemberDto
     public int Gender { get; set; }
     public string City { get; set; }
     public ICollection<UserLike> LikedUsers { get; set; }
+    public ICollection<Hobby> Hobbies { get; set; }
+    public int Age { get; set; }
 
+    public int GetAge(DateTime dob)
+    {
+        return  DateTime.Now.Year - dob.Year;
+    }
 }
-

@@ -21,5 +21,9 @@ namespace datingapp1.Application
         {
             Result = data_;
         }
+
+        public TBaseResponse(string errorMessage) : base(errorMessage, false) {
+
+        }
     }
 }

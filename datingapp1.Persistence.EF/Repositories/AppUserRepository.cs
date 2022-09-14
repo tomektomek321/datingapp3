@@ -14,7 +14,7 @@ namespace datingapp1.Persistence.EF.Repositories;
 
 public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 {
-    public AppUserRepository(DatingAppContext dbContext) : base(dbContext)  
+    public AppUserRepository(DatingAppContext dbContext) : base(dbContext)
     { }
 
     public Task<bool> DoesUserNameAlreadyExists(string UserName)
@@ -30,7 +30,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
                         .Include(x => x.LikedUsers)
                         .Where(x => x.UserName == username)
                         .FirstOrDefault();
-        return user;  
+        return user;
     }
 
     public Task<List<AppUser>> GetAppUsersList()
@@ -144,7 +144,47 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
             LastActive = user.LastActive,
             Age = user.DateOfBirth.ToUniversalTime().CalculateAge(),
         };
-        
+
+
+        return Task.FromResult(returnUserDto);
+    }
+
+
+    public Task<MemberDto> GetUserProfileByUsername(string Username)
+    {
+        AppUser user = _dbContext.AppUsers
+            .Include(u => u.City)
+            .Include(u => u.Country)
+            .Include(u => u.UserHobbies)
+                .ThenInclude(h => h.Hobby)
+            .Include(u => u.LikedUsers)
+            .Where(user_ => user_.UserName == Username)
+            .FirstOrDefault();
+
+        /*if(user == null) {
+            return null;
+        }*/
+
+        List<Hobby> hobbies = new List<Hobby>();
+
+
+        foreach (var hobby_ in user.UserHobbies)
+        {
+            hobbies.Add(hobby_.Hobby);
+        }
+
+
+        MemberDto returnUserDto = new MemberDto()
+        {
+            Id = user.Id,
+            Username = user.UserName,
+            KnownAs = user.KnownAs,
+            Gender = user.Gender,
+            City = user.City.Name,
+            Hobbies = hobbies,
+            Age = user.DateOfBirth.ToUniversalTime().CalculateAge(),
+        };
+
 
         return Task.FromResult(returnUserDto);
     }

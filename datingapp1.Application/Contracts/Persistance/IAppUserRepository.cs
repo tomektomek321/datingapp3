@@ -15,5 +15,6 @@ public interface IAppUserRepository: IRepository<AppUser>
     Task<List<MemberDto>> GetLikedMembers(int UserId);
     Task<List<MemberDto>> GetLikedByMembers(int UserId);
     Task<AppUserDto> GetUserProfile(int UserId);
+    Task<MemberDto> GetUserProfileByUsername(string Username);
     Task<AppUser> GetUserWithCity(int UserId);
 }
