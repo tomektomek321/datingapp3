@@ -25,7 +25,8 @@ public class LikeRepository: BaseRepository<UserLike>, ILikeRepository
                 SourceUserId = sourceUserId,
                 LikedUserId = targetUserId
             });
-        } else
+        }
+        else
         {
             _dbContext.UserLikes.Add(new UserLike()
             {

@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\datingapp1.Persistence.EF\datingapp1.Persistence.EF.csproj" />
     <ProjectReference Include="..\datingapp1.Application\datingapp1.Application.csproj" />
+    <ProjectReference Include="..\datingapp1.Domain\datingapp1.Domain.csproj" />
   </ItemGroup>
 
 </Project>

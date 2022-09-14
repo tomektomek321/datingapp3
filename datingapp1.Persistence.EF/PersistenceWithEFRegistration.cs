@@ -31,7 +31,8 @@ public static class PersistenceWithEFRegistration
         services.AddScoped<ILikeRepository, LikeRepository>();
         services.AddScoped<IHobbyRepository, HobbyRepository>();
         services.AddScoped<IUserHobbyRepository, UserHobbyRepository>();
-        
+        services.AddScoped<IMessageRepository, MessageRepository>();
+
         return services;
     }
 }
