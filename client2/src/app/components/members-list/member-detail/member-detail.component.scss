@@ -1,8 +1,12 @@
 
+.hobbyContainer {
+    flex-wrap: wrap;
+}
+
 .hobbyItem {
     background-color: yellow;
     color: black;
-    padding: 5px 10px;
+    padding: 8px 16px;
     border-radius: 15px;
     margin: 10px;
 }
