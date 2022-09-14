@@ -4,6 +4,8 @@ import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { NgxGalleryOptions, NgxGalleryImage } from '@kolkov/ngx-gallery';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserManagerService } from 'src/app/infrastructure/identity/user-manager.service';
+import { LikedMembersService } from '../../likes-list/services/liked-members.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -21,6 +23,8 @@ export class MemberDetailComponent implements OnInit {
     constructor(
         private http: HttpClient,
         private router: Router,
+        private userManagerService: UserManagerService,
+        private likedMembersService: LikedMembersService,
     ) {
 
     }
@@ -39,6 +43,25 @@ export class MemberDetailComponent implements OnInit {
 
     onTabActivated(event: any) {
 
+    }
+
+    selectTab(num: number) {
+
+    }
+
+    toggleLike() {
+        if(this.member) {
+            this.likedMembersService.toggleLike(this.member.id);
+        }
+    }
+
+    isUserLiked(): string {
+        if(this.member) {
+            const liked = this.userManagerService.isLikedByUser(this.member.id);
+            return liked ? "Unlike" : "Like";
+        }
+
+        return "Like";
     }
 
 }
