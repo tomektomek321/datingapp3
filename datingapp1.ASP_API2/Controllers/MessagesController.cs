@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using datingapp1.Domain.Entities;
+using datingapp1.Application.Functions.Messages.Commands.CreateMessage;
+using datingapp1.Application.Functions.Messages.Queries.GetMessageThread;
+using datingapp1.Domain.Dto;
 
 namespace datingapp1.ASP_API2.Controllers
 {
@@ -12,45 +12,26 @@ namespace datingapp1.ASP_API2.Controllers
     public class MessagesController : ControllerBase
     {
         private readonly IMediator _mediator;
-        //private readonly IMessageRepository _messageRepository;
 
         public MessagesController(IMediator mediator)
         {
             _mediator = mediator;
         }
+
+        [HttpPost("CreateMessage")]
+        public async Task<ActionResult<IEnumerable<Message>>> CreateMessage(CreateMessageQuery message)
+        {
+            var messageDto = await _mediator.Send(message);
+            return Ok(messageDto);
+        }
+
+        [HttpPost("GetMessageThread")]
+        public async Task<ActionResult<List<MessageDto>>> GetMessageThread(GetMessageThreadQuery message)
+        {
+            var messageDto = await _mediator.Send(message);
+            return Ok(messageDto);
+        }
+
     }
+
 }
-
-
-
-
-/*
-public class CityController
-{
-
-
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<City>>> GetAll()
-    {
-        var cities = await _mediator.Send(new GetAllCitiesQuery());
-
-        return Ok(cities);
-    }
-
-    [HttpGet("getById/{id}")]
-    public async Task<ActionResult<IEnumerable<City>>> GetById(int id)
-    {
-        var cities = await _mediator.Send(new GetCityByIdQuery() { CityId = id });
-
-        return Ok(cities);
-    }
-
-    [HttpGet("searchByText/{text}")]
-    public async Task<ActionResult<IEnumerable<City>>> SearchByText(string text)
-    {
-        var cities = await _mediator.Send(new GetCitiesByTextQuery() { searchText = text });
-
-        return Ok(cities);
-    }
-
-}*/

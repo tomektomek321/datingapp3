@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using datingapp1.Application.Contracts.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -21,8 +16,7 @@ public class BaseRepository<T> : IRepository<T> where T : class
     public async Task<T> Add(T entity)
     {
         EntityEntry e1 = _dbContext.Set<T>().Add(entity);
-        await _dbContext.SaveChangesAsync();
-
+        var x = await _dbContext.SaveChangesAsync();
         return entity;
     }
 
