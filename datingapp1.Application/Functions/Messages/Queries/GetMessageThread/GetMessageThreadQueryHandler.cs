@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using datingapp1.Application.Contracts.Persistance;
 using datingapp1.Domain.Dto;
 using MediatR;

@@ -26,9 +26,9 @@ namespace datingapp1.ASP_API2.Controllers
         }
 
         [HttpPost("GetMessageThread")]
-        public async Task<ActionResult<List<MessageDto>>> GetMessageThread(GetMessageThreadQuery message)
+        public async Task<ActionResult<List<MessageDto>>> GetMessageThread(GetMessageThreadQuery usersDto)
         {
-            var messageDto = await _mediator.Send(message);
+            var messageDto = await _mediator.Send(usersDto);
             return Ok(messageDto);
         }
 

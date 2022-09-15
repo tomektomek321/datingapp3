@@ -18,6 +18,8 @@ export class MemberDetailComponent implements OnInit {
     galleryOptions?: NgxGalleryOptions[];
     galleryImages?: NgxGalleryImage[];
     activeTab?: TabDirective;
+
+    chatOpened: boolean = false;
     //messages: Message[] = [];
 
     constructor(
@@ -41,11 +43,13 @@ export class MemberDetailComponent implements OnInit {
     }
 
 
-    onTabActivated(event: any) {
-
+    onTabActivated(num: number) {
+        if(num == 1) {this.chatOpened = true;}
+        this.memberTabs.tabs[num].active = true;
     }
 
     selectTab(num: number) {
+        if(num == 1) {this.chatOpened = true;}
         this.memberTabs.tabs[num].active = true;
     }
 

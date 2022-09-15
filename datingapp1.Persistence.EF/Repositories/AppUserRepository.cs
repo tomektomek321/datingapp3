@@ -3,12 +3,6 @@ using datingapp1.Application.Extensions;
 using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace datingapp1.Persistence.EF.Repositories;
 
@@ -113,7 +107,6 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
         return Task.FromResult(returnMembers);
     }
 
-
     public Task<AppUserDto> GetUserProfile(int UserId)
     {
         AppUser user = _dbContext.AppUsers
@@ -126,12 +119,10 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
         List<Hobby> hobbies = new List<Hobby>();
 
-
         foreach (var hobby_ in user.UserHobbies)
         {
             hobbies.Add(hobby_.Hobby);
         }
-
 
         AppUserDto returnUserDto = new AppUserDto()
         {
@@ -145,10 +136,8 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
             Age = user.DateOfBirth.ToUniversalTime().CalculateAge(),
         };
 
-
         return Task.FromResult(returnUserDto);
     }
-
 
     public Task<MemberDto> GetUserProfileByUsername(string Username)
     {
@@ -167,12 +156,10 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
         List<Hobby> hobbies = new List<Hobby>();
 
-
         foreach (var hobby_ in user.UserHobbies)
         {
             hobbies.Add(hobby_.Hobby);
         }
-
 
         MemberDto returnUserDto = new MemberDto()
         {
@@ -185,10 +172,8 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
             Age = user.DateOfBirth.ToUniversalTime().CalculateAge(),
         };
 
-
         return Task.FromResult(returnUserDto);
     }
-
 
     public Task<AppUser> GetUserWithCity(int UserId)
     {
