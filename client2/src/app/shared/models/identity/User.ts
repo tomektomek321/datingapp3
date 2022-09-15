@@ -3,7 +3,7 @@ import { likedUsers } from "../LikedUsers";
 
 export interface User {
     id: number;
-    userName?: string;
+    username?: string;
     knownAs?: string;
     token?: string;
     photoUrl?: string;

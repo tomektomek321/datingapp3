@@ -28,7 +28,7 @@
             <img src="{{ './assets/user.png' }}" alt="{{ 'nophoto' }}" />
 
             <button class="ml-3 px-4 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Welcome {{ (user$ | async)?.userName }}
+                Welcome {{ (user$ | async)?.username }}
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

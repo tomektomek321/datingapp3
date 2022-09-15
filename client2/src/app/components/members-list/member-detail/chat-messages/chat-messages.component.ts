@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Message } from 'src/app/shared/models/Message';
 import { MessagesManagerService } from '../../services/messages-manager.service';
 
 @Component({
@@ -8,6 +9,10 @@ import { MessagesManagerService } from '../../services/messages-manager.service'
 })
 export class ChatMessagesComponent implements OnInit {
 
+    @Input('username') username?: string;
+
+    messages: Message[] = [];
+
     constructor(
         private messagesManagerService: MessagesManagerService,
     ) {
@@ -15,7 +20,11 @@ export class ChatMessagesComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+        if(this.username) {
+            this.messagesManagerService.getMessageThread(this.username).subscribe( (response: any) => { console.log(response);
+                this.messages = response.data;
+            });
+        }
     }
 
 }

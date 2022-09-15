@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserService } from 'src/app/infrastructure/identity/user.service';
+import { User } from 'src/app/shared/models/identity/User';
 import { Message } from 'src/app/shared/models/Message';
 import { environment } from 'src/environments/environment';
 
@@ -17,10 +18,10 @@ export class MessagesManagerService {
     ) { }
 
     getMessageThread(username: string) {
-        const user =  this.userService.getUser();
+        const user: User =  this.userService.getUser();debugger
 
-        return this.http.post<Message[]>(this.baseUrl + 'messages/thread/', {
-            currentUsername: user.userName,
+        return this.http.post<Message[]>(this.baseUrl + 'Messages/GetMessageThread', {
+            currentUsername: user.username,
             recipientUsername: username,
         });
 

@@ -45,7 +45,7 @@
                 </tab> -->
                 <tab heading='Messages' (selectTab)="onTabActivated(1)">
 
-                    <app-chat-messages *ngIf="chatOpened"></app-chat-messages>
+                    <app-chat-messages *ngIf="chatOpened" [username]="member?.username"></app-chat-messages>
 
                     <!-- <app-member-messages [messages]="messages" [username]="member.username"></app-member-messages> -->
                 </tab>
