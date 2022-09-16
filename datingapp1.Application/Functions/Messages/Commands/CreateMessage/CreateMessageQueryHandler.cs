@@ -1,10 +1,11 @@
 using datingapp1.Application.Contracts.Persistance;
+using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using MediatR;
 
 namespace datingapp1.Application.Functions.Messages.Commands.CreateMessage;
 
-public class CreateMessageQueryHandler : IRequestHandler<CreateMessageQuery, BaseResponse>
+public class CreateMessageQueryHandler : IRequestHandler<CreateMessageQuery, TBaseResponse<MessageDto>>
 {
     private readonly IMessageRepository _messageRepository;
     private readonly IAppUserRepository _appUserRepository;
@@ -15,7 +16,7 @@ public class CreateMessageQueryHandler : IRequestHandler<CreateMessageQuery, Bas
         _appUserRepository = appUserRepository;
     }
 
-    public async Task<BaseResponse> Handle(CreateMessageQuery request, CancellationToken cancellationToken)
+    public async Task<TBaseResponse<MessageDto>> Handle(CreateMessageQuery request, CancellationToken cancellationToken)
     {
         AppUser userSender =  await _appUserRepository.GetUserByUsername(request.SenderUsername);
 
@@ -24,17 +25,30 @@ public class CreateMessageQueryHandler : IRequestHandler<CreateMessageQuery, Bas
         var message = new Message
         {
             SenderId = userSender.Id,
-            Sender = userSender,
+            //Sender = userSender,
             SenderUsername = request.SenderUsername,
-            Recipient = userRecipient,
+            //Recipient = userRecipient,
             RecipientId = userRecipient.Id,
             RecipientUsername = request.RecipientUsername,
             Content = request.Content,
             DateRead = DateTime.Now,
         };
 
-        var  x  = await _messageRepository.AddMessage(message);
+        var addedEntityId = await _messageRepository.AddMessage(message);
 
-        return new BaseResponse();
+        var messageDto = new MessageDto
+        {
+            Id = addedEntityId,
+            SenderId = userSender.Id,
+            //Sender = userSender,
+            SenderUsername = request.SenderUsername,
+            //Recipient = userRecipient,
+            RecipientId = userRecipient.Id,
+            RecipientUsername = request.RecipientUsername,
+            Content = request.Content,
+            DateRead = DateTime.Now,
+        };
+
+        return new TBaseResponse<MessageDto>(messageDto);
     }
 }

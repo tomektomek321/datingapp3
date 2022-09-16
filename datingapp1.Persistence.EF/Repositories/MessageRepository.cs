@@ -18,7 +18,7 @@ namespace datingapp1.Persistence.EF.Repositories
         public async Task<int> AddMessage(Message message)
         {
             var r = await Add(message);
-            return 1;
+            return r.Id;
         }
 
         public void DeleteMessage(Message message)

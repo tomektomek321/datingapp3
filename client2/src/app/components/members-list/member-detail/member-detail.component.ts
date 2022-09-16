@@ -38,6 +38,7 @@ export class MemberDetailComponent implements OnInit {
         this.http.post('https://localhost:7089/Member/GetUserProfileByUsername', { Username }).subscribe( (response: any) => {
             console.log(response);
             this.member = response.data;
+            this.memberTabs.tabs[1].active = true;
         });
 
     }

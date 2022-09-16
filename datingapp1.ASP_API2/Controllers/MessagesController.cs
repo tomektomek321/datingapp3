@@ -4,6 +4,7 @@ using datingapp1.Domain.Entities;
 using datingapp1.Application.Functions.Messages.Commands.CreateMessage;
 using datingapp1.Application.Functions.Messages.Queries.GetMessageThread;
 using datingapp1.Domain.Dto;
+using datingapp1.Application;
 
 namespace datingapp1.ASP_API2.Controllers
 {
@@ -19,7 +20,7 @@ namespace datingapp1.ASP_API2.Controllers
         }
 
         [HttpPost("CreateMessage")]
-        public async Task<ActionResult<IEnumerable<Message>>> CreateMessage(CreateMessageQuery message)
+        public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageQuery message)
         {
             var messageDto = await _mediator.Send(message);
             return Ok(messageDto);
