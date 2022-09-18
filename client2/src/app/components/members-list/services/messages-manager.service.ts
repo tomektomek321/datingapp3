@@ -26,10 +26,10 @@ export class MessagesManagerService {
     }
 
     sendMessage(recipientUsername: string, content: string) {
-        const senderUsername: User =  this.userService.getUser();
-        debugger
-        if(senderUsername.username) {
-            return this.http.post<Message>(environment.apiUrl + 'Messages/CreateMessage', { senderUsername: senderUsername.username, recipientUsername, content })
+        const user: User =  this.userService.getUser();
+
+        if(user.username) {
+            return this.http.post<Message>(environment.apiUrl + 'Messages/CreateMessage', { senderUsername: user.username, recipientUsername, content });
         } else {
             return new Observable();
         }

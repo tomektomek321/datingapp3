@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserService } from 'src/app/infrastructure/identity/user.service';
 import { Message } from 'src/app/shared/models/Message';
 import { MessagesManagerService } from '../../services/messages-manager.service';
 
@@ -20,6 +21,7 @@ export class ChatMessagesComponent implements OnInit {
 
     constructor(
         private messagesManagerService: MessagesManagerService,
+        private userService: UserService,
     ) {
 
     }
@@ -35,7 +37,7 @@ export class ChatMessagesComponent implements OnInit {
     sendMessage() {
 
         if(this.username && this.messageContent) {
-            this.messagesManagerService.sendMessage(this.username, this.messageContent).subscribe((message: any) => {debugger
+            this.messagesManagerService.sendMessage(this.username, this.messageContent).subscribe((message: any) => {
                 if(this.messageContent) {
                     this.messages.push(message.data);
                 }
@@ -43,6 +45,22 @@ export class ChatMessagesComponent implements OnInit {
             });
 
         }
+    }
+
+    isYourMessage(message_: Message) {
+        const user = this.userService.getUser();
+
+        if(user && this.username) {
+            const userUsername = user.username;
+
+            if(userUsername == message_.senderUsername) {
+                return "yourMessage";
+            } else if(this.username == message_.senderUsername) {
+                return "memberMessage";
+            }
+        }
+
+        return "somethingWrong";
     }
 
 }

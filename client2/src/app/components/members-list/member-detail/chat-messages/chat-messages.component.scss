@@ -10,11 +10,30 @@
 }
 
 .chat li {
-    margin-bottom: 25px;
-    padding-bottom: 25px;
-    border-bottom: 1px dotted #B3A9A9;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .rounded-circle {
     max-height: 50px;
+}
+
+.messages__Container {
+
+    &.yourMessage { justify-content: flex-start; }
+    &.memberMessage { justify-content: flex-end; }
+
+    .message__Container {
+
+
+        display: flex;
+
+
+        .yourMessage { padding: 15px 25px; background-color: red; color: black; border-radius: 25px; }
+        .memberMessage { padding: 15px 25px; background-color: blue; color: white; border-radius: 25px; }
+
+    }
+
+
+
 }

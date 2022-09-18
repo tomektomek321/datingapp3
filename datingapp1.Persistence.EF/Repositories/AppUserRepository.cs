@@ -19,11 +19,11 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public async Task<AppUser> GetUserByUsername(string username)
     {
-        AppUser user = _dbContext
+        AppUser user = await _dbContext
                         .AppUsers
                         .Include(x => x.LikedUsers)
                         .Where(x => x.UserName == username)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
         return user;
     }
 
@@ -34,9 +34,9 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public async Task<List<AppUser>> GetAppUsersByFilter(DateTime MinAge, DateTime MaxAge, int Gender, string OrderBy, int[] cities)
     {
-        List<AppUser> users = _dbContext.AppUsers
+        List<AppUser> users = await _dbContext.AppUsers
             .Include(user => user.City)
-            .ToList();
+            .ToListAsync();
 
         users = users.Where(user => user.Gender == Gender).ToList();
 

@@ -8,9 +8,9 @@ namespace datingapp1.Application
 {
     public class TBaseResponse<T>: BaseResponse
     {
-        public T Data { get; set; }
+        public T? Data { get; set; }
 
-        public List<T> Result { get; set; }
+        public List<T>? Result { get; set; }
 
         public TBaseResponse(T data_) : base()
         {
