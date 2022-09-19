@@ -1,8 +1,5 @@
 using datingapp1.Persistence.EF;
 using datingapp1.Application;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using MediatR;
 using datingapp1.Persistence.EF.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);

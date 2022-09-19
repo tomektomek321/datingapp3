@@ -40,14 +40,14 @@ public class LoginQueryHandlerValidator : AbstractValidator<LoginQuery>
 
     private Task<bool> IsPasswordCorrect(LoginQuery e, CancellationToken token)
     {
-        using var hmac = new HMACSHA512(_user.PasswordSalt);
+        /*using var hmac = new HMACSHA512(_user.PasswordSalt);
 
         var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(_password));
 
         for (int i = 0; i < computedHash.Length; i++)
         {
             if (computedHash[i] != _user.PasswordHash[i]) return Task.FromResult(false);
-        }
+        }*/
 
         return Task.FromResult(true);
     }

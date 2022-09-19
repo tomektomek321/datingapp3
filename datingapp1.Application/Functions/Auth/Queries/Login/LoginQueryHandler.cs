@@ -43,7 +43,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse<
             Username = user.UserName,
             Gender = user.Gender,
             KnownAs = user.KnownAs,
-            Token = _tokenService.CreateToken(user),
+            Token = await _tokenService.CreateToken(user),
             LikedUsers = user.LikedUsers,
         };
 

@@ -2,25 +2,29 @@
 using datingapp1.Application.Extensions;
 using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace datingapp1.Persistence.EF.Repositories;
 
 public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 {
-    public AppUserRepository(DatingAppContext dbContext) : base(dbContext)
-    { }
+    private readonly UserManager<AppUser> _userManager;
+    public AppUserRepository(UserManager<AppUser> userManager, DatingAppContext dbContext) : base(dbContext)
+    {
+        _userManager = userManager;
+    }
 
     public Task<bool> DoesUserNameAlreadyExists(string UserName)
     {
-        bool user = _dbContext.AppUsers.Any(x => x.UserName == UserName);
+        bool user = _userManager.Users.Any(x => x.UserName == UserName);
         return Task.FromResult(user);
     }
 
     public async Task<AppUser> GetUserByUsername(string username)
     {
-        AppUser user = await _dbContext
-                        .AppUsers
+        AppUser user = await _userManager
+                        .Users
                         .Include(x => x.LikedUsers)
                         .Where(x => x.UserName == username)
                         .FirstOrDefaultAsync();
@@ -34,7 +38,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public async Task<List<AppUser>> GetAppUsersByFilter(DateTime MinAge, DateTime MaxAge, int Gender, string OrderBy, int[] cities)
     {
-        List<AppUser> users = await _dbContext.AppUsers
+        List<AppUser> users = await _userManager.Users
             .Include(user => user.City)
             .ToListAsync();
 
@@ -52,7 +56,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public Task<List<MemberDto>> GetLikedMembers(int UserId)
     {
-        AppUser user = _dbContext.AppUsers
+        AppUser user = _userManager.Users
             .Include(u => u.LikedUsers)
             .Where(user_ => user_.Id == UserId)
             .FirstOrDefault();
@@ -61,7 +65,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
         foreach (var user_ in user.LikedUsers)
         {
-            var likedUser = _dbContext.AppUsers
+            var likedUser = _userManager.Users
                 .Include(u => u.City)
                 .Where(u => u.Id == user_.LikedUserId).FirstOrDefault();
 
@@ -80,7 +84,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public Task<List<MemberDto>> GetLikedByMembers(int UserId)
     {
-        AppUser user = _dbContext.AppUsers
+        AppUser user = _userManager.Users
             .Include(u => u.LikedByUsers)
             .Where(user_ => user_.Id == UserId)
             .FirstOrDefault();
@@ -89,7 +93,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
         foreach (var user_ in user.LikedByUsers)
         {
-            var likedUser = _dbContext.AppUsers
+            var likedUser = _userManager.Users
                 .Include(u => u.City)
                 .Where(u => u.Id == user_.SourceUserId)
                 .FirstOrDefault();
@@ -109,7 +113,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public Task<AppUserDto> GetUserProfile(int UserId)
     {
-        AppUser user = _dbContext.AppUsers
+        AppUser user = _userManager.Users
             .Include(u => u.City)
             .Include(u => u.Country)
             .Include(u => u.UserHobbies)
@@ -141,7 +145,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public Task<MemberDto> GetUserProfileByUsername(string Username)
     {
-        AppUser user = _dbContext.AppUsers
+        AppUser user = _userManager.Users
             .Include(u => u.City)
             .Include(u => u.Country)
             .Include(u => u.UserHobbies)
@@ -177,7 +181,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public Task<AppUser> GetUserWithCity(int UserId)
     {
-        AppUser user = _dbContext.AppUsers
+        AppUser user = _userManager.Users
             .Include(u => u.City)
             .Where(user_ => user_.Id == UserId)
             .FirstOrDefault();

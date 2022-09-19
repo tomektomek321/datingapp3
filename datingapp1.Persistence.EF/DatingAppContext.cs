@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using datingapp1.Application.Contracts.Persistance;
 using datingapp1.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace datingapp1.Persistence.EF;
 
-public class DatingAppContext: DbContext
+public class DatingAppContext: IdentityDbContext<AppUser, AppRole, int,
+        IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>,
+        IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
     public DatingAppContext(DbContextOptions options)
         : base(options) { }
@@ -16,7 +20,6 @@ public class DatingAppContext: DbContext
     public DbSet<City> Cities { get; set; }
     public DbSet<UserLike> UserLikes { get; set; }
     public DbSet<Country> Countries { get; set; }
-    public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<Hobby> Hobbies { get; set; }
     public DbSet<UserHobby> UserHobbies { get; set; }
     public DbSet<Message> Messages { get; set; }
@@ -42,9 +45,23 @@ public class DatingAppContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.
             ApplyConfigurationsFromAssembly
             (typeof(DatingAppContext).Assembly);
+
+        modelBuilder.Entity<AppUser>()
+            .HasMany(ur => ur.UserRoles)
+            .WithOne(u => u.User)
+            .HasForeignKey(ur => ur.UserId)
+            .IsRequired();
+
+        modelBuilder.Entity<AppRole>()
+            .HasMany(ur => ur.UserRoles)
+            .WithOne(u => u.Role)
+            .HasForeignKey(ur => ur.RoleId)
+            .IsRequired();
 
         modelBuilder.Entity<UserLike>()
             .HasKey(key => new { key.SourceUserId, key.LikedUserId });

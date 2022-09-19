@@ -9,6 +9,6 @@ namespace datingapp1.Application.Contracts.Identity
 {
     public interface ITokenService
     {
-        string CreateToken(AppUser user);
+        Task<string> CreateToken(AppUser user);
     }
 }
