@@ -33,6 +33,12 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResponse<
         var validator = new LoginQueryHandlerValidator(_appUserRepository, user, request.Password);
         var validatorResult = await validator.ValidateAsync(request);
 
+       /* bool logged = await _appUserRepository.CheckPasswordSignInAsync(user, request.Password);
+
+        if(!logged) {
+            return new LoginQueryResponse<LoginDto>("Wrong password", false);
+        }*/
+
         if (!validatorResult.IsValid)
         {
             return new LoginQueryResponse<LoginDto>(validatorResult);

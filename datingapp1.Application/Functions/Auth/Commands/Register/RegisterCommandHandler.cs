@@ -4,14 +4,9 @@ using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace datingapp1.Application.Functions.Auth.Commands.Register;
+
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterCommandHandlerResponse<LoginDto>>
 {
     private readonly IAppUserRepository _appUserRepository;
@@ -19,16 +14,14 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
     private readonly ICountryRepository _countryRepository;
     private readonly ITokenService _tokenService;
     private readonly UserManager<AppUser> _userManager;
-    //private readonly SignInManager<AppUser> _signInManager;
 
-    public RegisterCommandHandler(IAppUserRepository appUserRepository, ICityRepository cityRepository, UserManager<AppUser> userManager, /*SignInManager<AppUser> signInManager,*/
+    public RegisterCommandHandler(IAppUserRepository appUserRepository, ICityRepository cityRepository, UserManager<AppUser> userManager,
         ICountryRepository countryRepository, ITokenService tokenService)
     {
         _appUserRepository = appUserRepository;
         _cityRepository = cityRepository;
         _countryRepository = countryRepository;
         _tokenService = tokenService;
-        //_signInManager = signInManager;
         _userManager = userManager;
     }
 
@@ -49,34 +42,43 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
             return new RegisterCommandHandlerResponse<LoginDto>(validatorResult);
         }
 
-        //using var hmac = new HMACSHA512();
+        AppUser newUser = new AppUser() {
+            UserName = request.Username,
+            KnownAs = request.KnownAs,
+            Email = request.Username + "@wp.pl",
+            City = city,
+            Country = country,
+            DateOfBirth = request.DateOfBirth,
+            Gender = request.Gender,
+        };
 
-        //var password = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
+        IdentityResult created = await _appUserRepository.RegisterAsync(newUser, request.Password);
+        List<string> listOfErrors = new List<string>();
+        if(!created.Succeeded) {
 
-        //int day1 = request.DateOfBirth.Day;
-        //int year = request.DateOfBirth.Year;
-        //int mon = request.DateOfBirth.Month;
-        //int day1 = request.DateOfBirth.Day;
+            foreach(var erorr in created.Errors) {
+                listOfErrors.Add(erorr.Description);
+            }
 
-        //DateTime x = DateTime.SpecifyKind(new DateTime(year, mon, day1), DateTimeKind.Local);
-        //string a = TimeZone.CurrentTimeZone.StandardName;
+            return new RegisterCommandHandlerResponse<LoginDto>(listOfErrors);
+        }
+
+        var user1 = await _appUserRepository.GetUserByUsername(request.Username);
 
         AppUser user = new AppUser()
         {
+            Id = user1.Id,
             UserName = request.Username,
             KnownAs = request.KnownAs,
             Gender = request.Gender,
-            DateOfBirth =  request.DateOfBirth, // new DateTime(year, mon, day1), //request.DateOfBirth.ToUniversalTime(), // DateTime.SpecifyKind(new DateTime(year, mon, day1), DateTimeKind.Local), //  , // request.DateOfBirth,
+            DateOfBirth =  request.DateOfBirth,
             City = city,
             Country = country,
         };
 
-        var result = await _userManager.CreateAsync(user, request.Password);
-        var roleResult = await _userManager.AddToRoleAsync(user, "Member");
-        //AppUser newUser = await _appUserRepository.Add(user);
-
         LoginDto loginDto = new LoginDto()
         {
+            Id = user1.Id,
             Username = request.Username,
             KnownAs = request.KnownAs,
             Gender = request.Gender,

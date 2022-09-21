@@ -33,14 +33,14 @@ export class RegisterService {
         const newDate = new Date()
         return this.http.post(environment.apiUrl + 'account/register', model).pipe(
 
-            map((response: any) => {
+            map((response: any) => { debugger
                 const user: HttpResponse<User> = response;
                 if(user.success) {
                     this.userService.setUser(response.data);
                     this.router.navigateByUrl('/searchMembers');
                 }
 
-            }, (error: any) => {
+            }, (error: any) => {debugger
                 console.log(error);
                 return "error";
             })

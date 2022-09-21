@@ -10,9 +10,11 @@ namespace datingapp1.Persistence.EF.Repositories;
 public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 {
     private readonly UserManager<AppUser> _userManager;
-    public AppUserRepository(UserManager<AppUser> userManager, DatingAppContext dbContext) : base(dbContext)
+    private readonly SignInManager<AppUser> _signInManager;
+    public AppUserRepository(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DatingAppContext dbContext) : base(dbContext)
     {
         _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     public Task<bool> DoesUserNameAlreadyExists(string UserName)
@@ -29,6 +31,24 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
                         .Where(x => x.UserName == username)
                         .FirstOrDefaultAsync();
         return user;
+    }
+
+    public async Task<IdentityResult> RegisterAsync(AppUser user_, string password_) {
+
+        IdentityResult result = await _userManager.CreateAsync(user_, password_);
+
+        return result;
+    }
+
+    public async Task<bool> CheckPasswordSignInAsync(AppUser user_, string password_) {
+
+        var result = await _signInManager.CheckPasswordSignInAsync(user_, password_, false);
+
+        if(result.Succeeded) {
+            return true;
+        }
+
+        return false;
     }
 
     public Task<List<AppUser>> GetAppUsersList()

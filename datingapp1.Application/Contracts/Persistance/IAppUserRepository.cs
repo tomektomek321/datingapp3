@@ -1,9 +1,7 @@
 using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
 namespace datingapp1.Application.Contracts.Persistance;
 
 public interface IAppUserRepository: IRepository<AppUser>
@@ -17,4 +15,6 @@ public interface IAppUserRepository: IRepository<AppUser>
     Task<AppUserDto> GetUserProfile(int UserId);
     Task<MemberDto> GetUserProfileByUsername(string Username);
     Task<AppUser> GetUserWithCity(int UserId);
+    public Task<bool> CheckPasswordSignInAsync(AppUser user_, string password_);
+    public Task<IdentityResult> RegisterAsync(AppUser user_, string password_);
 }

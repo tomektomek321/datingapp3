@@ -26,8 +26,8 @@ export class RegisterComponent implements OnInit {
             dateOfBirth: ['', Validators.required],
             city: ['', Validators.required],
             country: ['', Validators.required],
-            password: ['tom12345', [Validators.required, Validators.maxLength(8), Validators.minLength(4)]],
-            confirmPassword: ['tom12345', [Validators.required, this.matchValues('password')]]
+            password: ['tomee', [Validators.required, Validators.maxLength(8), Validators.minLength(4)]],
+            confirmPassword: ['tomee', [Validators.required, this.matchValues('password')]]
         })
     }
 
@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
 
     register(): void {
         this.registerService.register(this.registerForm.value).subscribe(response => {
+            console.log(123);debugger
         }, error => {
             this.validationErrors = error;
         })
