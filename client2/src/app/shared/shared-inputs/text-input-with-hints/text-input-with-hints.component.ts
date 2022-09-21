@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, pluck } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -55,10 +55,16 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         fromEvent(this.textInput.nativeElement, 'input').pipe(
             pluck("target", "value"),
-            debounceTime(800),
+            debounceTime(400),
         ).subscribe((data: any) => {
             this.request();
         })
+    }
+
+    @HostListener('window:click', ['$event'])
+    handleKeyDown(event: KeyboardEvent) {
+        if(this.promptShow)
+            this.promptShow = false;
     }
 
     request(): void {

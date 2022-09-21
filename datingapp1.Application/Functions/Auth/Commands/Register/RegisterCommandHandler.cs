@@ -33,7 +33,6 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
         City city = await _cityRepository.GetById(request.City);
         Country country = await _countryRepository.GetById(request.City);
 
-
         var validator = new RegisterCommandHandlerValidator(_appUserRepository);
         var validatorResult = await validator.ValidateAsync(request);
 
@@ -63,26 +62,17 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
             return new RegisterCommandHandlerResponse<LoginDto>(listOfErrors);
         }
 
-        var user1 = await _appUserRepository.GetUserByUsername(request.Username);
+        var justRegisteredUser = await _appUserRepository.GetUserByUsername(request.Username);
 
-        AppUser user = new AppUser()
-        {
-            Id = user1.Id,
-            UserName = request.Username,
-            KnownAs = request.KnownAs,
-            Gender = request.Gender,
-            DateOfBirth =  request.DateOfBirth,
-            City = city,
-            Country = country,
-        };
+        newUser.Id = justRegisteredUser.Id;
 
         LoginDto loginDto = new LoginDto()
         {
-            Id = user1.Id,
+            Id = justRegisteredUser.Id,
             Username = request.Username,
             KnownAs = request.KnownAs,
             Gender = request.Gender,
-            Token = await _tokenService.CreateToken(user),
+            Token = await _tokenService.CreateToken(newUser),
         };
 
         return new RegisterCommandHandlerResponse<LoginDto>(loginDto);
