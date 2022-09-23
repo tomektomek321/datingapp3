@@ -3,46 +3,54 @@
 
     <form #form="ngForm" class="mb-3" name="someForm" (ngSubmit)="loadMembers()" autocomplete="off">
 
-        <div class="form-inline mb-3">
+        <div class="d-flex mb-3">
 
-            <div class="form-group">
+            <div class="d-flex Age__Wrapper ageFrom">
 
-                <label>Age from: </label>
-                <input type="number" class="form-control ml-1" style="width: 70px;" name="minAge"
-                    [(ngModel)]="searchUserParams.minAge">
+                <label>Age from:</label>
+                <div>
+                    <input type="number" class="form-control" name="minAge"
+                        [(ngModel)]="searchUserParams.minAge">
+                </div>
             </div>
 
-             <div class="form-group px-2">
+             <div class="d-flex Age__Wrapper ageTo">
 
-                <label>Age to: </label>
-                <input type="number" class="form-control ml-1" style="width: 70px;" name="maxAge"
-                    [(ngModel)]="searchUserParams.maxAge">
+                <label>to:</label>
+                <div>
+                    <input type="number" class="form-control" name="maxAge"
+                        [(ngModel)]="searchUserParams.maxAge">
+                </div>
             </div>
 
-            <div class="form-group px-2">
+            <div class="d-flex Show__Wrapper">
 
-                <label>Show: </label>
+                <label>Show:</label>
 
-                <select name="gender" style="width: 130px" [(ngModel)]="searchUserParams.gender" class="form-control ml-1">
+                <div>
+                    <select name="gender" style="width: 130px" [(ngModel)]="searchUserParams.gender" class="form-control">
 
-                    <option *ngFor="let gender of genderList; let i = index" attr.data-name="testGender{{i}}" [value]="gender.value">
-                        {{ gender.display }}
-                    </option>
+                        <option *ngFor="let gender of genderList; let i = index" attr.data-name="testGender{{i}}" [value]="gender.value">
+                            {{ gender.display }}
+                        </option>
 
-                </select>
+                    </select>
+                </div>
+
 
             </div>
 
-            <button class="btn btn-primary ml-1" name="testApply" type="submit">Find</button>
+            <button class="btn btn-primary ml-3" name="testApply" type="submit">Find</button>
 
         </div>
 
-        <div class="form-inline mb-3">
+        <div class="form-inline mb-32">
 
             <div class="form-group">
 
-                <app-text-input-with-hints
+                <app-text-input-with-hints class="mr-2"
                     [label]="'Add Cities: '"
+                    [labelWidth]="'110px'"
                     [URL]="'City/searchByText/'"
                     [autoAdd]="true"
                     [placeholder]="'City'"

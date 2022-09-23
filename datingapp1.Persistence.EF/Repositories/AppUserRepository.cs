@@ -11,6 +11,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
+
     public AppUserRepository(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DatingAppContext dbContext) : base(dbContext)
     {
         _userManager = userManager;

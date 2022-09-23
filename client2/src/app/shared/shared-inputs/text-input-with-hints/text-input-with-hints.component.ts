@@ -32,6 +32,8 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
 
     @Input('fullWidth') fullWidth: boolean = true;
 
+    @Input('labelWidth') labelWidth: string | undefined = "auto";
+
     @Input('darkMode') darkMode: boolean = false;
 
     @Output() callback = new EventEmitter<IdName>();
@@ -101,6 +103,10 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
 
 
         return response;
+    }
+
+    getLabelWidth() {
+        return this.labelWidth;
     }
 
 }

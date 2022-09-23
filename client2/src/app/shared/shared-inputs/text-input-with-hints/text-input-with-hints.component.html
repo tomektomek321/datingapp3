@@ -1,9 +1,9 @@
 
-<div class="autocomplete" [ngClass]="[getCSS()]">
+<div class="autocomplete d-flex" [ngClass]="[getCSS()]">
 
-    <span *ngIf="label != false">
+    <label *ngIf="label != false" [ngStyle]="{'width': labelWidth}">
         {{ label }}
-    </span>
+    </label>
 
     <input
         #textInput

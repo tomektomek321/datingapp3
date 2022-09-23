@@ -1,4 +1,43 @@
 
 .searchBar__Container {
     margin-top: 90px;
+
+    .Age__Wrapper {
+        align-items: baseline;
+
+        &.ageFrom {
+
+            label {
+                width: 110px;
+                text-align: center;
+            }
+
+            input {
+                width: 76px;
+            }
+        }
+
+        &.ageTo {
+
+            label {
+                width: 55px;
+                text-align: center;
+            }
+
+            input {
+                width: 76px;
+            }
+        }
+
+
+    }
+
+    .Show__Wrapper {
+        align-items: baseline;
+
+        label {
+            width: 90px;
+            text-align: center;
+        }
+    }
 }
