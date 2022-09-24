@@ -24,20 +24,38 @@ public class GetMembersByFilterQueryHandler : IRequestHandler<GetMembersByFilter
         var minDob = DateTime.Today.AddYears(-request.maxAge - 1);
         var maxDob = DateTime.Today.AddYears(-request.minAge);
 
-        int[] citiesId = null;
+        int[] citiesIds = null;
 
         if (request.cities != "")
         {
             List<string> stringCitiesId = request.cities.Split("-").ToList();
-            citiesId = new int[stringCitiesId.Count];
+            citiesIds = new int[stringCitiesId.Count];
             int coutner = 0;
             foreach (var item in stringCitiesId)
             {
-                citiesId[coutner++] = int.Parse(item);
+                citiesIds[coutner++] = int.Parse(item);
             }
         }
 
-        List<AppUser> users = await _appUserRepository.GetAppUsersByFilter(minDob, maxDob, request.gender, request.orderBy, citiesId);
+
+        int[] hobbiesIds = null;
+
+        if (request.hobbies != "")
+        {
+            List<string> stringhobbiesId = request.hobbies.Split("-").ToList();
+            hobbiesIds = new int[stringhobbiesId.Count];
+            int coutner = 0;
+            foreach (var item in stringhobbiesId)
+            {
+                hobbiesIds[coutner++] = int.Parse(item);
+            }
+        }
+
+
+
+
+
+        List<AppUser> users = await _appUserRepository.GetAppUsersByFilter(minDob, maxDob, request.gender, request.orderBy, citiesIds, hobbiesIds);
 
         List<MemberDto> returnDto = new List<MemberDto>();
 

@@ -23,6 +23,7 @@ export class MemberListRequestService {
         const params: SearchUserParams = this.searchBarService.getSearchUserParams();
 
         const citiesString = this.createCitiesIdStringForRequest(params.cities);
+        const hobbiesString = this.createCitiesIdStringForRequest(params.hobbies);
 
         return {
             gender: params.gender,
@@ -30,11 +31,13 @@ export class MemberListRequestService {
             minAge: params.minAge,
             orderBy: params.orderBy,
             cities: citiesString,
+            hobbies: hobbiesString,
         }
     }
 
     loadMembers(): void {
         const filterParams = this.createFilterParams();
+        debugger
 
         this.http.post<SearchUserDto>(environment.apiUrl + 'Member/FilterMembers', filterParams)
         .subscribe((response: any) => {
@@ -44,7 +47,7 @@ export class MemberListRequestService {
         });
     }
 
-    createCitiesIdStringForRequest(cities: IdName[]) {
+    createCitiesIdStringForRequest(cities: IdName[]) {debugger
         let citiesString = ""
 
         cities.forEach(element => {

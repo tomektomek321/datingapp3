@@ -5,4 +5,5 @@ export interface SearchUserDto {
     maxAge: number;
     orderBy: string;
     cities: string;
+    hobbies: string;
 }

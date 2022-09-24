@@ -14,6 +14,7 @@ export class SearchBarService {
         minAge: 21,
         maxAge: 21,
         cities: [],
+        hobbies: [],
         orderBy: SearchUserOrderByEnum.lastACtive,
     };
 
@@ -43,12 +44,31 @@ export class SearchBarService {
 
     }
 
+    addHobby(city_: IdName): void {
+        const added = this.searchUserParams.hobbies.filter(item => item.id == city_.id);
+        if(added.length > 0) {
+            console.log("Already added");
+            return;
+        }
+
+        this.searchUserParams.hobbies.push(city_);
+        this.searchUserParams$.next(this.searchUserParams);
+    }
+
+    removeHobby(city_: IdName): void{
+        const added = this.searchUserParams.hobbies.filter(item => item.id != city_.id);
+        this.searchUserParams.hobbies = added;
+        this.searchUserParams$.next(this.searchUserParams);
+
+    }
+
     resetParams(): void {
         this.searchUserParams = {
             gender: 1,
             minAge: 18,
             maxAge: 50,
             cities: [],
+            hobbies: [],
             orderBy: SearchUserOrderByEnum.lastACtive,
         };
 

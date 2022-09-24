@@ -6,4 +6,5 @@ export interface SearchUserParams {
     maxAge: number;
     orderBy: string;
     cities: IdName[];
+    hobbies: IdName[];
 }

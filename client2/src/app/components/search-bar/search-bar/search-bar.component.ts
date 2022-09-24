@@ -42,4 +42,15 @@ export class SearchBarComponent implements OnInit {
         this.searchBarService.removeCity(city_);
     }
 
+
+    addHobby(city_: any): void {
+        if(this.searchUserParams) {
+            this.searchBarService.addHobby(city_);
+        }
+    }
+
+    removeHobby(city_: any) {
+        this.searchBarService.removeHobby(city_);
+    }
+
 }

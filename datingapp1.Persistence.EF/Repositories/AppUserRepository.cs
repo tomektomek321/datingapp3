@@ -57,10 +57,11 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
         throw new NotImplementedException();
     }
 
-    public async Task<List<AppUser>> GetAppUsersByFilter(DateTime MinAge, DateTime MaxAge, int Gender, string OrderBy, int[] cities)
+    public async Task<List<AppUser>> GetAppUsersByFilter(DateTime MinAge, DateTime MaxAge, int Gender, string OrderBy, int[] cities,  int[] hobbies)
     {
         List<AppUser> users = await _userManager.Users
             .Include(user => user.City)
+            //.Include(user => user.UserHobbies)
             .ToListAsync();
 
         users = users.Where(user => user.Gender == Gender).ToList();
@@ -71,6 +72,13 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
         {
             users = users.Where(u => cities.Contains(u.City.Id)).ToList();
         }
+
+        /*if(hobbies?.Length > 0)
+        {
+            foreach(var h in hobbies) {
+                users = users.Where(u => u.UserHobbies.Any(h => hobbies.Contains(h.Id))).ToList();
+            }
+        }*/
 
         return users;
     }
