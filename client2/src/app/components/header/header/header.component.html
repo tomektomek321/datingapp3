@@ -1,25 +1,25 @@
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="headerek d-flex">
 
-    <div class="container">
+    <div class="d-flex">
 
         <a class="navbar-brand text-light" routerLinkActive='active'> Date App </a>
 
-        <ul class="navbar-nav mr-auto">
+        <div class="mr-auto d-flex">
 
             <ng-container *ngIf="(user$ | async)?.id != 0">
 
-                <li class="nav-item">
+                <div class="nav-item">
                     <a class="nav-link" [routerLink]="['/searchMembers']" routerLinkActive='active'> Find </a>
-                </li>
+                </div>
 
-                <li class="nav-item">
+                <div class="nav-item">
                     <a class="nav-link" [routerLink]="['/likesList']" routerLinkActive='active'> My Likes / Liked By </a>
-                </li>
+                </div>
 
             </ng-container>
 
-        </ul>
+        </div>
 
         <app-login *ngIf="(user$ | async)?.id == 0"></app-login>
 

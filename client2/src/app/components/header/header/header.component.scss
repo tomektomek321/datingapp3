@@ -4,3 +4,20 @@ img {
     border: 2px solid #fff;
     display: inline;
 }
+
+.nav-link, .nav-item {
+    text-decoration: none;
+
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.headerek {
+    background-color: #3e3e64;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: center;
+}

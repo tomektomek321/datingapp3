@@ -37,7 +37,6 @@ export class MemberListRequestService {
 
     loadMembers(): void {
         const filterParams = this.createFilterParams();
-        debugger
 
         this.http.post<SearchUserDto>(environment.apiUrl + 'Member/FilterMembers', filterParams)
         .subscribe((response: any) => {
@@ -47,11 +46,11 @@ export class MemberListRequestService {
         });
     }
 
-    createCitiesIdStringForRequest(cities: IdName[]) {debugger
-        let citiesString = ""
+    createCitiesIdStringForRequest(cities: IdName[]) {
+        let citiesString = "";
 
         cities.forEach(element => {
-            citiesString += (element.id + "-")
+            citiesString += (element.id + "-");
         });
 
         citiesString = citiesString.slice(0, citiesString.length - 1);
