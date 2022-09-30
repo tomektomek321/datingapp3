@@ -1,0 +1,14 @@
+.loginForm {
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+
+        input {
+            margin-bottom: 5px;
+            min-width: 250px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    }
+}

@@ -1,5 +1,5 @@
 
-<form class="form-inline mt-2 mt-md-0" (ngSubmit)="login()">
+<form class="form-inline mt-2 mt-md-0 loginForm" (ngSubmit)="login()">
 
     <input
         type="text"
@@ -17,6 +17,6 @@
         [(ngModel)]="loginModel.Password"
     />
 
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Login </button>
+    <button class="btn btn-outline-success" type="submit"> Login </button>
 
 </form>

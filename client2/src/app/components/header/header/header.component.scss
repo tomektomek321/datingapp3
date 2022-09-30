@@ -33,6 +33,7 @@ ul {
     align-items: center;
 
     &__menu {
+        margin-top: 6px;
         @media screen and (max-width: 768px) {
             position: fixed;
             top: -100%;

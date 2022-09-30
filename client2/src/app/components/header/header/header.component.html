@@ -7,10 +7,28 @@
             <ul class="nav__list">
                 <ng-container *ngIf="(user$ | async)?.id != 0">
                     <li class="nav__item"><a class="nav__link active-link" [routerLink]="['/searchMembers']" routerLinkActive='active' >Find</a></li>
-                    <li class="nav__item"><a class="nav__link" [routerLink]="['/likesList']" routerLinkActive='active'>My Likes / Liked By</a></li>
+                    <li class="nav__item mr-3"><a class="nav__link" [routerLink]="['/likesList']" routerLinkActive='active'>My Likes / Liked By</a></li>
                 </ng-container>
 
                 <li>
+                    <div class="dropdown" *ngIf="(user$ | async)?.id != 0">
+
+                        <img src="{{ './assets/user.png' }}" alt="{{ 'nophoto' }}" />
+
+                        <button class="ml-3 px-4 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome {{ (user$ | async)?.username }}
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a [routerLink]="['/member/edit']" class="dropdown-item">Edit Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" (click)="logout()" href="#">Log out</a>
+                        </div>
+
+                    </div>
+                </li>
+
+                <li *ngIf="(user$ | async)?.id == 0">
                     <app-login></app-login>
                 </li>
 
@@ -24,46 +42,3 @@
     </div>
 </header>
 
-<!-- <nav class="headerek d-flex">
-
-    <div class="d-flex">
-
-        <a class="navbar-brand text-light">  </a>
-
-        <div class="mr-auto d-flex">
-
-
-
-                <div class="nav-item">
-                    <a class="nav-link>  </a>
-                </div>
-
-                <div class="nav-item">
-                    <a class="nav-link">  </a>
-                </div>
-
-            </ng-container>
-
-        </div>
-
-        <app-login *ngIf="(user$ | async)?.id == 0"></app-login>
-
-        <div class="dropdown" *ngIf="(user$ | async)?.id != 0">
-
-            <img src="{{ './assets/user.png' }}" alt="{{ 'nophoto' }}" />
-
-            <button class="ml-3 px-4 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Welcome {{ (user$ | async)?.username }}
-            </button>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a [routerLink]="['/member/edit']" class="dropdown-item">Edit Profile</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click)="logout()" href="#">Log out</a>
-            </div>
-
-        </div>
-
-    </div>
-
-</nav> -->
