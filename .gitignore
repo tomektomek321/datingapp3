@@ -40,3 +40,5 @@ msbuild.wrn
 *.db
 
 /testClient1
+
+**/TestController.cs
