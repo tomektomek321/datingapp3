@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
 
     user$: Observable<User>;
 
+    menuShowed: boolean = true;
+
     constructor(
         private userService: UserService,
         private loginService: LoginService,
@@ -25,6 +27,18 @@ export class HeaderComponent implements OnInit {
 
     logout() {
         this.loginService.logout();
+    }
+
+    openMenu() {
+        this.menuShowed = !this.menuShowed;
+    }
+
+    isMenuShowed() {
+        if(this.menuShowed) {
+            return 'show-menu';
+        } else {
+            return '';
+        }
     }
 
 }

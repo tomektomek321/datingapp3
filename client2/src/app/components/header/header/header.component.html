@@ -1,20 +1,45 @@
 
-<nav class="headerek d-flex">
+<header class="container l-header" id="header">
+    <div class="nav bd-container">
+        <a href="#" class="nav__logo" routerLinkActive='active'>Date App</a>
+
+        <div class="nav__menu" id="nav-menu" [ngClass]="[isMenuShowed()]">
+            <ul class="nav__list">
+                <ng-container *ngIf="(user$ | async)?.id != 0">
+                    <li class="nav__item"><a class="nav__link active-link" [routerLink]="['/searchMembers']" routerLinkActive='active' >Find</a></li>
+                    <li class="nav__item"><a class="nav__link" [routerLink]="['/likesList']" routerLinkActive='active'>My Likes / Liked By</a></li>
+                </ng-container>
+
+                <li>
+                    <app-login></app-login>
+                </li>
+
+                <li><i class='bx bx-toggle-left change-theme' id="theme-button"></i></li>
+            </ul>
+        </div>
+
+        <div class="nav__toggle" id="nav-toggle" (click)="openMenu();">
+            X
+        </div>
+    </div>
+</header>
+
+<!-- <nav class="headerek d-flex">
 
     <div class="d-flex">
 
-        <a class="navbar-brand text-light" routerLinkActive='active'> Date App </a>
+        <a class="navbar-brand text-light">  </a>
 
         <div class="mr-auto d-flex">
 
-            <ng-container *ngIf="(user$ | async)?.id != 0">
+
 
                 <div class="nav-item">
-                    <a class="nav-link" [routerLink]="['/searchMembers']" routerLinkActive='active'> Find </a>
+                    <a class="nav-link>  </a>
                 </div>
 
                 <div class="nav-item">
-                    <a class="nav-link" [routerLink]="['/likesList']" routerLinkActive='active'> My Likes / Liked By </a>
+                    <a class="nav-link">  </a>
                 </div>
 
             </ng-container>
@@ -41,4 +66,4 @@
 
     </div>
 
-</nav>
+</nav> -->
