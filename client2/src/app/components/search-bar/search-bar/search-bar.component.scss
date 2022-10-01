@@ -1,6 +1,6 @@
 
 .searchBar__Container {
-    margin-top: 90px;
+    margin-top: 20px;
 
     .Age__Wrapper {
         align-items: baseline;
@@ -34,9 +34,14 @@
 
     .Show__Wrapper {
         align-items: baseline;
-
+        @media screen and (max-width: 768px) {
+            margin-top: 4px;
+        }
         label {
             width: 70px;
+            @media screen and (max-width: 768px) {
+                width: 110px;
+            }
             text-align: center;
         }
 
@@ -45,6 +50,15 @@
     .findBtn {
         width: 90px;
         margin-left: 7px;
+        @media screen and (max-width: 768px) {
+            width: 70px;
+        }
+    }
+
+    .AgeShowFind__Container {
+        @media screen and (max-width: 768px) {
+            flex-wrap: wrap;
+        }
     }
 
 

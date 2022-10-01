@@ -241,4 +241,8 @@ img {
         background-color: white;
         margin: 7px 0;
     }
+
+    &:hover div {
+        background-color: red;
+    }
 }

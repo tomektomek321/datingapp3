@@ -3,44 +3,6 @@
 
     <form #form="ngForm" class="mb-2" name="someForm" (ngSubmit)="loadMembers()" autocomplete="off">
 
-        <div class="d-flex mb-2">
-
-            <div class="d-flex Age__Wrapper ageFrom">
-
-                <label>Age from:</label>
-                <div>
-                    <input type="number" class="form-control" name="minAge" [(ngModel)]="searchUserParams.minAge">
-                </div>
-            </div>
-
-             <div class="d-flex Age__Wrapper ageTo">
-
-                <label>to:</label>
-                <div>
-                    <input type="number" class="form-control" name="maxAge" [(ngModel)]="searchUserParams.maxAge">
-                </div>
-            </div>
-
-            <div class="d-flex Show__Wrapper">
-
-                <label>Show:</label>
-
-                <div>
-                    <select name="gender" style="width: 130px" [(ngModel)]="searchUserParams.gender" class="form-control">
-
-                        <option *ngFor="let gender of genderList; let i = index" attr.data-name="testGender{{ i }}" [value]="gender.value">
-                            {{ gender.display }}
-                        </option>
-
-                    </select>
-                </div>
-
-
-            </div>
-
-            <button class="btn btn-primary findBtn" name="testApply" type="submit">Find</button>
-
-        </div>
 
         <div class="form-inline mb-2">
 
@@ -93,6 +55,45 @@
                 </ng-container>
 
             </div>
+
+        </div>
+
+        <div class="d-flex mb-2 AgeShowFind__Container">
+
+            <div class="d-flex Age__Wrapper ageFrom">
+
+                <label>Age from:</label>
+                <div>
+                    <input type="number" class="form-control" name="minAge" [(ngModel)]="searchUserParams.minAge">
+                </div>
+            </div>
+
+             <div class="d-flex Age__Wrapper ageTo">
+
+                <label>to:</label>
+                <div>
+                    <input type="number" class="form-control" name="maxAge" [(ngModel)]="searchUserParams.maxAge">
+                </div>
+            </div>
+
+            <div class="d-flex Show__Wrapper">
+
+                <label>Show:</label>
+
+                <div>
+                    <select name="gender" style="width: 130px" [(ngModel)]="searchUserParams.gender" class="form-control">
+
+                        <option *ngFor="let gender of genderList; let i = index" attr.data-name="testGender{{ i }}" [value]="gender.value">
+                            {{ gender.display }}
+                        </option>
+
+                    </select>
+                </div>
+
+                <button class="btn btn-primary findBtn" name="testApply" type="submit">Find</button>
+
+            </div>
+
 
         </div>
 
