@@ -56,7 +56,7 @@ ul {
         margin-bottom: 1.5rem;
     }
 
-    &__link, &__logo, &__toggle{
+    &__link, &__logo, &__toggle {
         color: #F3F1F1;;
         font-weight: 600;
     }
@@ -71,7 +71,7 @@ ul {
     &__link {
         transition: .3s;
 
-        &:hover{
+        &:hover {
             color: #DA2535;
         }
     }
@@ -79,11 +79,14 @@ ul {
     &__toggle {
         font-size: 1.3rem;
         cursor: pointer;
+        @media screen and (max-width: 768px) {
+            margin-top: 8px;
+        }
     }
 }
 
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
     body {
         margin: 0;
     }
@@ -108,44 +111,44 @@ ul {
         }
     }
 
-    .change-theme{
+    .change-theme {
         position: initial;
         margin-left: 2rem;
     }
 
 
-    .home__container{
+    .home__container {
         padding: 7rem 2rem 0;
     }
 
-    .share__container{
+    .share__container {
         padding: 0 2rem;
     }
 
-    .accessory{
-        &__container{
+    .accessory {
+        &__container {
             grid-template-columns: repeat(3, 224px);
             justify-content: center;
         }
-        &__content{
+        &__content {
             padding: .5rem 1.5rem 1.5rem;
         }
-        &__img{
+        &__img {
             width: 120px;
             margin-bottom: .5rem;
         }
-        &__title, &__category{
+        &__title, &__category {
             text-align: initial;
         }
-        &__button{
+        &__button {
             padding: .75rem;
         }
     }
 
-    .send{
+    .send {
         background: none;
 
-        &__container{
+        &__container {
             background-color: #DE3B49;
             padding: 2rem;
             border-radius: 1.5rem;
@@ -153,7 +156,7 @@ ul {
     }
 }
 
-@media screen and (min-width: 968px){
+@media screen and (min-width: 968px) {
     .bd-container{
         margin-left: auto;
         margin-right: auto;
@@ -229,4 +232,13 @@ img {
 
 .drop1:hover .drop1-cont {
     display: block;
+}
+
+.iconContainer {
+    div {
+        width: 35px;
+        height: 3px;
+        background-color: white;
+        margin: 7px 0;
+    }
 }
