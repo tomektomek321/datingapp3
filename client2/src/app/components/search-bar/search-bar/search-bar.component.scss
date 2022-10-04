@@ -75,7 +75,8 @@
     }
 
     .listOfCities__Container, .listOfHobbies__Container {
-        display: flex;
+
+
         @media screen and (max-width: 768px) {
             position: fixed;
             top: -110%;
@@ -90,13 +91,32 @@
             box-shadow: 0 0 4px rgba(146, 143, 143, 0.5);
             border-radius: 2rem;
             z-index: 100;
-            flex-wrap: wrap;
-            justify-content: center;
+
 
             div {
                 margin-bottom: 5px;
             }
             &.hidden { display: none; }
+        }
+
+        .listOfCities__Wrapper, .listOfHobbies__Wrapper {
+            display: flex;
+            width: 100%;
+            position: relative;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            span {
+                cursor: pointer;
+                position: absolute;
+                right: -20px;
+                top: -37px;
+                padding: 0;
+                transform: rotate(45deg);
+                font-size: 40px;
+
+                &:hover { color: red; }
+            }
         }
     }
 
@@ -107,13 +127,6 @@
     .listOfHobbiesShowed {
         top: 10%;
     }
-
-
-
-
-
-
-
 
 
 }

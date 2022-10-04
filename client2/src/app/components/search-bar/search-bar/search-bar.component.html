@@ -17,20 +17,24 @@
                     (callback)="addCity($event)"
                 ></app-text-input-with-hints>
 
-                <div class="numberOfItems" (click)="toggleListOfCities();">
+                <div class="numberOfItems" (click)="openListOfCities();">
                     {{ getNumberOfCities() }}
                 </div>
 
                 <div class="listOfCities__Container" [ngClass]="{hidden: !getNumberOfCities(), listOfCitiesShowed: isListOfCitiesVisible() }">
-                    <ng-container *ngFor="let city of searchUserParams.cities">
+                    <div class="listOfCities__Wrapper">
+                        <span (click)="closeListOfCities()">+</span>
+                        <ng-container *ngFor="let city of searchUserParams.cities">
 
-                        <app-badge-item
-                            [item]="city"
-                            (callback)="removeCity($event)"
+                            <app-badge-item
+                                [item]="city"
+                                (callback)="removeCity($event)"
 
-                        ></app-badge-item>
+                            ></app-badge-item>
 
-                    </ng-container>
+                        </ng-container>
+
+                    </div>
 
                 </div>
 
@@ -51,19 +55,22 @@
                     (callback)="addHobby($event)"
                 ></app-text-input-with-hints>
 
-                <div class="numberOfItems" (click)="toggleListOfHobbies();">
+                <div class="numberOfItems" (click)="openListOfHobbies();">
                     {{ getNumberOfHobbies() }}
                 </div>
 
                 <div class="listOfHobbies__Container" [ngClass]="{hidden: !getNumberOfHobbies(), listOfHobbiesShowed: isListOfHobbiesVisible() }">
-                    <div *ngFor="let hobby of searchUserParams.hobbies">
+                    <div class="listOfHobbies__Wrapper">
+                        <span (click)="closeListOfHobbies()">+</span>
+                        <div *ngFor="let hobby of searchUserParams.hobbies">
 
-                        <app-badge-item
-                            [item]="hobby"
-                            (callback)="removeHobby($event)"
+                            <app-badge-item
+                                [item]="hobby"
+                                (callback)="removeHobby($event)"
 
-                        ></app-badge-item>
+                            ></app-badge-item>
 
+                        </div>
                     </div>
                 </div>
 

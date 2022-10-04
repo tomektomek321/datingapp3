@@ -95,15 +95,27 @@ export class SearchBarService {
 
     getNumberOfHobbies = () => this.searchUserParams.hobbies.length;
 
-    toggleListOfCities() {
-        this.listOfHobbiesVisible = false;
-        this.listOfCitiesVisible = !this.listOfCitiesVisible;
+    closeListOfCities() {
+        this.listOfCitiesVisible = false;
     }
 
-    toggleListOfHobbies() {
-        this.listOfCitiesVisible = false;
-        this.listOfHobbiesVisible = !this.listOfHobbiesVisible;
+    closeListOfHobbies() {
+        this.listOfHobbiesVisible = false;
     }
+
+    openListOfCities() {
+        this.listOfHobbiesVisible = false;
+        this.listOfCitiesVisible = true;
+    }
+
+    openListOfHobbies() {
+        this.listOfCitiesVisible = false;
+        this.listOfHobbiesVisible = true;
+    }
+
+
+
+
 
     isListOfCitiesVisible = () => this.listOfCitiesVisible;
 
