@@ -53,4 +53,20 @@ export class SearchBarComponent implements OnInit {
         this.searchBarService.removeHobby(city_);
     }
 
+    getNumberOfCities(): number {
+        return this.searchBarService.getNumberOfCities();
+    }
+
+    getNumberOfHobbies(): number {
+        return this.searchBarService.getNumberOfHobbies();
+    }
+
+    toggleListOfCities() { this.searchBarService.toggleListOfCities(); }
+
+    toggleListOfHobbies() { this.searchBarService.toggleListOfHobbies(); }
+
+    isListOfCitiesVisible = () => this.searchBarService.isListOfCitiesVisible();
+
+    isListOfHobbiesVisible = () => this.searchBarService.isListOfHobbiesVisible();
+
 }

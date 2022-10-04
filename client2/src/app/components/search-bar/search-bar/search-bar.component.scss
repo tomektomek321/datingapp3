@@ -61,5 +61,59 @@
         }
     }
 
+    .numberOfItems {
+        height: 38px;
+        padding: 0 15px;
+        border-radius: 50%;
+        background-color: red;
+        display: flex;
+        align-items: center;
+
+        @media screen and (max-width: 768px) {
+            display: flex;
+        }
+    }
+
+    .listOfCities__Container, .listOfHobbies__Container {
+        display: flex;
+        @media screen and (max-width: 768px) {
+            position: fixed;
+            top: -110%;
+            left: 0;
+            right: 0;
+            width: 90%;
+            margin: 0 auto;
+            padding: 1.8rem;
+            text-align: center;
+            background-color: #251D1E;
+            transition: .4s;
+            box-shadow: 0 0 4px rgba(146, 143, 143, 0.5);
+            border-radius: 2rem;
+            z-index: 100;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            div {
+                margin-bottom: 5px;
+            }
+            &.hidden { display: none; }
+        }
+    }
+
+    .listOfCitiesShowed {
+        top: 10%;
+    }
+
+    .listOfHobbiesShowed {
+        top: 10%;
+    }
+
+
+
+
+
+
+
+
 
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { add } from 'ngx-bootstrap/chronos';
 import { BehaviorSubject } from 'rxjs';
 import { IdName } from 'src/app/shared/models/IdName';
 import { SearchUserOrderByEnum } from 'src/app/shared/models/searchUsers/SearchUserOrderByEnum';
@@ -13,10 +14,17 @@ export class SearchBarService {
         gender: 1,
         minAge: 21,
         maxAge: 21,
-        cities: [],
+        cities: [
+            { id: 1, name: 'Gdansk' },
+            { id: 2, name: 'Warszawa' },
+        ],
         hobbies: [],
         orderBy: SearchUserOrderByEnum.lastACtive,
     };
+
+    listOfCitiesVisible: boolean = false;
+
+    listOfHobbiesVisible: boolean = false;
 
     searchUserParams$ = new BehaviorSubject<SearchUserParams>(this.searchUserParams);
 
@@ -39,6 +47,10 @@ export class SearchBarService {
 
     removeCity(city_: IdName): void{
         const added = this.searchUserParams.cities.filter(item => item.id != city_.id);
+        if(added.length == 0) {
+            this.listOfCitiesVisible = false;
+        }
+
         this.searchUserParams.cities = added;
         this.searchUserParams$.next(this.searchUserParams);
 
@@ -57,6 +69,10 @@ export class SearchBarService {
 
     removeHobby(city_: IdName): void{
         const added = this.searchUserParams.hobbies.filter(item => item.id != city_.id);
+        if(added.length == 0) {
+            this.listOfHobbiesVisible = false;
+        }
+
         this.searchUserParams.hobbies = added;
         this.searchUserParams$.next(this.searchUserParams);
 
@@ -74,4 +90,22 @@ export class SearchBarService {
 
         this.searchUserParams$.next(this.searchUserParams);
     }
+
+    getNumberOfCities = () => this.searchUserParams.cities.length;
+
+    getNumberOfHobbies = () => this.searchUserParams.hobbies.length;
+
+    toggleListOfCities() {
+        this.listOfHobbiesVisible = false;
+        this.listOfCitiesVisible = !this.listOfCitiesVisible;
+    }
+
+    toggleListOfHobbies() {
+        this.listOfCitiesVisible = false;
+        this.listOfHobbiesVisible = !this.listOfHobbiesVisible;
+    }
+
+    isListOfCitiesVisible = () => this.listOfCitiesVisible;
+
+    isListOfHobbiesVisible = () => this.listOfHobbiesVisible;
 }

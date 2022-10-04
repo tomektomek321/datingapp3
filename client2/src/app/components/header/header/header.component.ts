@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
     user$: Observable<User>;
 
-    menuShowed: boolean = true;
+    menuShowed: boolean = false;
 
     constructor(
         private userService: UserService,

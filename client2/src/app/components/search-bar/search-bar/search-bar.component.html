@@ -17,15 +17,22 @@
                     (callback)="addCity($event)"
                 ></app-text-input-with-hints>
 
-                <ng-container *ngFor="let city of searchUserParams.cities">
+                <div class="numberOfItems" (click)="toggleListOfCities();">
+                    {{ getNumberOfCities() }}
+                </div>
 
-                    <app-badge-item
-                        [item]="city"
-                        (callback)="removeCity($event)"
+                <div class="listOfCities__Container" [ngClass]="{hidden: !getNumberOfCities(), listOfCitiesShowed: isListOfCitiesVisible() }">
+                    <ng-container *ngFor="let city of searchUserParams.cities">
 
-                    ></app-badge-item>
+                        <app-badge-item
+                            [item]="city"
+                            (callback)="removeCity($event)"
 
-                </ng-container>
+                        ></app-badge-item>
+
+                    </ng-container>
+
+                </div>
 
             </div>
 
@@ -44,15 +51,21 @@
                     (callback)="addHobby($event)"
                 ></app-text-input-with-hints>
 
-                <ng-container *ngFor="let hobby of searchUserParams.hobbies">
+                <div class="numberOfItems" (click)="toggleListOfHobbies();">
+                    {{ getNumberOfHobbies() }}
+                </div>
 
-                    <app-badge-item
-                        [item]="hobby"
-                        (callback)="removeHobby($event)"
+                <div class="listOfHobbies__Container" [ngClass]="{hidden: !getNumberOfHobbies(), listOfHobbiesShowed: isListOfHobbiesVisible() }">
+                    <div *ngFor="let hobby of searchUserParams.hobbies">
 
-                    ></app-badge-item>
+                        <app-badge-item
+                            [item]="hobby"
+                            (callback)="removeHobby($event)"
 
-                </ng-container>
+                        ></app-badge-item>
+
+                    </div>
+                </div>
 
             </div>
 
