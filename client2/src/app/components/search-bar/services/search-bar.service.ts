@@ -14,10 +14,10 @@ export class SearchBarService {
         gender: 1,
         minAge: 21,
         maxAge: 21,
-        cities: [
+        cities: [/*
             { id: 1, name: 'Gdansk' },
             { id: 2, name: 'Warszawa' },
-        ],
+    */],
         hobbies: [],
         orderBy: SearchUserOrderByEnum.lastACtive,
     };

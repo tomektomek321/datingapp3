@@ -26,6 +26,8 @@ export class SearchBarComponent implements OnInit {
         this.searchBarService.getSearchUserParams$().subscribe( (params_: SearchUserParams) => {
             this.searchUserParams = params_;
         });
+
+        this.loadMembers();
     }
 
     loadMembers(): void {
