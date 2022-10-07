@@ -25,16 +25,12 @@
 
     .message__Container {
 
-
         display: flex;
-
 
         .yourMessage { padding: 15px 25px; background-color: red; color: black; border-radius: 25px; }
         .memberMessage { padding: 15px 25px; background-color: blue; color: white; border-radius: 25px; }
 
     }
-
-
 
 }
 
@@ -46,6 +42,11 @@
     padding: 10px;
     margin: 10px 0;
     color: black;
+
+    &.darker {
+        border-color: #817878;
+        background-color: #d5cfcf;
+    }
 
     &::after {
         content: "";
@@ -71,10 +72,6 @@
     .time-left {
         float: left;
         color: #999;
-    }
-    &.darker {
-        border-color: #817878;
-        background-color: #d5cfcf;
     }
 
 }

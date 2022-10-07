@@ -63,8 +63,7 @@ export class ChatMessagesComponent implements OnInit {
         return "somethingWrong";
     }
 
-
-    MessageTimeSide(message_: Message) {
+    messageTimeSide(message_: Message) {
         const user = this.userService.getUser();
 
         if(user && this.username) {
@@ -79,14 +78,5 @@ export class ChatMessagesComponent implements OnInit {
 
         return "somethingWrong";
     }
-
-
-
-
-
-
-
-
-
 
 }

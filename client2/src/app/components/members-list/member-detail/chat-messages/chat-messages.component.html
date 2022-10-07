@@ -1,5 +1,6 @@
 
 <div class="card">
+
     <div class="card-body">
         <div *ngIf="messages?.length === 0">
             No messages yet... say hi by using the message box below
@@ -9,7 +10,7 @@
             <div *ngFor="let message of messages" class="messages2__Container" [ngClass]="[isYourMessage(message)]">
                 <img src="./assets/user.png" alt="Avatar">
                 <p>{{ message.content }}</p>
-                <span [ngClass]="[MessageTimeSide(message)]">11:00</span>
+                <span [ngClass]="[messageTimeSide(message)]">11:00</span>
             </div>
         </ul>
 
@@ -31,19 +32,5 @@
             </div>
         </form>
     </div>
-</div>
 
-<!--
-<div class="header">
-    <small class="text-muted">
-         <span class="fa fa-clock-o">{{ message.messageSent | timeago }}</span>
-         <span class="text-danger" *ngIf="!message.dateRead
-            && message.senderUsername !== username">
-            (unread)
-        </span>
-         <span class="text-success" *ngIf="message.dateRead
-            && message.senderUsername !== username">
-            (read {s{ message.dateRead | timeago }})
-        </span> -
-    </small>
-</div>-->
+</div>
