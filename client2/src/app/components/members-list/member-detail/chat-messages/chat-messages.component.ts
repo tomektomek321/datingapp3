@@ -54,13 +54,39 @@ export class ChatMessagesComponent implements OnInit {
             const userUsername = user.username;
 
             if(userUsername == message_.senderUsername) {
-                return "yourMessage";
+                return "darker";
             } else if(this.username == message_.senderUsername) {
-                return "memberMessage";
+                return "";
             }
         }
 
         return "somethingWrong";
     }
+
+
+    MessageTimeSide(message_: Message) {
+        const user = this.userService.getUser();
+
+        if(user && this.username) {
+            const userUsername = user.username;
+
+            if(userUsername == message_.senderUsername) {
+                return "time-left";
+            } else if(this.username == message_.senderUsername) {
+                return "time-right";
+            }
+        }
+
+        return "somethingWrong";
+    }
+
+
+
+
+
+
+
+
+
 
 }

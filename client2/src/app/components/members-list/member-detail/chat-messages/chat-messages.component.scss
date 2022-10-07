@@ -37,3 +37,44 @@
 
 
 }
+
+.messages2__Container {
+
+    border: 2px solid #817878;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    color: black;
+
+    &::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    img {
+        float: left;
+        max-width: 60px;
+        width: 100%;
+        margin-right: 20px;
+        border-radius: 50%;
+    }
+    img.right {
+        float: right;
+        margin-left: 20px;
+        margin-right:0;
+    }
+    .time-right {
+        float: right;
+        color: #aaa;
+    }
+    .time-left {
+        float: left;
+        color: #999;
+    }
+    &.darker {
+        border-color: #817878;
+        background-color: #d5cfcf;
+    }
+
+}

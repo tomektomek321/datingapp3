@@ -6,17 +6,13 @@
         </div>
 
         <ul *ngIf="messages && messages.length > 0" class="chat">
-            <li *ngFor="let message of messages">
-                <div class="d-flex messages__Container" [ngClass]="[isYourMessage(message)]">
-                    <div class="message__Container">
-
-                        <div [ngClass]="[isYourMessage(message)]">{{ message.content }}</div>
-
-                    </div>
-
-                </div>
-            </li>
+            <div *ngFor="let message of messages" class="messages2__Container" [ngClass]="[isYourMessage(message)]">
+                <img src="./assets/user.png" alt="Avatar">
+                <p>{{ message.content }}</p>
+                <span [ngClass]="[MessageTimeSide(message)]">11:00</span>
+            </div>
         </ul>
+
     </div>
 
     <div class="card-footer">
