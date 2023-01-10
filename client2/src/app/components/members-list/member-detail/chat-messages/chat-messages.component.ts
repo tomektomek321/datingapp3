@@ -11,72 +11,72 @@ import { MessagesManagerService } from '../../services/messages-manager.service'
 })
 export class ChatMessagesComponent implements OnInit {
 
-    @ViewChild('messageForm') messageForm?: NgForm;
+  @ViewChild('messageForm') messageForm?: NgForm;
 
-    @Input('username') username?: string;
+  @Input('username') username?: string;
 
-    messageContent?: string;
+  messageContent?: string;
 
-    messages: Message[] = [];
+  messages: Message[] = [];
 
-    constructor(
-        private messagesManagerService: MessagesManagerService,
-        private userService: UserService,
-    ) {
+  constructor(
+    private messagesManagerService: MessagesManagerService,
+    private userService: UserService,
+  ) {
 
+  }
+
+  ngOnInit(): void {
+    if (this.username) {
+      this.messagesManagerService.getMessageThread(this.username).subscribe((response: any) => {
+        this.messages = response.data;
+      });
     }
+  }
 
-    ngOnInit(): void {
-        if(this.username) {
-            this.messagesManagerService.getMessageThread(this.username).subscribe( (response: any) => {
-                this.messages = response.data;
-            });
+  sendMessage() {
+
+    if (this.username && this.messageContent) {
+      this.messagesManagerService.sendMessage(this.username, this.messageContent).subscribe((message: any) => {
+        if (this.messageContent) {
+          this.messages.push(message.data);
         }
+        this.messageForm && this.messageForm.reset();
+      });
+
+    }
+  }
+
+  isYourMessage(message_: Message) {
+    const user = this.userService.getUser();
+
+    if (user && this.username) {
+      const userUsername = user.username;
+
+      if (userUsername == message_.senderUsername) {
+        return "darker";
+      } else if (this.username == message_.senderUsername) {
+        return "";
+      }
     }
 
-    sendMessage() {
+    return "somethingWrong";
+  }
 
-        if(this.username && this.messageContent) {
-            this.messagesManagerService.sendMessage(this.username, this.messageContent).subscribe((message: any) => {
-                if(this.messageContent) {
-                    this.messages.push(message.data);
-                }
-                this.messageForm && this.messageForm.reset();
-            });
+  messageTimeSide(message_: Message) {
+    const user = this.userService.getUser();
 
-        }
+    if (user && this.username) {
+      const userUsername = user.username;
+
+      if (userUsername == message_.senderUsername) {
+        return "time-left";
+      } else if (this.username == message_.senderUsername) {
+        return "time-right";
+      }
     }
 
-    isYourMessage(message_: Message) {
-        const user = this.userService.getUser();
-
-        if(user && this.username) {
-            const userUsername = user.username;
-
-            if(userUsername == message_.senderUsername) {
-                return "darker";
-            } else if(this.username == message_.senderUsername) {
-                return "";
-            }
-        }
-
-        return "somethingWrong";
-    }
-
-    messageTimeSide(message_: Message) {
-        const user = this.userService.getUser();
-
-        if(user && this.username) {
-            const userUsername = user.username;
-
-            if(userUsername == message_.senderUsername) {
-                return "time-left";
-            } else if(this.username == message_.senderUsername) {
-                return "time-right";
-            }
-        }
-
-        return "somethingWrong";
-    }
+    return "somethingWrong";
+  }
 
 }

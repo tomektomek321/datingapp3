@@ -1,28 +1,19 @@
-
 <div class="autocomplete d-flex" [ngClass]="[getCSS()]">
 
-    <label *ngIf="label != false" [ngStyle]="{'width': labelWidth}">
-        {{ label }}
-    </label>
+  <label *ngIf="label != false" [ngStyle]="{'width': labelWidth}">
+    {{ label }}
+  </label>
 
-    <input
-        #textInput
-        type="text"
-        id="myInput"
-        class="form-control ml-0"
-        [(ngModel)]="valueInput"
-        autocomplete="off"
-        name="myCity"
-        placeholder="{{placeholder}}"
-    />
+  <input #textInput type="text" id="myInput" class="form-control ml-0" [(ngModel)]="valueInput" autocomplete="off"
+    name="myCity" placeholder="{{placeholder}}" />
 
-    <div id="autocomplete-list" class="autocomplete-items" *ngIf="promptShow">
+  <div id="autocomplete-list" class="autocomplete-items" *ngIf="promptShow">
 
-        <div *ngFor="let item of allItems" (click)="setValue(item)">
-            {{ item.name }}
-        </div>
-
+    <div *ngFor="let item of allItems" (click)="setValue(item)">
+      {{ item.name }}
     </div>
+
+  </div>
 
 </div>
 

@@ -1,123 +1,122 @@
 import { Injectable } from '@angular/core';
-import { add } from 'ngx-bootstrap/chronos';
 import { BehaviorSubject } from 'rxjs';
 import { IdName } from 'src/app/shared/models/IdName';
 import { SearchUserOrderByEnum } from 'src/app/shared/models/searchUsers/SearchUserOrderByEnum';
 import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserParams';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class SearchBarService {
 
-    searchUserParams: SearchUserParams = {
-        gender: 1,
-        minAge: 21,
-        maxAge: 21,
-        cities: [/*
+  searchUserParams: SearchUserParams = {
+    gender: 1,
+    minAge: 21,
+    maxAge: 21,
+    cities: [/*
             { id: 1, name: 'Gdansk' },
             { id: 2, name: 'Warszawa' },
     */],
-        hobbies: [],
-        orderBy: SearchUserOrderByEnum.lastACtive,
+    hobbies: [],
+    orderBy: SearchUserOrderByEnum.lastACtive,
+  };
+
+  listOfCitiesVisible: boolean = false;
+
+  listOfHobbiesVisible: boolean = false;
+
+  searchUserParams$ = new BehaviorSubject<SearchUserParams>(this.searchUserParams);
+
+  constructor() { }
+
+  getSearchUserParams = (): SearchUserParams => this.searchUserParams;
+
+  getSearchUserParams$ = () => this.searchUserParams$.asObservable();
+
+  addCity(city_: IdName): void {
+    const added = this.searchUserParams.cities.filter(item => item.id == city_.id);
+    if (added.length > 0) {
+      console.log("Already added");
+      return;
+    }
+
+    this.searchUserParams.cities.push(city_);
+    this.searchUserParams$.next(this.searchUserParams);
+  }
+
+  removeCity(city_: IdName): void {
+    const added = this.searchUserParams.cities.filter(item => item.id != city_.id);
+    if (added.length == 0) {
+      this.listOfCitiesVisible = false;
+    }
+
+    this.searchUserParams.cities = added;
+    this.searchUserParams$.next(this.searchUserParams);
+
+  }
+
+  addHobby(city_: IdName): void {
+    const added = this.searchUserParams.hobbies.filter(item => item.id == city_.id);
+    if (added.length > 0) {
+      console.log("Already added");
+      return;
+    }
+
+    this.searchUserParams.hobbies.push(city_);
+    this.searchUserParams$.next(this.searchUserParams);
+  }
+
+  removeHobby(city_: IdName): void {
+    const added = this.searchUserParams.hobbies.filter(item => item.id != city_.id);
+    if (added.length == 0) {
+      this.listOfHobbiesVisible = false;
+    }
+
+    this.searchUserParams.hobbies = added;
+    this.searchUserParams$.next(this.searchUserParams);
+
+  }
+
+  resetParams(): void {
+    this.searchUserParams = {
+      gender: 1,
+      minAge: 18,
+      maxAge: 50,
+      cities: [],
+      hobbies: [],
+      orderBy: SearchUserOrderByEnum.lastACtive,
     };
 
-    listOfCitiesVisible: boolean = false;
+    this.searchUserParams$.next(this.searchUserParams);
+  }
 
-    listOfHobbiesVisible: boolean = false;
+  getNumberOfCities = () => this.searchUserParams.cities.length;
 
-    searchUserParams$ = new BehaviorSubject<SearchUserParams>(this.searchUserParams);
+  getNumberOfHobbies = () => this.searchUserParams.hobbies.length;
 
-    constructor() { }
+  closeListOfCities() {
+    this.listOfCitiesVisible = false;
+  }
 
-    getSearchUserParams = (): SearchUserParams => this.searchUserParams;
+  closeListOfHobbies() {
+    this.listOfHobbiesVisible = false;
+  }
 
-    getSearchUserParams$ = () => this.searchUserParams$.asObservable();
+  openListOfCities() {
+    this.listOfHobbiesVisible = false;
+    this.listOfCitiesVisible = true;
+  }
 
-    addCity(city_: IdName): void {
-        const added = this.searchUserParams.cities.filter(item => item.id == city_.id);
-        if(added.length > 0) {
-            console.log("Already added");
-            return;
-        }
-
-        this.searchUserParams.cities.push(city_);
-        this.searchUserParams$.next(this.searchUserParams);
-    }
-
-    removeCity(city_: IdName): void{
-        const added = this.searchUserParams.cities.filter(item => item.id != city_.id);
-        if(added.length == 0) {
-            this.listOfCitiesVisible = false;
-        }
-
-        this.searchUserParams.cities = added;
-        this.searchUserParams$.next(this.searchUserParams);
-
-    }
-
-    addHobby(city_: IdName): void {
-        const added = this.searchUserParams.hobbies.filter(item => item.id == city_.id);
-        if(added.length > 0) {
-            console.log("Already added");
-            return;
-        }
-
-        this.searchUserParams.hobbies.push(city_);
-        this.searchUserParams$.next(this.searchUserParams);
-    }
-
-    removeHobby(city_: IdName): void{
-        const added = this.searchUserParams.hobbies.filter(item => item.id != city_.id);
-        if(added.length == 0) {
-            this.listOfHobbiesVisible = false;
-        }
-
-        this.searchUserParams.hobbies = added;
-        this.searchUserParams$.next(this.searchUserParams);
-
-    }
-
-    resetParams(): void {
-        this.searchUserParams = {
-            gender: 1,
-            minAge: 18,
-            maxAge: 50,
-            cities: [],
-            hobbies: [],
-            orderBy: SearchUserOrderByEnum.lastACtive,
-        };
-
-        this.searchUserParams$.next(this.searchUserParams);
-    }
-
-    getNumberOfCities = () => this.searchUserParams.cities.length;
-
-    getNumberOfHobbies = () => this.searchUserParams.hobbies.length;
-
-    closeListOfCities() {
-        this.listOfCitiesVisible = false;
-    }
-
-    closeListOfHobbies() {
-        this.listOfHobbiesVisible = false;
-    }
-
-    openListOfCities() {
-        this.listOfHobbiesVisible = false;
-        this.listOfCitiesVisible = true;
-    }
-
-    openListOfHobbies() {
-        this.listOfCitiesVisible = false;
-        this.listOfHobbiesVisible = true;
-    }
+  openListOfHobbies() {
+    this.listOfCitiesVisible = false;
+    this.listOfHobbiesVisible = true;
+  }
 
 
 
 
 
-    isListOfCitiesVisible = () => this.listOfCitiesVisible;
+  isListOfCitiesVisible = () => this.listOfCitiesVisible;
 
-    isListOfHobbiesVisible = () => this.listOfHobbiesVisible;
+  isListOfHobbiesVisible = () => this.listOfHobbiesVisible;
 }

@@ -11,52 +11,52 @@ import { environment } from 'src/environments/environment';
 })
 export class LikedMembersService {
 
-    likedMembers: Member[] = [];
+  likedMembers: Member[] = [];
 
-    likedMembers$ = new BehaviorSubject<Member[]>(this.likedMembers);
+  likedMembers$ = new BehaviorSubject<Member[]>(this.likedMembers);
 
-    constructor(
-        private http: HttpClient,
-        private userService: UserService,
-        private userManagerService: UserManagerService,
-    ) {
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+    private userManagerService: UserManagerService,
+  ) {
 
-    }
+  }
 
-    setLikedMembers(members_: Member[]) {
-        this.likedMembers = members_;
-        this.likedMembers$.next(this.likedMembers);
-    }
+  setLikedMembers(members_: Member[]) {
+    this.likedMembers = members_;
+    this.likedMembers$.next(this.likedMembers);
+  }
 
-    getLikedMembers = (): Member[] => this.likedMembers;
+  getLikedMembers = (): Member[] => this.likedMembers;
 
-    getLikedMembers$ = () => this.likedMembers$.asObservable();
+  getLikedMembers$ = () => this.likedMembers$.asObservable();
 
-    fetchLikedMembers() {
-        const userId = this.userService.getUser().id;
+  fetchLikedMembers() {
+    const userId = this.userService.getUser().id;
 
-        this.http.post(environment.apiUrl + 'Member/GetLikedMembers', { userId })
-        .subscribe((response: any) => {
-            this.setLikedMembers(response.data);
-        });
-    }
+    this.http.post(environment.apiUrl + 'Member/GetLikedMembers', { userId })
+      .subscribe((response: any) => {
+        this.setLikedMembers(response.data);
+      });
+  }
 
-    toggleLike(memberId: number): void {
-        const user = this.userService.getUser();
-        const userId = user.id;
-        console.log(user);
+  toggleLike(memberId: number): void {
+    const user = this.userService.getUser();
+    const userId = user.id;
+    console.log(user);
 
-        this.http.post(environment.apiUrl + 'Like/LikeUser', {
-            sourceUserId: userId,
-            targetUserId: memberId
-        }).subscribe((response: any) => {
-            console.log(response)
-            if(response.success) {
-                this.userManagerService.toggleLike(memberId);
-                //this.toastr.success("Userlike toggled");
-            } else {
-                //this.toastr.error("Something bad happened.");
-            }
-        })
-    }
+    this.http.post(environment.apiUrl + 'Like/LikeUser', {
+      sourceUserId: userId,
+      targetUserId: memberId
+    }).subscribe((response: any) => {
+      console.log(response)
+      if (response.success) {
+        this.userManagerService.toggleLike(memberId);
+        //this.toastr.success("Userlike toggled");
+      } else {
+        //this.toastr.error("Something bad happened.");
+      }
+    })
+  }
 }

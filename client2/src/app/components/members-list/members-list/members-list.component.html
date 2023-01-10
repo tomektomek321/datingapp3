@@ -1,12 +1,11 @@
-
 <app-search-bar></app-search-bar>
 
 <div class="container mt-1">
 
-    <div class="memberCards__Container">
-        <div *ngFor="let member of membersList">
-            <app-member-card [member]="member"></app-member-card>
-        </div>
+  <div class="memberCards__Container">
+    <div *ngFor="let member of membersList">
+      <app-member-card [member]="member"></app-member-card>
     </div>
+  </div>
 
 </div>

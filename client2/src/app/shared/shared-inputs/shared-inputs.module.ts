@@ -7,27 +7,25 @@ import { DateInputComponent } from './date-input/date-input.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BadgeItemComponent } from './badge-item/badge-item.component';
 
-
-
 @NgModule({
-    declarations: [
-        TextInputWithHintsComponent,
-        TextInputComponent,
-        DateInputComponent,
-        BadgeItemComponent,
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BsDatepickerModule.forRoot(),
-    ],
-    exports: [
-        TextInputWithHintsComponent,
-        TextInputComponent,
-        DateInputComponent,
-        BadgeItemComponent,
-        BsDatepickerModule,
-    ]
+  declarations: [
+    TextInputWithHintsComponent,
+    TextInputComponent,
+    DateInputComponent,
+    BadgeItemComponent,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
+  ],
+  exports: [
+    TextInputWithHintsComponent,
+    TextInputComponent,
+    DateInputComponent,
+    BadgeItemComponent,
+    BsDatepickerModule,
+  ]
 })
 export class SharedInputsModule { }

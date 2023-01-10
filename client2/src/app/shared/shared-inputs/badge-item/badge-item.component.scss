@@ -1,48 +1,49 @@
-
 .item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+
+  .item__name {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    cursor: pointer;
+    height: 35px;
+    width: 130px;
+    font-size: 15px;
+    transition: 0.2s;
+  }
+
+  .item__remove {
+    position: absolute;
+    right: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    width: 14px;
+    height: 18px;
+    transition: 0.2s;
+
+    i {
+      font-size: 21px;
+    }
+  }
+
+  &:hover {
 
     .item__name {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 35px;
-        width: 130px;
-        font-size: 15px;
-        transition: 0.2s;
+      font-size: 13px;
+      width: 110px;
+      margin-right: 20px;
     }
 
     .item__remove {
-        position: absolute;
-        right: -20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: black;
-        width: 14px;
-        height: 18px;
-        transition: 0.2s;
-
-        i {   font-size: 21px; }
+      right: 15px;
     }
 
-    &:hover {
-
-        .item__name {
-            font-size: 13px;
-            width: 110px;
-            margin-right: 20px;
-        }
-
-        .item__remove {
-            right: 15px;
-        }
-
-    }
+  }
 }

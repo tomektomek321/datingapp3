@@ -4,19 +4,17 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FormsModule } from '@angular/forms';
 import { SharedInputsModule } from 'src/app/shared/shared-inputs/shared-inputs.module';
 
-
-
 @NgModule({
-    declarations: [
-        SearchBarComponent,
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        SharedInputsModule,
-    ],
-    exports: [
-        SearchBarComponent,
-    ]
+  declarations: [
+    SearchBarComponent,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SharedInputsModule,
+  ],
+  exports: [
+    SearchBarComponent,
+  ]
 })
 export class SearchBarModule { }

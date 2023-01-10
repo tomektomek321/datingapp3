@@ -10,34 +10,34 @@ import { environment } from 'src/environments/environment';
 })
 export class LikedByMembersService {
 
-    likedByMembers: Member[] = [];
+  likedByMembers: Member[] = [];
 
-    likedByMembers$ = new BehaviorSubject<Member[]>(this.likedByMembers);
+  likedByMembers$ = new BehaviorSubject<Member[]>(this.likedByMembers);
 
-    constructor(
-        private http: HttpClient,
-        private userService: UserService,
-    ) {
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {
 
-    }
+  }
 
-    setLikedByMembers(members_: Member[]) {
-        this.likedByMembers = members_;
-        this.likedByMembers$.next(this.likedByMembers);
-    }
+  setLikedByMembers(members_: Member[]) {
+    this.likedByMembers = members_;
+    this.likedByMembers$.next(this.likedByMembers);
+  }
 
-    getLikedByMembers = (): Member[] => this.likedByMembers;
+  getLikedByMembers = (): Member[] => this.likedByMembers;
 
-    getLikedByMembers$ = () => this.likedByMembers$.asObservable();
+  getLikedByMembers$ = () => this.likedByMembers$.asObservable();
 
-    fetchLikedByMembers() {
+  fetchLikedByMembers() {
 
-        const userId = this.userService.getUser().id;
+    const userId = this.userService.getUser().id;
 
-        this.http.post(environment.apiUrl + 'Member/GetLikedByMembers', { userId })
-        .subscribe((response: any) => {
-            this.setLikedByMembers(response.data);
-        });
+    this.http.post(environment.apiUrl + 'Member/GetLikedByMembers', { userId })
+      .subscribe((response: any) => {
+        this.setLikedByMembers(response.data);
+      });
 
-    }
+  }
 }

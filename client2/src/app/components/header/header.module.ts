@@ -7,17 +7,17 @@ import { AuthModule } from 'src/app/infrastructure/auth/auth.module';
 
 
 @NgModule({
-    declarations: [
-        HeaderComponent,
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        AppRoutingModule,
-        AuthModule,
-    ],
-    exports: [
-        HeaderComponent,
-    ]
+  declarations: [
+    HeaderComponent,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    AppRoutingModule,
+    AuthModule,
+  ],
+  exports: [
+    HeaderComponent,
+  ]
 })
 export class HeaderModule { }

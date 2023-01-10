@@ -1,136 +1,143 @@
-
 .searchBar__Container {
-    margin-top: 20px;
+  margin-top: 20px;
 
-    .Age__Wrapper {
-        align-items: baseline;
+  .Age__Wrapper {
+    align-items: baseline;
 
-        &.ageFrom {
+    &.ageFrom {
 
-            label {
-                width: 110px;
-                text-align: center;
-            }
+      label {
+        width: 110px;
+        text-align: center;
+      }
 
-            input {
-                width: 76px;
-            }
-        }
-
-        &.ageTo {
-
-            label {
-                width: 55px;
-                text-align: center;
-            }
-
-            input {
-                width: 76px;
-            }
-        }
-
-
+      input {
+        width: 76px;
+      }
     }
 
-    .Show__Wrapper {
-        align-items: baseline;
-        @media screen and (max-width: 768px) {
-            margin-top: 4px;
+    &.ageTo {
+
+      label {
+        width: 55px;
+        text-align: center;
+      }
+
+      input {
+        width: 76px;
+      }
+    }
+  }
+
+  .Show__Wrapper {
+    align-items: baseline;
+
+    @media screen and (max-width: 768px) {
+      margin-top: 4px;
+    }
+
+    label {
+      width: 70px;
+
+      @media screen and (max-width: 768px) {
+        width: 110px;
+      }
+
+      text-align: center;
+    }
+
+  }
+
+  .findBtn {
+    width: 90px;
+    margin-left: 7px;
+
+    @media screen and (max-width: 768px) {
+      width: 70px;
+    }
+  }
+
+  .AgeShowFind__Container {
+    @media screen and (max-width: 768px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  .numberOfItems {
+    height: 38px;
+    padding: 0 15px;
+    border-radius: 50%;
+    background-color: red;
+    display: flex;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .listOfCities__Container,
+  .listOfHobbies__Container {
+
+
+    @media screen and (max-width: 768px) {
+      position: fixed;
+      top: -110%;
+      left: 0;
+      right: 0;
+      width: 90%;
+      margin: 0 auto;
+      padding: 1.8rem;
+      text-align: center;
+      background-color: #251D1E;
+      transition: .4s;
+      box-shadow: 0 0 4px rgba(146, 143, 143, 0.5);
+      border-radius: 2rem;
+      z-index: 100;
+
+
+      div {
+        margin-bottom: 5px;
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .listOfCities__Wrapper,
+    .listOfHobbies__Wrapper {
+      display: flex;
+      width: 100%;
+      position: relative;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      span {
+        cursor: pointer;
+        position: absolute;
+        right: -20px;
+        top: -37px;
+        padding: 0;
+        transform: rotate(45deg);
+        font-size: 40px;
+
+        &:hover {
+          color: red;
         }
-        label {
-            width: 70px;
-            @media screen and (max-width: 768px) {
-                width: 110px;
-            }
-            text-align: center;
-        }
-
+      }
     }
+  }
 
-    .findBtn {
-        width: 90px;
-        margin-left: 7px;
-        @media screen and (max-width: 768px) {
-            width: 70px;
-        }
-    }
+  .listOfCitiesShowed {
+    top: 10%;
+  }
 
-    .AgeShowFind__Container {
-        @media screen and (max-width: 768px) {
-            flex-wrap: wrap;
-        }
-    }
+  .listOfHobbiesShowed {
+    top: 10%;
+  }
 
-    .numberOfItems {
-        height: 38px;
-        padding: 0 15px;
-        border-radius: 50%;
-        background-color: red;
-        display: flex;
-        align-items: center;
-
-        @media screen and (max-width: 768px) {
-            display: flex;
-        }
-    }
-
-    .listOfCities__Container, .listOfHobbies__Container {
-
-
-        @media screen and (max-width: 768px) {
-            position: fixed;
-            top: -110%;
-            left: 0;
-            right: 0;
-            width: 90%;
-            margin: 0 auto;
-            padding: 1.8rem;
-            text-align: center;
-            background-color: #251D1E;
-            transition: .4s;
-            box-shadow: 0 0 4px rgba(146, 143, 143, 0.5);
-            border-radius: 2rem;
-            z-index: 100;
-
-
-            div {
-                margin-bottom: 5px;
-            }
-            &.hidden { display: none; }
-        }
-
-        .listOfCities__Wrapper, .listOfHobbies__Wrapper {
-            display: flex;
-            width: 100%;
-            position: relative;
-            flex-wrap: wrap;
-            justify-content: center;
-
-            span {
-                cursor: pointer;
-                position: absolute;
-                right: -20px;
-                top: -37px;
-                padding: 0;
-                transform: rotate(45deg);
-                font-size: 40px;
-
-                &:hover { color: red; }
-            }
-        }
-    }
-
-    .listOfCitiesShowed {
-        top: 10%;
-    }
-
-    .listOfHobbiesShowed {
-        top: 10%;
-    }
-
-    .form-group {
-        margin-bottom: 0;
-    }
-
-
+  .form-group {
+    margin-bottom: 0;
+  }
 }

@@ -14,27 +14,27 @@ import { LikesListModule } from './components/likes-list/likes-list.module';
 import { EditProfileModule } from './components/edit-profile/edit-profile.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        SharedModule,
+  declarations: [
+    AppComponent,
+    HomeComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    SharedModule,
 
-        HeaderModule,
-        MembersListModule,
-        LikesListModule,
-        EditProfileModule,
+    HeaderModule,
+    MembersListModule,
+    LikesListModule,
+    EditProfileModule,
 
-        SharedInputsModule,
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+    SharedInputsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

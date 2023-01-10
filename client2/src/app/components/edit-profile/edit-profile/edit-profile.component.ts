@@ -14,70 +14,70 @@ import { UserProfileManagerService } from '../services/user-profile-manager.serv
 })
 export class EditProfileComponent implements OnInit, AfterViewInit {
 
-    @ViewChild('editForm') editForm!: NgForm;
+  @ViewChild('editForm') editForm!: NgForm;
 
-    user?: User;
+  user?: User;
 
-    constructor(
-        private userService: UserService,
-        private userManagerService: UserManagerService,
-        private hobbyManager: HobbyManagerService,
-        private userProfileManagerService: UserProfileManagerService,
-    ) {
+  constructor(
+    private userService: UserService,
+    private userManagerService: UserManagerService,
+    private hobbyManager: HobbyManagerService,
+    private userProfileManagerService: UserProfileManagerService,
+  ) {
 
-    }
-    ngAfterViewInit(): void {
-        console.log(this.editForm)
-    }
+  }
+  ngAfterViewInit(): void {
+    console.log(this.editForm)
+  }
 
-    ngOnInit(): void {
-        console.log(this.editForm)
-        this.userManagerService.GetUserDetails();
+  ngOnInit(): void {
+    console.log(this.editForm)
+    this.userManagerService.GetUserDetails();
 
-        this.userService.getUser$().subscribe((user: User) => {
-            this.user = user;
-        });
-    }
+    this.userService.getUser$().subscribe((user: User) => {
+      this.user = user;
+    });
+  }
 
-    updateMember() {}
-    removeHobby(hobbyId_: number) {
-        let userId = this.userService.getUser().id
+  updateMember() { }
+  removeHobby(hobbyId_: number) {
+    let userId = this.userService.getUser().id
 
-        this.hobbyManager.removeHobby(hobbyId_, userId).subscribe((response: any) => {
-            if(response) {
-                this.userManagerService.removeHobby(hobbyId_);
-            }
-        });
-    }
+    this.hobbyManager.removeHobby(hobbyId_, userId).subscribe((response: any) => {
+      if (response) {
+        this.userManagerService.removeHobby(hobbyId_);
+      }
+    });
+  }
 
-    getHobby(hobbyObject: any): void {
-        this.addHobby(hobbyObject);
-    }
+  getHobby(hobbyObject: any): void {
+    this.addHobby(hobbyObject);
+  }
 
-    addHobby(hobbyObject: any): void {
-        let userId = this.userService.getUser().id
+  addHobby(hobbyObject: any): void {
+    let userId = this.userService.getUser().id
 
-        this.hobbyManager.addHobby(hobbyObject.id, userId).subscribe((response: any) => {
-            console.log(response)
-            if(response.success) {
-                this.userManagerService.addHobby(hobbyObject);
-            };
-        })
-    }
+    this.hobbyManager.addHobby(hobbyObject.id, userId).subscribe((response: any) => {
+      console.log(response)
+      if (response.success) {
+        this.userManagerService.addHobby(hobbyObject);
+      };
+    })
+  }
 
-    getCity(cityObject: any): void {
-        this.changeCity(cityObject);
-    }
+  getCity(cityObject: any): void {
+    this.changeCity(cityObject);
+  }
 
-    changeCity(cityObject: any): void {
-
-
+  changeCity(cityObject: any): void {
 
 
-        this.userProfileManagerService.updateCity(cityObject);
-    }
 
-    getCountry(cityObject: any): void {
-        this.userProfileManagerService.updateCountry(cityObject);
-    }
+
+    this.userProfileManagerService.updateCity(cityObject);
+  }
+
+  getCountry(cityObject: any): void {
+    this.userProfileManagerService.updateCountry(cityObject);
+  }
 }

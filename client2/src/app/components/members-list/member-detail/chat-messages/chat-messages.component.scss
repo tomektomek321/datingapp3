@@ -1,77 +1,97 @@
 .card {
-    border: none;
-    background-color: #333333;
+  border: none;
+  background-color: #333333;
 }
 
 .chat {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .chat li {
-    margin-bottom: 5px;
-    padding-bottom: 5px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .rounded-circle {
-    max-height: 50px;
+  max-height: 50px;
 }
 
 .messages__Container {
 
-    &.yourMessage { justify-content: flex-start; }
-    &.memberMessage { justify-content: flex-end; }
+  &.yourMessage {
+    justify-content: flex-start;
+  }
 
-    .message__Container {
+  &.memberMessage {
+    justify-content: flex-end;
+  }
 
-        display: flex;
+  .message__Container {
 
-        .yourMessage { padding: 15px 25px; background-color: red; color: black; border-radius: 25px; }
-        .memberMessage { padding: 15px 25px; background-color: blue; color: white; border-radius: 25px; }
+    display: flex;
 
+    .yourMessage {
+      padding: 15px 25px;
+      background-color: red;
+      color: black;
+      border-radius: 25px;
     }
+
+    .memberMessage {
+      padding: 15px 25px;
+      background-color: blue;
+      color: white;
+      border-radius: 25px;
+    }
+
+  }
 
 }
 
 .messages2__Container {
 
-    border: 2px solid #817878;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    color: black;
+  border: 2px solid #817878;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  color: black;
 
-    &.darker {
-        border-color: #817878;
-        background-color: #d5cfcf;
-    }
+  &.darker {
+    border-color: #817878;
+    background-color: #d5cfcf;
+  }
 
-    &::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-    img {
-        float: left;
-        max-width: 60px;
-        width: 100%;
-        margin-right: 20px;
-        border-radius: 50%;
-    }
-    img.right {
-        float: right;
-        margin-left: 20px;
-        margin-right:0;
-    }
-    .time-right {
-        float: right;
-        color: #aaa;
-    }
-    .time-left {
-        float: left;
-        color: #999;
-    }
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+
+  img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right: 0;
+  }
+
+  .time-right {
+    float: right;
+    color: #aaa;
+  }
+
+  .time-left {
+    float: left;
+    color: #999;
+  }
 
 }

@@ -6,39 +6,39 @@ import { User } from 'src/app/shared/models/identity/User';
 
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-    user$: Observable<User>;
+  user$: Observable<User>;
 
-    menuShowed: boolean = false;
+  menuShowed: boolean = false;
 
-    constructor(
-        private userService: UserService,
-        private loginService: LoginService,
-    ) {
-        this.user$ = this.userService.getUser$();
+  constructor(
+    private userService: UserService,
+    private loginService: LoginService,
+  ) {
+    this.user$ = this.userService.getUser$();
+  }
+
+  ngOnInit(): void { }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  openMenu() {
+    this.menuShowed = !this.menuShowed;
+  }
+
+  isMenuShowed() {
+    if (this.menuShowed) {
+      return 'show-menu';
+    } else {
+      return '';
     }
-
-    ngOnInit(): void {}
-
-    logout() {
-        this.loginService.logout();
-    }
-
-    openMenu() {
-        this.menuShowed = !this.menuShowed;
-    }
-
-    isMenuShowed() {
-        if(this.menuShowed) {
-            return 'show-menu';
-        } else {
-            return '';
-        }
-    }
+  }
 
 }

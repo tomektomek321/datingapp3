@@ -8,31 +8,26 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { SharedModule } from 'src/app/shared/libs/shared.module';
 import { SharedInputsModule } from 'src/app/shared/shared-inputs/shared-inputs.module';
 import { ChatMessagesComponent } from './member-detail/chat-messages/chat-messages.component';
-import { FormsModule,  } from '@angular/forms';
-
-
+import { FormsModule, } from '@angular/forms';
 
 @NgModule({
-    declarations: [
-        MembersListComponent,
-        MemberCardComponent,
-        MemberDetailComponent,
-        ChatMessagesComponent,
-    ],
-    imports: [
-        CommonModule,
-        SearchBarModule,
-        AppRoutingModule,
-
-
-        FormsModule,
-
-        SharedModule,
-        SharedInputsModule,
-    ],
-    exports: [
-        MembersListComponent,
-        MemberCardComponent,
-    ]
+  declarations: [
+    MembersListComponent,
+    MemberCardComponent,
+    MemberDetailComponent,
+    ChatMessagesComponent,
+  ],
+  imports: [
+    CommonModule,
+    SearchBarModule,
+    AppRoutingModule,
+    FormsModule,
+    SharedModule,
+    SharedInputsModule,
+  ],
+  exports: [
+    MembersListComponent,
+    MemberCardComponent,
+  ]
 })
 export class MembersListModule { }

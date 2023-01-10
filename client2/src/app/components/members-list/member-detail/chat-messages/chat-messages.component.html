@@ -1,36 +1,30 @@
-
 <div class="card">
 
-    <div class="card-body">
-        <div *ngIf="messages?.length === 0">
-            No messages yet... say hi by using the message box below
+  <div class="card-body">
+    <div *ngIf="messages?.length === 0">
+      No messages yet... say hi by using the message box below
+    </div>
+
+    <ul *ngIf="messages && messages.length > 0" class="chat">
+      <div *ngFor="let message of messages" class="messages2__Container" [ngClass]="[isYourMessage(message)]">
+        <img src="./assets/user.png" alt="Avatar">
+        <p>{{ message.content }}</p>
+        <span [ngClass]="[messageTimeSide(message)]">11:00</span>
+      </div>
+    </ul>
+
+  </div>
+
+  <div class="card-footer">
+    <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+      <div class="input-group">
+        <input name="messageContent" required [(ngModel)]="messageContent" type="text" class="form-control input-sm"
+          placeholder="Send a private message">
+        <div class="input-group-append">
+          <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
         </div>
-
-        <ul *ngIf="messages && messages.length > 0" class="chat">
-            <div *ngFor="let message of messages" class="messages2__Container" [ngClass]="[isYourMessage(message)]">
-                <img src="./assets/user.png" alt="Avatar">
-                <p>{{ message.content }}</p>
-                <span [ngClass]="[messageTimeSide(message)]">11:00</span>
-            </div>
-        </ul>
-
-    </div>
-
-    <div class="card-footer">
-        <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
-            <div class="input-group">
-                <input
-                    name="messageContent"
-                    required
-                    [(ngModel)]="messageContent"
-                    type="text"
-                    class="form-control input-sm"
-                    placeholder="Send a private message">
-                <div class="input-group-append">
-                    <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
-                </div>
-            </div>
-        </form>
-    </div>
+      </div>
+    </form>
+  </div>
 
 </div>

@@ -5,74 +5,74 @@ import { MemberListRequestService } from '../../members-list/services/member-lis
 import { SearchBarService } from '../services/search-bar.service';
 
 @Component({
-    selector: 'app-search-bar',
-    templateUrl: './search-bar.component.html',
-    styleUrls: ['./search-bar.component.scss']
+  selector: 'app-search-bar',
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
 
-    searchUserParams?: SearchUserParams;
+  searchUserParams?: SearchUserParams;
 
-    members: Member[] = [];
+  members: Member[] = [];
 
-    genderList = [{ value: '1', display: 'Males' }, { value: '0', display: 'Females' }];
+  genderList = [{ value: '1', display: 'Males' }, { value: '0', display: 'Females' }];
 
-    constructor(
-        private searchBarService: SearchBarService,
-        private memberListRequestService: MemberListRequestService,
-    ) { }
+  constructor(
+    private searchBarService: SearchBarService,
+    private memberListRequestService: MemberListRequestService,
+  ) { }
 
-    ngOnInit(): void {
-        this.searchBarService.getSearchUserParams$().subscribe( (params_: SearchUserParams) => {
-            this.searchUserParams = params_;
-        });
+  ngOnInit(): void {
+    this.searchBarService.getSearchUserParams$().subscribe((params_: SearchUserParams) => {
+      this.searchUserParams = params_;
+    });
 
-        this.loadMembers();
+    this.loadMembers();
+  }
+
+  loadMembers(): void {
+    this.memberListRequestService.loadMembers();
+  }
+
+  addCity(city_: any): void {
+    if (this.searchUserParams) {
+      this.searchBarService.addCity(city_);
     }
+  }
 
-    loadMembers(): void {
-        this.memberListRequestService.loadMembers();
+  removeCity(city_: any) {
+    this.searchBarService.removeCity(city_);
+  }
+
+
+  addHobby(city_: any): void {
+    if (this.searchUserParams) {
+      this.searchBarService.addHobby(city_);
     }
+  }
 
-    addCity(city_: any): void {
-        if(this.searchUserParams) {
-            this.searchBarService.addCity(city_);
-        }
-    }
+  removeHobby(city_: any) {
+    this.searchBarService.removeHobby(city_);
+  }
 
-    removeCity(city_: any) {
-        this.searchBarService.removeCity(city_);
-    }
+  getNumberOfCities(): number {
+    return this.searchBarService.getNumberOfCities();
+  }
 
+  getNumberOfHobbies(): number {
+    return this.searchBarService.getNumberOfHobbies();
+  }
 
-    addHobby(city_: any): void {
-        if(this.searchUserParams) {
-            this.searchBarService.addHobby(city_);
-        }
-    }
+  closeListOfCities() { this.searchBarService.closeListOfCities(); }
 
-    removeHobby(city_: any) {
-        this.searchBarService.removeHobby(city_);
-    }
+  closeListOfHobbies() { this.searchBarService.closeListOfHobbies(); }
 
-    getNumberOfCities(): number {
-        return this.searchBarService.getNumberOfCities();
-    }
+  openListOfCities() { this.searchBarService.openListOfCities(); }
 
-    getNumberOfHobbies(): number {
-        return this.searchBarService.getNumberOfHobbies();
-    }
+  openListOfHobbies() { this.searchBarService.openListOfHobbies(); }
 
-    closeListOfCities() { this.searchBarService.closeListOfCities(); }
+  isListOfCitiesVisible = () => this.searchBarService.isListOfCitiesVisible();
 
-    closeListOfHobbies() { this.searchBarService.closeListOfHobbies(); }
-
-    openListOfCities() { this.searchBarService.openListOfCities(); }
-
-    openListOfHobbies() { this.searchBarService.openListOfHobbies(); }
-
-    isListOfCitiesVisible = () => this.searchBarService.isListOfCitiesVisible();
-
-    isListOfHobbiesVisible = () => this.searchBarService.isListOfHobbiesVisible();
+  isListOfHobbiesVisible = () => this.searchBarService.isListOfHobbiesVisible();
 
 }

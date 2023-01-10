@@ -3,23 +3,23 @@ import { BehaviorSubject } from 'rxjs';
 import { Member } from 'src/app/shared/models/Member';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class MemberListService {
 
-    searchedMembers: Member[] = [];
+  searchedMembers: Member[] = [];
 
-    searchedMembers$ = new BehaviorSubject<Member[]>(this.searchedMembers);
+  searchedMembers$ = new BehaviorSubject<Member[]>(this.searchedMembers);
 
-    constructor() { }
+  constructor() { }
 
-    setSearchedMembers(members_: Member[]) {
-        this.searchedMembers = members_;
-        this.searchedMembers$.next(this.searchedMembers);
-    }
+  setSearchedMembers(members_: Member[]) {
+    this.searchedMembers = members_;
+    this.searchedMembers$.next(this.searchedMembers);
+  }
 
-    getSearchedMembers = (): Member[] => this.searchedMembers;
+  getSearchedMembers = (): Member[] => this.searchedMembers;
 
-    getSearchedMembers$ = () => this.searchedMembers$.asObservable();
+  getSearchedMembers$ = () => this.searchedMembers$.asObservable();
 
 }
