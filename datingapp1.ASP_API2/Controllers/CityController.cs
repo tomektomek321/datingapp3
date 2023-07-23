@@ -5,6 +5,7 @@ using datingapp1.Application.Functions.Cities;
 using datingapp1.Application.Functions.Cities.Queries.GetCitiesByText;
 using datingapp1.Application.Functions.Cities.Queries.GetAllCities;
 using datingapp1.Application.Functions.Cities.Queries.GetCityById;
+using datingapp1.Application.Functions.Cities.Commands.BasicSeed;
 
 namespace datingapp1.ASP_API2.Controllers;
 
@@ -42,5 +43,17 @@ public class CityController : ControllerBase
 
         return Ok(cities);
     }
+
+    [HttpGet("basicSeed")]
+    public async Task<ActionResult<IEnumerable<City>>> BasicSeed()
+    {
+        var cities = await _mediator.Send(new BasicSeedCitiesCommand());
+
+        return Ok(cities);
+    }
+
+
+
+
 
 }

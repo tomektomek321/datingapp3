@@ -12,8 +12,11 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
 
-    public AppUserRepository(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DatingAppContext dbContext) : base(dbContext)
-    {
+    public AppUserRepository(
+        UserManager<AppUser> userManager, 
+        SignInManager<AppUser> signInManager, 
+        DatingAppContext dbContext
+    ) : base(dbContext) {
         _userManager = userManager;
         _signInManager = signInManager;
     }
@@ -214,6 +217,15 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
             .Include(u => u.City)
             .Where(user_ => user_.Id == UserId)
             .FirstOrDefault();
+
+        return Task.FromResult(user);
+    }
+
+    public Task<AppUser> GetLastUserId()
+    {
+        AppUser user = _userManager.Users
+            .OrderByDescending(u => u.Id)
+            .First();
 
         return Task.FromResult(user);
     }

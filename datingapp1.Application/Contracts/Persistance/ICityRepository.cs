@@ -10,4 +10,5 @@ public interface ICityRepository: IRepository<City>
 {
     List<City> GetCitiesByText(string text);
     City GetCityByName(string text);
+    public Task<bool> BasicSeed();
 }
