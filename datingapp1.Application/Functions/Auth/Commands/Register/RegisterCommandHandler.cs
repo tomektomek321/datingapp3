@@ -15,9 +15,13 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
     private readonly ITokenService _tokenService;
     private readonly UserManager<AppUser> _userManager;
 
-    public RegisterCommandHandler(IAppUserRepository appUserRepository, ICityRepository cityRepository, UserManager<AppUser> userManager,
-        ICountryRepository countryRepository, ITokenService tokenService)
-    {
+    public RegisterCommandHandler(
+        IAppUserRepository appUserRepository, 
+        ICityRepository cityRepository, 
+        UserManager<AppUser> userManager,
+        ICountryRepository countryRepository, 
+        ITokenService tokenService
+    ) {
         _appUserRepository = appUserRepository;
         _cityRepository = cityRepository;
         _countryRepository = countryRepository;

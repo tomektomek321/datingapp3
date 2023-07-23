@@ -17,4 +17,5 @@ public interface IAppUserRepository: IRepository<AppUser>
     Task<AppUser> GetUserWithCity(int UserId);
     public Task<bool> CheckPasswordSignInAsync(AppUser user_, string password_);
     public Task<IdentityResult> RegisterAsync(AppUser user_, string password_);
+    Task<AppUser> GetLastUserId();
 }
