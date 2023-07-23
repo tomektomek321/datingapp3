@@ -1,6 +1,7 @@
 ﻿using datingapp1.Application;
 using datingapp1.Application.Functions.Auth.Commands.Register;
 using datingapp1.Application.Functions.Auth.Queries.Login;
+using datingapp1.Application.Functions.Hobbies.Commands;
 using datingapp1.Application.Functions.Hobbies.Queries.GetHobbiesByTest;
 using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
@@ -28,4 +29,11 @@ public class HobbyController : ControllerBase
         return Ok(hobbies);
     }
 
+    [HttpGet("basicSeed")]
+    public async Task<ActionResult<IEnumerable<City>>> BasicSeed()
+    {
+        var cities = await _mediator.Send(new BasicSeedHobbiesCommand());
+
+        return Ok(cities);
+    }
 }
