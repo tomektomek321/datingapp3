@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using datingapp1.Domain.Entities;
 using datingapp1.Application.Contracts.Persistance;
 
@@ -38,5 +34,27 @@ public class CityRepository : BaseRepository<City>, ICityRepository
             Any(a => a.Name.Equals(name));
 
         return Task.FromResult(matches);
+    }
+
+    public async Task<bool> BasicSeed()
+    {
+        // List<Country> Countries = new List<Country>();
+
+        // Countries.Add(new Country() { Name = "Poland" });
+        // Countries.Add(new Country() { Name = "Germany" });
+        // cities.Add(new City() { Name = "Wroclaw" });
+        // cities.Add(new City() { Name = "Gdynia" });
+        // cities.Add(new City() { Name = "Opole" });
+        // cities.Add(new City() { Name = "Krakow" });
+        // cities.Add(new City() { Name = "Szczecin" });
+        // cities.Add(new City() { Name = "Sopot" });
+        // cities.Add(new City() { Name = "Torun" });
+        // cities.Add(new City() { Name = "Bydgoszcz" });
+        // cities.Add(new City() { Name = "Szczecin" });
+
+        // _dbContext.Countries.AddRange(Countries);
+        // await _dbContext.SaveChangesAsync();
+
+        return true;
     }
 }
