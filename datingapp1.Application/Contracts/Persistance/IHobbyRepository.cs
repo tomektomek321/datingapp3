@@ -10,5 +10,6 @@ namespace datingapp1.Application.Contracts.Persistance;
 public interface IHobbyRepository : IRepository<Hobby>
 {
     List<Hobby> GetHobbiesByText(string text);
+    Task<bool> BasicSeed();
 }
 
