@@ -18,4 +18,5 @@ public interface IAppUserRepository: IRepository<AppUser>
     public Task<bool> CheckPasswordSignInAsync(AppUser user_, string password_);
     public Task<IdentityResult> RegisterAsync(AppUser user_, string password_);
     Task<AppUser> GetLastUserId();
+    Task<AppUser> GetLastUserIdBySex(int s);
 }

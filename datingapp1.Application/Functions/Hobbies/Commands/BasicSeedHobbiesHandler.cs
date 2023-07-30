@@ -9,14 +9,14 @@ namespace datingapp1.Application.Functions.Hobbies.Commands
 
     public BasicSeedHobbiesHandler(IHobbyRepository hobbyRepository)
     {
-        _hobbyRepository = hobbyRepository;
+      _hobbyRepository = hobbyRepository;
     }
     
     public async Task<BaseResponse> Handle(BasicSeedHobbiesCommand request, CancellationToken cancellationToken)
     {
-        var respo = _hobbyRepository.BasicSeed();
+      var respo = _hobbyRepository.BasicSeed();
 
-        return new BaseResponse();
+      return new BaseResponse();
     }
   }
 }

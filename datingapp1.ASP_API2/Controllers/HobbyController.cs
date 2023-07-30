@@ -1,9 +1,6 @@
 ﻿using datingapp1.Application;
-using datingapp1.Application.Functions.Auth.Commands.Register;
-using datingapp1.Application.Functions.Auth.Queries.Login;
 using datingapp1.Application.Functions.Hobbies.Commands;
 using datingapp1.Application.Functions.Hobbies.Queries.GetHobbiesByTest;
-using datingapp1.Domain.Dto;
 using datingapp1.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

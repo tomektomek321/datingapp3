@@ -229,5 +229,17 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
         return Task.FromResult(user);
     }
+
+    public Task<AppUser> GetLastUserIdBySex(int s)
+    {
+        AppUser user = _userManager.Users
+            .OrderByDescending(u => u.Id)
+            .Where(u => u.Gender == s)
+            .First();
+
+        return Task.FromResult(user);
+    }
+
+
 }
 

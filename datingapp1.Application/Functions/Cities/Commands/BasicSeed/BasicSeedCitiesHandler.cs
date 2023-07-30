@@ -26,15 +26,16 @@ namespace datingapp1.Application.Functions.Cities.Commands.BasicSeed
 
         public async Task<BaseResponse> Handle(BasicSeedCitiesCommand request, CancellationToken cancellationToken)
         {
-            var name = "tomek";
-            var namePass = "Tomek";
+            var name = "Ewa";
+            var namePass = "Ewa";
+            var s = 0;
 
             var respo = _cityRepository.BasicSeed();
             var random = new Random();
 
-            var lastUser = await _appUserRepository.GetLastUserId();
+            var lastUser = await _appUserRepository.GetLastUserIdBySex(s);
 
-            for (int i = lastUser.Id; i < (lastUser.Id + 355); i++)
+            for (int i = lastUser.Id; i < (lastUser.Id + 155); i++)
             {
                 var city = await _cityRepository.GetById(random.Next(1, 10));
                 var country = await _countryRepository.GetById(1);
@@ -42,7 +43,7 @@ namespace datingapp1.Application.Functions.Cities.Commands.BasicSeed
                 var user = new AppUser() {
                     UserName = name + "" + i,
                     DateOfBirth = new DateTime(random.Next(1960, 2005), random.Next(1, 12), random.Next(1, 25)),
-                    Gender = 1,
+                    Gender = 0,
                     KnownAs = name + "" + i,
                     EmailConfirmed = true,
                     Email = name + "" + i + "@wp.pl",
