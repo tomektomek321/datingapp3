@@ -10,9 +10,9 @@ import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserPa
 export class SearchBarService {
 
   searchUserParams: SearchUserParams = {
-    gender: 1,
+    gender: 0,
     minAge: 21,
-    maxAge: 21,
+    maxAge: 25,
     cities: [/*
             { id: 1, name: 'Gdansk' },
             { id: 2, name: 'Warszawa' },
