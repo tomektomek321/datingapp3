@@ -50,7 +50,16 @@ public class GetMembersByFilterQueryHandler : IRequestHandler<GetMembersByFilter
 
 
 
-        List<AppUser> users = await _appUserRepository.GetAppUsersByFilter(minDob, maxDob, request.gender, request.orderBy, citiesIds, hobbiesIds);
+        List<AppUser> users = await _appUserRepository.GetAppUsersByFilter(
+            minDob, 
+            maxDob, 
+            request.gender, 
+            request.orderBy, 
+            citiesIds, 
+            hobbiesIds,
+            request.userId,
+            request.userName
+        );
 
         List<MemberDto> returnDto = new List<MemberDto>();
 

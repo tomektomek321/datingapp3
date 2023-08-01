@@ -5,7 +5,7 @@ using datingapp1.Application.Functions.Users.Commands.UpdateUserProfile;
 using datingapp1.Application.Functions.Users.Queries.GetProfile;
 using datingapp1.Application.Functions.Users.Queries.GetProfileByUsername;
 using datingapp1.Domain.Dto;
-using datingapp1.Domain.Entities;
+using datingapp1.Domain.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,10 +23,22 @@ public class MemberController : ControllerBase
     }
 
     [HttpPost("FilterMembers")]
-    public async Task<ActionResult<IEnumerable<List<MemberDto>>>> FilterMembers(GetMembersByFilterQuery _filter)
+    public async Task<ActionResult<IEnumerable<List<MemberDto>>>> FilterMembers(GetMembersByFilterDto _filter)
     {
-        Console.WriteLine(_filter.gender);
-        var users = await _mediator.Send(_filter);
+        var user = User.GetUsername();
+        var userId = User.GetUserId();
+        var query = new GetMembersByFilterQuery() {
+            gender = _filter.gender,
+            minAge = _filter.minAge,
+            maxAge = _filter.maxAge,
+            orderBy = _filter.orderBy,
+            cities = _filter.cities,
+            hobbies = _filter.hobbies,
+            userName = user,
+            userId = userId,
+        };
+
+        var users = await _mediator.Send(query);
 
         return Ok(users);
     }

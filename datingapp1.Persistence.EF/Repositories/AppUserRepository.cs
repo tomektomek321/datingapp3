@@ -66,12 +66,13 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
         int Gender,
         string OrderBy,
         int[] cities,
-        int[] hobbies
+        int[] hobbies,
+        int userId,
+        string UserName
     ) {
         List<AppUser> users = await _userManager.Users
             .Include(user => user.City)
             .Include(user => user.LikedByUsers)
-            //.Include(user => user.UserHobbies)
             .ToListAsync();
 
         var x = users.SelectMany(r => r.LikedUsers, (u, l) => new {
@@ -79,8 +80,9 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
             Liked = l.LikedUser.Email,
         });
 
+
         var a = users.Where(u => 
-            u.LikedByUsers.Where(l => l.LikedUserId == 1).ToList().Count > 0
+            u.LikedByUsers.Where(l => l.LikedUserId == userId).ToList().Count > 0
         );
 
         users = users.Where(user => user.Gender == Gender).ToList();

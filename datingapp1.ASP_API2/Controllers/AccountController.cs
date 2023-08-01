@@ -1,6 +1,7 @@
 ﻿using datingapp1.Application.Functions.Auth.Commands.Register;
 using datingapp1.Application.Functions.Auth.Queries.Login;
 using datingapp1.Domain.Dto;
+using datingapp1.Domain.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ public class AccountController : ControllerBase
     [HttpPost("Register")]
     public async Task<ActionResult<RegisterCommandHandlerResponse<LoginDto>>> Register(RegisterCommand registerCommand)
     {
+        
         var user = await _mediator.Send(registerCommand);
         Console.WriteLine(user);
         return Ok(user);
