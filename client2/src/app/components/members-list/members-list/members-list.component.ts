@@ -17,6 +17,7 @@ export class MembersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.memberListService.searchedMembers$.subscribe(members_ => {
+      console.log(members_);
       this.membersList = members_;
     });
   }

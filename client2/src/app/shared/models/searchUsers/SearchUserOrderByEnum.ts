@@ -1,5 +1,5 @@
 
 export enum SearchUserOrderByEnum {
-    lastACtive = 'lastACtive',
+    lastActive = 'lastActive',
     age = 'age',
 }

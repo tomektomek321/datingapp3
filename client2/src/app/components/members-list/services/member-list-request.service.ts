@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IdName } from 'src/app/shared/models/IdName';
 import { Member } from 'src/app/shared/models/Member';
-import { SearchUserDto } from 'src/app/shared/models/searchUsers/Dtos/SearchUserDto';
+import { SearchUserReqDto } from 'src/app/shared/models/searchUsers/Dtos/SearchUserDto';
 import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserParams';
 import { environment } from 'src/environments/environment';
 import { SearchBarService } from '../../search-bar/services/search-bar.service';
@@ -19,14 +19,14 @@ export class MemberListRequestService {
     private http: HttpClient,
   ) { }
 
-  createFilterParams(): SearchUserDto {
+  createFilterParams(): SearchUserReqDto {
     const params: SearchUserParams = this.searchBarService.getSearchUserParams();
 
     const citiesString = this.createCitiesIdStringForRequest(params.cities);
     const hobbiesString = this.createCitiesIdStringForRequest(params.hobbies);
 
     return {
-      gender: params.gender,
+      gender: typeof(params.gender) == 'number' ? params.gender : parseInt(params.gender) as 1 | 0,
       maxAge: params.maxAge,
       minAge: params.minAge,
       orderBy: params.orderBy,
@@ -37,13 +37,13 @@ export class MemberListRequestService {
 
   loadMembers(): void {
     const filterParams = this.createFilterParams();
-
-    this.http.post<SearchUserDto>(environment.apiUrl + 'Member/FilterMembers', filterParams)
-      .subscribe((response: any) => {
-        const members: Member[] = response.data;
-        console.log(members);
-        this.memberListService.setSearchedMembers(members);
-      });
+    this.http.post<SearchUserReqDto>(
+      environment.apiUrl + 'Member/FilterMembers',
+      filterParams
+    ).subscribe((response: any) => {
+      const members: Member[] = response.data;
+      this.memberListService.setSearchedMembers(members);
+    });
   }
 
   createCitiesIdStringForRequest(cities: IdName[]) {
@@ -56,7 +56,5 @@ export class MemberListRequestService {
     citiesString = citiesString.slice(0, citiesString.length - 1);
 
     return citiesString;
-
   }
-
 }

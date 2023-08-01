@@ -18,7 +18,7 @@ export class SearchBarService {
             { id: 2, name: 'Warszawa' },
     */],
     hobbies: [],
-    orderBy: SearchUserOrderByEnum.lastACtive,
+    orderBy: SearchUserOrderByEnum.lastActive,
   };
 
   listOfCitiesVisible: boolean = false;
@@ -84,7 +84,7 @@ export class SearchBarService {
       maxAge: 50,
       cities: [],
       hobbies: [],
-      orderBy: SearchUserOrderByEnum.lastACtive,
+      orderBy: SearchUserOrderByEnum.lastActive,
     };
 
     this.searchUserParams$.next(this.searchUserParams);
