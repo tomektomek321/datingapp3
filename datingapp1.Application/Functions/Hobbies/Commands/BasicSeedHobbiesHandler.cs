@@ -12,8 +12,10 @@ namespace datingapp1.Application.Functions.Hobbies.Commands
       _hobbyRepository = hobbyRepository;
     }
     
-    public async Task<BaseResponse> Handle(BasicSeedHobbiesCommand request, CancellationToken cancellationToken)
-    {
+    public async Task<BaseResponse> Handle(
+      BasicSeedHobbiesCommand request, 
+      CancellationToken cancellationToken
+    ) {
       var respo = _hobbyRepository.BasicSeed();
 
       return new BaseResponse();

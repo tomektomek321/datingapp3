@@ -60,16 +60,34 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
         throw new NotImplementedException();
     }
 
-    public async Task<List<AppUser>> GetAppUsersByFilter(DateTime MinAge, DateTime MaxAge, int Gender, string OrderBy, int[] cities,  int[] hobbies)
-    {
+    public async Task<List<AppUser>> GetAppUsersByFilter(
+        DateTime MinAge,
+        DateTime MaxAge,
+        int Gender,
+        string OrderBy,
+        int[] cities,
+        int[] hobbies
+    ) {
         List<AppUser> users = await _userManager.Users
             .Include(user => user.City)
+            .Include(user => user.LikedByUsers)
             //.Include(user => user.UserHobbies)
             .ToListAsync();
 
+        var x = users.SelectMany(r => r.LikedUsers, (u, l) => new {
+            user = u.Email,
+            Liked = l.LikedUser.Email,
+        });
+
+        var a = users.Where(u => 
+            u.LikedByUsers.Where(l => l.LikedUserId == 1).ToList().Count > 0
+        );
+
         users = users.Where(user => user.Gender == Gender).ToList();
 
-        users = users.Where(user => user.DateOfBirth > MinAge && user.DateOfBirth <= MaxAge).ToList();
+        users = users.Where(user => 
+            user.DateOfBirth > MinAge && 
+            user.DateOfBirth <= MaxAge).ToList();
 
         if(cities?.Length > 0)
         {
@@ -234,7 +252,7 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
     {
         AppUser user = _userManager.Users
             .OrderByDescending(u => u.Id)
-            .Where(u => u.Gender == s)
+            // .Where(u => u.Gender == s)
             .First();
 
         return Task.FromResult(user);

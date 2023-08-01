@@ -16,7 +16,10 @@ public class LikeRepository: BaseRepository<UserLike>, ILikeRepository
 
     public Task<bool> ToggleLike(int sourceUserId, int targetUserId)
     {
-        bool x = _dbContext.UserLikes.Where(like => like.SourceUserId == sourceUserId && like.LikedUserId == targetUserId).Any();
+        bool x = _dbContext.UserLikes.Where(like =>
+                    like.SourceUserId == sourceUserId 
+                    && like.LikedUserId == targetUserId)
+                .Any();
 
         if(x)
         {

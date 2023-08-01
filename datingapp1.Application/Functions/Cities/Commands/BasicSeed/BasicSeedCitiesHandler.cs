@@ -35,7 +35,7 @@ namespace datingapp1.Application.Functions.Cities.Commands.BasicSeed
 
             var lastUser = await _appUserRepository.GetLastUserIdBySex(s);
 
-            for (int i = lastUser.Id; i < (lastUser.Id + 155); i++)
+            for (int i = lastUser.Id; i < (lastUser.Id + 55); i++)
             {
                 var city = await _cityRepository.GetById(random.Next(1, 10));
                 var country = await _countryRepository.GetById(1);
@@ -43,7 +43,7 @@ namespace datingapp1.Application.Functions.Cities.Commands.BasicSeed
                 var user = new AppUser() {
                     UserName = name + "" + i,
                     DateOfBirth = new DateTime(random.Next(1960, 2005), random.Next(1, 12), random.Next(1, 25)),
-                    Gender = 0,
+                    Gender = s,
                     KnownAs = name + "" + i,
                     EmailConfirmed = true,
                     Email = name + "" + i + "@wp.pl",

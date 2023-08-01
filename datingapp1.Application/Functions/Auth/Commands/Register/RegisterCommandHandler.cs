@@ -29,8 +29,10 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterC
         _userManager = userManager;
     }
 
-    public async Task<RegisterCommandHandlerResponse<LoginDto>> Handle(RegisterCommand request, CancellationToken cancellationToken)
-    {
+    public async Task<RegisterCommandHandlerResponse<LoginDto>> Handle(
+        RegisterCommand request, 
+        CancellationToken cancellationToken
+    ) {
         bool userExists = await _appUserRepository.DoesUserNameAlreadyExists(request.Username);
         if (userExists) return new RegisterCommandHandlerResponse<LoginDto>("User already exists", false);
 
