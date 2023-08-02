@@ -3,59 +3,59 @@ using datingapp1.Domain.Entities;
 
 namespace datingapp1.Persistence.EF.Repositories;
 
-public class LikeRepository: BaseRepository<UserLike>, ILikeRepository
+public class LikeRepository : BaseRepository<UserLike>, ILikeRepository
 {
-    public LikeRepository(DatingAppContext dbContext) : base(dbContext)
-    { }
+  public LikeRepository(DatingAppContext dbContext) : base(dbContext)
+  { }
 
-    public Task<bool> ToggleLike(int sourceUserId, int targetUserId)
+  public Task<bool> ToggleLike(int sourceUserId, int targetUserId)
+  {
+    bool x = _dbContext.UserLikes.Where(like =>
+                like.SourceUserId == sourceUserId
+                && like.LikedUserId == targetUserId)
+            .Any();
+
+    if (x)
     {
-        bool x = _dbContext.UserLikes.Where(like =>
-                    like.SourceUserId == sourceUserId 
-                    && like.LikedUserId == targetUserId)
-                .Any();
-
-        if(x)
-        {
-            _dbContext.UserLikes.Remove(new UserLike()
-            {
-                SourceUserId = sourceUserId,
-                LikedUserId = targetUserId
-            });
-        }
-        else
-        {
-            _dbContext.UserLikes.Add(new UserLike()
-            {
-                SourceUserId = sourceUserId,
-                LikedUserId = targetUserId
-            });
-        }
-
-        return Task.FromResult(_dbContext.SaveChanges() > 0);
+      _dbContext.UserLikes.Remove(new UserLike()
+      {
+        SourceUserId = sourceUserId,
+        LikedUserId = targetUserId
+      });
+    }
+    else
+    {
+      _dbContext.UserLikes.Add(new UserLike()
+      {
+        SourceUserId = sourceUserId,
+        LikedUserId = targetUserId
+      });
     }
 
-    /*public Task<List<MemberDto>> GetLikedMembers(int UserId)
-    {
-        var users = _dbContext.UserLikes.Where(like_ => like_.SourceUserId == UserId).ToList();
+    return Task.FromResult(_dbContext.SaveChanges() > 0);
+  }
 
-        List<MemberDto> returnMembers = new List<MemberDto>();
+  /*public Task<List<MemberDto>> GetLikedMembers(int UserId)
+  {
+      var users = _dbContext.UserLikes.Where(like_ => like_.SourceUserId == UserId).ToList();
 
-        foreach (var user in users)
-        {
-            returnMembers.Add(new MemberDto()
-            {
-                Id = user.I
-            }
-        }
+      List<MemberDto> returnMembers = new List<MemberDto>();
 
-
-
-        return Task.FromResult(users);
-
+      foreach (var user in users)
+      {
+          returnMembers.Add(new MemberDto()
+          {
+              Id = user.I
+          }
+      }
 
 
-        throw new NotImplementedException();
-    }*/
+
+      return Task.FromResult(users);
+
+
+
+      throw new NotImplementedException();
+  }*/
 }
 

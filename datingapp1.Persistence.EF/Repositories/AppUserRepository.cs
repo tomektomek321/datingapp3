@@ -72,9 +72,9 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
     string UserName
   ) {
     List<AppUser> users = await _userManager.Users
-        .Include(user => user.City)
-        .Include(user => user.LikedByUsers)
-        .ToListAsync();
+      .Include(user => user.City)
+      .Include(user => user.LikedByUsers)
+      .ToListAsync();
 
     var x = users.SelectMany(r => r.LikedUsers, (u, l) => new
     {
@@ -85,8 +85,8 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
     users = users.Where(user => user.Gender == Gender).ToList();
 
     users = users.Where(user =>
-        user.DateOfBirth > MinAge &&
-        user.DateOfBirth <= MaxAge).ToList();
+      user.DateOfBirth > MinAge &&
+      user.DateOfBirth <= MaxAge).ToList();
 
     if (cities?.Length > 0)
     {

@@ -1,47 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { LikesGatewayService } from 'src/app/domains/likes/likes-gateway.service';
-import { UserManagerService } from 'src/app/infrastructure/identity/user-manager.service';
 import { UserService } from 'src/app/infrastructure/identity/user.service';
-import { Member } from 'src/app/shared/models/Member';
-import { environment } from 'src/environments/environment';
+import { FilteredMembersService } from './filtered-members.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LikedMembersService {
-
-  likedMembers: Member[] = [];
-
-  likedMembers$ = new BehaviorSubject<Member[]>(this.likedMembers);
+export class RateMemberManagerService {
 
   constructor(
-    private http: HttpClient,
     private userService: UserService,
-    private userManagerService: UserManagerService,
     private likesGatewayService: LikesGatewayService,
-  ) {
-
-  }
-
-  setLikedMembers(members_: Member[]) {
-    this.likedMembers = members_;
-    this.likedMembers$.next(this.likedMembers);
-  }
-
-  getLikedMembers = (): Member[] => this.likedMembers;
-
-  getLikedMembers$ = () => this.likedMembers$.asObservable();
-
-  fetchLikedMembers() {
-    const userId = this.userService.getUser().id;
-
-    this.http.post(environment.apiUrl + 'Member/GetLikedMembers', { userId })
-    .subscribe((response: any) => {
-      this.setLikedMembers(response.data);
-    });
-  }
+    private filteredMembersService: FilteredMembersService,
+  ) { }
 
   toggleLike(memberId: number): void {
     const user = this.userService.getUser();
@@ -53,7 +24,15 @@ export class LikedMembersService {
       targetUserId: memberId
     }).subscribe((response: any) => {
       if (response.success) {
-        this.userManagerService.toggleLike(memberId);
+        // this.userManagerService.toggleLike(memberId);
+        debugger;
+        const members = this.filteredMembersService.getFilteredMembers();
+
+        members.shift();
+
+        this.filteredMembersService.setFilteredMembers(members);
+
+
         //this.toastr.success("Userlike toggled");
       } else {
         //this.toastr.error("Something bad happened.");

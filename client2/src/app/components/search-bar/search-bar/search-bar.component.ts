@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/shared/models/Member';
 import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserParams';
-import { MemberListRequestService } from '../../members-list/services/member-list-request.service';
+import { FilteredMembersRequestService } from '../../members-list/services/filtered-members-request.service';
 import { SearchBarService } from '../services/search-bar.service';
 
 @Component({
@@ -19,11 +19,12 @@ export class SearchBarComponent implements OnInit {
 
   constructor(
     private searchBarService: SearchBarService,
-    private memberListRequestService: MemberListRequestService,
+    private filteredMembersRequestService: FilteredMembersRequestService,
   ) { }
 
   ngOnInit(): void {
-    this.searchBarService.getSearchUserParams$().subscribe((params_: SearchUserParams) => {
+    this.searchBarService.getSearchUserParams$()
+    .subscribe((params_: SearchUserParams) => {
       this.searchUserParams = params_;
     });
 
@@ -31,7 +32,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   loadMembers(): void {
-    this.memberListRequestService.loadMembers();
+    this.filteredMembersRequestService.loadMembers();
   }
 
   addCity(city_: any): void {
