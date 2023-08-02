@@ -11,8 +11,8 @@ export class SearchBarService {
 
   searchUserParams: SearchUserParams = {
     gender: 0,
-    minAge: 21,
-    maxAge: 25,
+    minAge: 28,
+    maxAge: 33,
     cities: [/*
             { id: 1, name: 'Gdansk' },
             { id: 2, name: 'Warszawa' },

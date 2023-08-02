@@ -59,18 +59,5 @@ export class LikedMembersService {
         //this.toastr.error("Something bad happened.");
       }
     })
-
-    /*this.http.post(environment.apiUrl + 'Like/LikeUser', {
-      sourceUserId: userId,
-      targetUserId: memberId
-    }).subscribe((response: any) => {
-      console.log(response)
-      if (response.success) {
-        this.userManagerService.toggleLike(memberId);
-        //this.toastr.success("Userlike toggled");
-      } else {
-        //this.toastr.error("Something bad happened.");
-      }
-    })*/
   }
 }

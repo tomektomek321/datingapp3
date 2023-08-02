@@ -17,39 +17,19 @@ export class RateMemberManagerService {
   toggleLike(memberId: number): void {
     const user = this.userService.getUser();
     const userId = user.id;
-    console.log(user);
 
     this.likesGatewayService.likeMember({
       sourceUserId: userId,
       targetUserId: memberId
     }).subscribe((response: any) => {
       if (response.success) {
-        // this.userManagerService.toggleLike(memberId);
-        debugger;
         const members = this.filteredMembersService.getFilteredMembers();
-
         members.shift();
-
         this.filteredMembersService.setFilteredMembers(members);
-
-
         //this.toastr.success("Userlike toggled");
       } else {
         //this.toastr.error("Something bad happened.");
       }
     })
-
-    /*this.http.post(environment.apiUrl + 'Like/LikeUser', {
-      sourceUserId: userId,
-      targetUserId: memberId
-    }).subscribe((response: any) => {
-      console.log(response)
-      if (response.success) {
-        this.userManagerService.toggleLike(memberId);
-        //this.toastr.success("Userlike toggled");
-      } else {
-        //this.toastr.error("Something bad happened.");
-      }
-    })*/
   }
 }

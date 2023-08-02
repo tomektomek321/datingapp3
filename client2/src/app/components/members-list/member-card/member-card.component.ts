@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserManagerService } from 'src/app/infrastructure/identity/user-manager.service';
 import { Member } from 'src/app/shared/models/Member';
-import { LikedMembersService } from '../../likes-list/services/liked-members.service';
 import { RateMemberManagerService } from '../../likes-list/services/rate-member-manager.service';
 
 @Component({
