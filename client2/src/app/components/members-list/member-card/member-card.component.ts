@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserManagerService } from 'src/app/infrastructure/identity/user-manager.service';
 import { Member } from 'src/app/shared/models/Member';
-import { LikedMembersService } from '../../likes-list/services/liked-members.service';
+import { RateMemberManagerService } from '../../likes-list/services/rate-member-manager.service';
 
 @Component({
   selector: 'app-member-card',
@@ -14,13 +14,13 @@ export class MemberCardComponent implements OnInit {
 
   constructor(
     private userManagerService: UserManagerService,
-    private likedMembersService: LikedMembersService,
+    private rateMemberManagerService: RateMemberManagerService,
   ) { }
 
   ngOnInit(): void { }
 
-  toggleLike() {
-    this.likedMembersService.toggleLike(this.member.id);
+  toggleLike(isLiked: boolean) {
+    this.rateMemberManagerService.toggleLike(this.member.id, isLiked);
   }
 
   isLikedByUser = (): string => this.userManagerService.isLikedByUser(this.member.id) ? "btn-success" : "btn-primary";

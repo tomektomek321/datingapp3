@@ -1,32 +1,31 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IdName } from 'src/app/shared/models/IdName';
 import { Member } from 'src/app/shared/models/Member';
-import { SearchUserDto } from 'src/app/shared/models/searchUsers/Dtos/SearchUserDto';
+import { SearchUserReqDto } from 'src/app/shared/models/searchUsers/Dtos/SearchUserDto';
 import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserParams';
-import { environment } from 'src/environments/environment';
 import { SearchBarService } from '../../search-bar/services/search-bar.service';
-import { MemberListService } from './member-list.service';
+import { FilteredMembersGatewayService } from 'src/app/domains/filtered-members/filtered-members-gateway.service';
+import { FilteredMembersService } from '../../likes-list/services/filtered-members.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MemberListRequestService {
+export class FilteredMembersRequestService {
 
   constructor(
     private searchBarService: SearchBarService,
-    private memberListService: MemberListService,
-    private http: HttpClient,
+    private memberListService: FilteredMembersService,
+    private filteredMembersGatewayService: FilteredMembersGatewayService,
   ) { }
 
-  createFilterParams(): SearchUserDto {
+  createFilterParams(): SearchUserReqDto {
     const params: SearchUserParams = this.searchBarService.getSearchUserParams();
 
     const citiesString = this.createCitiesIdStringForRequest(params.cities);
     const hobbiesString = this.createCitiesIdStringForRequest(params.hobbies);
 
     return {
-      gender: params.gender,
+      gender: typeof(params.gender) == 'number' ? params.gender : parseInt(params.gender) as 1 | 0,
       maxAge: params.maxAge,
       minAge: params.minAge,
       orderBy: params.orderBy,
@@ -38,12 +37,11 @@ export class MemberListRequestService {
   loadMembers(): void {
     const filterParams = this.createFilterParams();
 
-    this.http.post<SearchUserDto>(environment.apiUrl + 'Member/FilterMembers', filterParams)
-      .subscribe((response: any) => {
-        const members: Member[] = response.data;
-        console.log(members);
-        this.memberListService.setSearchedMembers(members);
-      });
+    this.filteredMembersGatewayService.fetchFilteredMembers(filterParams)
+    .subscribe((response: any) => {
+      const members: Member[] = response.data;
+      this.memberListService.setFilteredMembers(members);
+    });
   }
 
   createCitiesIdStringForRequest(cities: IdName[]) {
@@ -56,7 +54,5 @@ export class MemberListRequestService {
     citiesString = citiesString.slice(0, citiesString.length - 1);
 
     return citiesString;
-
   }
-
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/shared/models/Member';
-import { MemberListService } from '../services/member-list.service';
+import { FilteredMembersService } from '../../likes-list/services/filtered-members.service';
 
 @Component({
   selector: 'app-members-list',
@@ -12,11 +12,13 @@ export class MembersListComponent implements OnInit {
   membersList: Member[] = [];
 
   constructor(
-    private memberListService: MemberListService,
+    private filteredMembersService: FilteredMembersService,
   ) { }
 
   ngOnInit(): void {
-    this.memberListService.searchedMembers$.subscribe(members_ => {
+    this.filteredMembersService.getFilteredMembers$()
+    .subscribe((members_: Member[]) => {
+      console.log(members_);
       this.membersList = members_;
     });
   }

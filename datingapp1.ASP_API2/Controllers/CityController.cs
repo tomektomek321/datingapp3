@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using datingapp1.Domain.Entities;
-using datingapp1.Application.Functions.Cities;
 using datingapp1.Application.Functions.Cities.Queries.GetCitiesByText;
 using datingapp1.Application.Functions.Cities.Queries.GetAllCities;
 using datingapp1.Application.Functions.Cities.Queries.GetCityById;

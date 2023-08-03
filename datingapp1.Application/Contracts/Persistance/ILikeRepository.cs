@@ -8,6 +8,6 @@ namespace datingapp1.Application.Contracts.Persistance
 {
     public interface ILikeRepository
     {
-        Task<bool> ToggleLike(int sourceUserId, int targetUserId);
+        Task<bool> ToggleLike(int sourceUserId, int targetUserId, bool IsLiked);
     }
 }

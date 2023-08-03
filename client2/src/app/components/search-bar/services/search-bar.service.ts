@@ -10,15 +10,15 @@ import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserPa
 export class SearchBarService {
 
   searchUserParams: SearchUserParams = {
-    gender: 1,
-    minAge: 21,
-    maxAge: 21,
+    gender: 0,
+    minAge: 32,
+    maxAge: 37,
     cities: [/*
             { id: 1, name: 'Gdansk' },
             { id: 2, name: 'Warszawa' },
     */],
     hobbies: [],
-    orderBy: SearchUserOrderByEnum.lastACtive,
+    orderBy: SearchUserOrderByEnum.lastActive,
   };
 
   listOfCitiesVisible: boolean = false;
@@ -84,7 +84,7 @@ export class SearchBarService {
       maxAge: 50,
       cities: [],
       hobbies: [],
-      orderBy: SearchUserOrderByEnum.lastACtive,
+      orderBy: SearchUserOrderByEnum.lastActive,
     };
 
     this.searchUserParams$.next(this.searchUserParams);
