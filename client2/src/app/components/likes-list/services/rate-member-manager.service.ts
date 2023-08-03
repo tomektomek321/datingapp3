@@ -31,6 +31,6 @@ export class RateMemberManagerService {
       } else {
         //this.toastr.error("Something bad happened.");
       }
-    })
+    });
   }
 }

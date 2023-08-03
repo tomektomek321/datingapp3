@@ -5,7 +5,7 @@ import { SearchUserOrderByEnum } from 'src/app/shared/models/searchUsers/SearchU
 import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserParams';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchBarService {
 
@@ -21,13 +21,11 @@ export class SearchBarService {
     orderBy: SearchUserOrderByEnum.lastActive,
   };
 
-  listOfCitiesVisible: boolean = false;
+  listOfCitiesVisible = false;
 
-  listOfHobbiesVisible: boolean = false;
+  listOfHobbiesVisible = false;
 
   searchUserParams$ = new BehaviorSubject<SearchUserParams>(this.searchUserParams);
-
-  constructor() { }
 
   getSearchUserParams = (): SearchUserParams => this.searchUserParams;
 
@@ -36,7 +34,7 @@ export class SearchBarService {
   addCity(city_: IdName): void {
     const added = this.searchUserParams.cities.filter(item => item.id == city_.id);
     if (added.length > 0) {
-      console.log("Already added");
+      console.log('Already added');
       return;
     }
 
@@ -58,7 +56,7 @@ export class SearchBarService {
   addHobby(city_: IdName): void {
     const added = this.searchUserParams.hobbies.filter(item => item.id == city_.id);
     if (added.length > 0) {
-      console.log("Already added");
+      console.log('Already added');
       return;
     }
 
@@ -111,10 +109,6 @@ export class SearchBarService {
     this.listOfCitiesVisible = false;
     this.listOfHobbiesVisible = true;
   }
-
-
-
-
 
   isListOfCitiesVisible = () => this.listOfCitiesVisible;
 

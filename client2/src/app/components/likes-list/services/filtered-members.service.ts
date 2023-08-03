@@ -11,8 +11,6 @@ export class FilteredMembersService {
 
   filteredMembers$ = new BehaviorSubject<Member[]>(this.filteredMembers);
 
-  constructor() { }
-
   setFilteredMembers(members_: Member[]) {
     this.filteredMembers = members_;
     this.filteredMembers$.next(this.filteredMembers);
@@ -21,8 +19,4 @@ export class FilteredMembersService {
   getFilteredMembers = (): Member[] => this.filteredMembers;
 
   getFilteredMembers$ = () => this.filteredMembers$.asObservable();
-
-
-
-
 }

@@ -7,7 +7,7 @@ import { SearchBarService } from '../services/search-bar.service';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss']
+  styleUrls: [ './search-bar.component.scss' ],
 })
 export class SearchBarComponent implements OnInit {
 
@@ -15,7 +15,7 @@ export class SearchBarComponent implements OnInit {
 
   members: Member[] = [];
 
-  genderList = [{ value: '1', display: 'Males' }, { value: '0', display: 'Females' }];
+  genderList = [ { value: '1', display: 'Males' }, { value: '0', display: 'Females' } ];
 
   constructor(
     private searchBarService: SearchBarService,
@@ -24,9 +24,9 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchBarService.getSearchUserParams$()
-    .subscribe((params_: SearchUserParams) => {
-      this.searchUserParams = params_;
-    });
+      .subscribe((params_: SearchUserParams) => {
+        this.searchUserParams = params_;
+      });
 
     this.loadMembers();
   }
