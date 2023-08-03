@@ -55,9 +55,9 @@ export class MemberDetailComponent implements OnInit {
   }
 
   toggleLike() {
-    if (this.member) {
-      this.likedMembersService.toggleLike(this.member.id);
-    }
+    // if (this.member) {
+    //   this.likedMembersService.toggleLike(this.member.id);
+    // }
   }
 
   isUserLiked(): string {

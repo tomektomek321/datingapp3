@@ -19,8 +19,8 @@ export class MemberCardComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  toggleLike() {
-    this.rateMemberManagerService.toggleLike(this.member.id);
+  toggleLike(isLiked: boolean) {
+    this.rateMemberManagerService.toggleLike(this.member.id, isLiked);
   }
 
   isLikedByUser = (): string => this.userManagerService.isLikedByUser(this.member.id) ? "btn-success" : "btn-primary";

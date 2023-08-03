@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 interface ILikeMemberPayload {
   sourceUserId: number;
   targetUserId: number;
+  isLiked: boolean;
 }
 
 @Injectable({

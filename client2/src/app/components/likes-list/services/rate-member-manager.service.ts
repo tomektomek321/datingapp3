@@ -14,13 +14,14 @@ export class RateMemberManagerService {
     private filteredMembersService: FilteredMembersService,
   ) { }
 
-  toggleLike(memberId: number): void {
+  toggleLike(memberId: number, isLiked: boolean): void {
     const user = this.userService.getUser();
     const userId = user.id;
 
     this.likesGatewayService.likeMember({
       sourceUserId: userId,
-      targetUserId: memberId
+      targetUserId: memberId,
+      isLiked
     }).subscribe((response: any) => {
       if (response.success) {
         const members = this.filteredMembersService.getFilteredMembers();
