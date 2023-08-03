@@ -11,5 +11,6 @@ public class ToggleLikeUserCommand: IRequest<ToggleLikeUserCommandResponse>
 {
     public int SourceUserId { get; set; }
     public int TargetUserId { get; set; }
+    public bool IsLiked { get; set; }
 }
 

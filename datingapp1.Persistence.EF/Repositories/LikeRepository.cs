@@ -8,7 +8,7 @@ public class LikeRepository : BaseRepository<UserLike>, ILikeRepository
   public LikeRepository(DatingAppContext dbContext) : base(dbContext)
   { }
 
-  public Task<bool> ToggleLike(int sourceUserId, int targetUserId)
+  public Task<bool> ToggleLike(int sourceUserId, int targetUserId, bool IsLiked)
   {
     bool x = _dbContext.UserLikes.Where(like =>
                 like.SourceUserId == sourceUserId
@@ -28,7 +28,8 @@ public class LikeRepository : BaseRepository<UserLike>, ILikeRepository
       _dbContext.UserLikes.Add(new UserLike()
       {
         SourceUserId = sourceUserId,
-        LikedUserId = targetUserId
+        LikedUserId = targetUserId,
+        IsLiked = IsLiked,
       });
     }
 

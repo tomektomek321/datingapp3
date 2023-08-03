@@ -9,7 +9,7 @@ namespace datingapp1.Persistence.EF.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "isLiked",
+                name: "IsLiked",
                 table: "UserLikes",
                 type: "boolean",
                 nullable: false,
@@ -19,7 +19,7 @@ namespace datingapp1.Persistence.EF.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "isLiked",
+                name: "IsLiked",
                 table: "UserLikes");
         }
     }

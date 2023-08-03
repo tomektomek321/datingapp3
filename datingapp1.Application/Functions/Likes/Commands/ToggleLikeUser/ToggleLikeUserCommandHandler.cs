@@ -17,7 +17,7 @@ public class ToggleLikeUserCommandHandler : IRequestHandler<ToggleLikeUserComman
       CancellationToken cancellationToken
   )
   {
-    bool isLiked = await _likeRepository.ToggleLike(request.SourceUserId, request.TargetUserId);
+    bool isLiked = await _likeRepository.ToggleLike(request.SourceUserId, request.TargetUserId, request.IsLiked);
 
     if (isLiked) return new ToggleLikeUserCommandResponse();
 

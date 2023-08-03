@@ -283,6 +283,9 @@ namespace datingapp1.Persistence.EF.Migrations
                     b.Property<int>("LikedUserId")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("IsLiked")
+                        .HasColumnType("boolean");
+
                     b.HasKey("SourceUserId", "LikedUserId");
 
                     b.HasIndex("LikedUserId");

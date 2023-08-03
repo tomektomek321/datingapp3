@@ -10,5 +10,6 @@ public class UserLike
     [JsonIgnore]
     public AppUser LikedUser { get; set; }
     public int LikedUserId { get; set; }
+    public bool IsLiked { get; set; }
 }
 
