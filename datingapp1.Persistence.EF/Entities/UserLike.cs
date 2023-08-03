@@ -12,5 +12,6 @@ public class UserLike
     public int SourceUserId { get; set; }
     public AppUser LikedUser { get; set; }
     public int LikedUserId { get; set; }
+    public bool IsLiked { get; set; }
 }
 
