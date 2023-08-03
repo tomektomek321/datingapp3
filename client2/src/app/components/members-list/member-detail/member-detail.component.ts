@@ -3,14 +3,13 @@ import { Member } from 'src/app/shared/models/Member';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { NgxGalleryOptions, NgxGalleryImage } from '@kolkov/ngx-gallery';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserManagerService } from 'src/app/infrastructure/identity/user-manager.service';
-import { LikedMembersService } from '../../likes-list/services/liked-members.service';
 
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
-  styleUrls: ['./member-detail.component.scss']
+  styleUrls: [ './member-detail.component.scss' ],
 })
 export class MemberDetailComponent implements OnInit {
   @ViewChild('memberTabs', { static: true }) memberTabs!: TabsetComponent;
@@ -19,30 +18,24 @@ export class MemberDetailComponent implements OnInit {
   galleryImages?: NgxGalleryImage[];
   activeTab?: TabDirective;
 
-  chatOpened: boolean = false;
-  //messages: Message[] = [];
+  chatOpened = false;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private userManagerService: UserManagerService,
-    private likedMembersService: LikedMembersService,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
+    const Username = this.router.url.split('/')[2];
 
-    const Username = this.router.url.split("/")[2];
-
-    this.http.post('https://localhost:7089/Member/GetUserProfileByUsername', { Username }).subscribe((response: any) => {
-      console.log(response);
-      this.member = response.data;
-      this.memberTabs.tabs[1].active = true;
-    });
-
+    this.http.post('https://localhost:7089/Member/GetUserProfileByUsername', { Username })
+      .subscribe((response: any) => {
+        console.log(response);
+        this.member = response.data;
+        this.memberTabs.tabs[1].active = true;
+      });
   }
-
 
   onTabActivated(num: number) {
     if (num == 1) { this.chatOpened = true; }
@@ -63,10 +56,10 @@ export class MemberDetailComponent implements OnInit {
   isUserLiked(): string {
     if (this.member) {
       const liked = this.userManagerService.isLikedByUser(this.member.id);
-      return liked ? "Unlike" : "Like";
+
+      return liked ? 'Unlike' : 'Like';
     }
 
-    return "Like";
+    return 'Like';
   }
-
 }

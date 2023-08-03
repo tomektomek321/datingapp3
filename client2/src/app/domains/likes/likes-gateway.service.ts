@@ -9,10 +9,9 @@ interface ILikeMemberPayload {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LikesGatewayService {
-
   constructor(private readonly http: HttpClient) { }
 
   public likeMember(payload: ILikeMemberPayload) {

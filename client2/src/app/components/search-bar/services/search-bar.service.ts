@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { UserService } from 'src/app/infrastructure/identity/user.service';
 import { IdName } from 'src/app/shared/models/IdName';
+import { User } from 'src/app/shared/models/identity/User';
 import { SearchUserOrderByEnum } from 'src/app/shared/models/searchUsers/SearchUserOrderByEnum';
 import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserParams';
 
@@ -8,7 +10,6 @@ import { SearchUserParams } from 'src/app/shared/models/searchUsers/SearchUserPa
   providedIn: 'root',
 })
 export class SearchBarService {
-
   searchUserParams: SearchUserParams = {
     gender: 0,
     minAge: 32,
@@ -20,6 +21,17 @@ export class SearchBarService {
     hobbies: [],
     orderBy: SearchUserOrderByEnum.lastActive,
   };
+
+  constructor(
+    private readonly userService: UserService,
+  ) {
+    this.userService.getUser$().subscribe((user: User) => {
+      if (user.id && user.gender !== undefined) {
+        this.searchUserParams.gender = user.gender.toString() == '1' ? 0 : 1;
+        this.searchUserParams$.next(this.searchUserParams);
+      }
+    });
+  }
 
   listOfCitiesVisible = false;
 
@@ -33,8 +45,10 @@ export class SearchBarService {
 
   addCity(city_: IdName): void {
     const added = this.searchUserParams.cities.filter(item => item.id == city_.id);
+
     if (added.length > 0) {
       console.log('Already added');
+
       return;
     }
 
@@ -44,19 +58,21 @@ export class SearchBarService {
 
   removeCity(city_: IdName): void {
     const added = this.searchUserParams.cities.filter(item => item.id != city_.id);
+
     if (added.length == 0) {
       this.listOfCitiesVisible = false;
     }
 
     this.searchUserParams.cities = added;
     this.searchUserParams$.next(this.searchUserParams);
-
   }
 
   addHobby(city_: IdName): void {
     const added = this.searchUserParams.hobbies.filter(item => item.id == city_.id);
+
     if (added.length > 0) {
       console.log('Already added');
+
       return;
     }
 
@@ -66,13 +82,13 @@ export class SearchBarService {
 
   removeHobby(city_: IdName): void {
     const added = this.searchUserParams.hobbies.filter(item => item.id != city_.id);
+
     if (added.length == 0) {
       this.listOfHobbiesVisible = false;
     }
 
     this.searchUserParams.hobbies = added;
     this.searchUserParams$.next(this.searchUserParams);
-
   }
 
   resetParams(): void {

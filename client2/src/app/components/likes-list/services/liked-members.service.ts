@@ -6,18 +6,14 @@ import { Member } from 'src/app/shared/models/Member';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LikedMembersService {
-
   likedMembers: Member[] = [];
 
   likedMembers$ = new BehaviorSubject<Member[]>(this.likedMembers);
 
-  constructor(
-    private http: HttpClient,
-    private userService: UserService,
-  ) { }
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   setLikedMembers(members_: Member[]) {
     this.likedMembers = members_;

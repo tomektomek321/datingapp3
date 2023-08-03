@@ -10,12 +10,14 @@ import { SearchBarService } from '../services/search-bar.service';
   styleUrls: [ './search-bar.component.scss' ],
 })
 export class SearchBarComponent implements OnInit {
-
   searchUserParams?: SearchUserParams;
 
   members: Member[] = [];
 
-  genderList = [ { value: '1', display: 'Males' }, { value: '0', display: 'Females' } ];
+  genderList = [
+    { value: '1', display: 'Males' },
+    { value: '0', display: 'Females' },
+  ];
 
   constructor(
     private searchBarService: SearchBarService,
@@ -44,7 +46,6 @@ export class SearchBarComponent implements OnInit {
   removeCity(city_: any) {
     this.searchBarService.removeCity(city_);
   }
-
 
   addHobby(city_: any): void {
     if (this.searchUserParams) {
@@ -75,5 +76,4 @@ export class SearchBarComponent implements OnInit {
   isListOfCitiesVisible = () => this.searchBarService.isListOfCitiesVisible();
 
   isListOfHobbiesVisible = () => this.searchBarService.isListOfHobbiesVisible();
-
 }

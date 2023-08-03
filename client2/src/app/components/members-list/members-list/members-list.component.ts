@@ -8,7 +8,6 @@ import { FilteredMembersService } from '../../likes-list/services/filtered-membe
   styleUrls: [ './members-list.component.scss' ],
 })
 export class MembersListComponent implements OnInit {
-
   membersList: Member[] = [];
 
   constructor(

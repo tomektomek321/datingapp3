@@ -15,6 +15,6 @@ import { SharedInputsModule } from 'src/app/shared/shared-inputs/shared-inputs.m
   ],
   exports: [
     SearchBarComponent,
-  ]
+  ],
 })
 export class SearchBarModule { }

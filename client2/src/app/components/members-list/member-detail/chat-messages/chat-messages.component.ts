@@ -7,10 +7,9 @@ import { MessagesManagerService } from '../../services/messages-manager.service'
 @Component({
   selector: 'app-chat-messages',
   templateUrl: './chat-messages.component.html',
-  styleUrls: ['./chat-messages.component.scss']
+  styleUrls: [ './chat-messages.component.scss' ],
 })
 export class ChatMessagesComponent implements OnInit {
-
   @ViewChild('messageForm') messageForm?: NgForm;
 
   @Input('username') username?: string;
@@ -35,7 +34,6 @@ export class ChatMessagesComponent implements OnInit {
   }
 
   sendMessage() {
-
     if (this.username && this.messageContent) {
       this.messagesManagerService.sendMessage(this.username, this.messageContent).subscribe((message: any) => {
         if (this.messageContent) {
@@ -43,7 +41,6 @@ export class ChatMessagesComponent implements OnInit {
         }
         this.messageForm && this.messageForm.reset();
       });
-
     }
   }
 
@@ -54,13 +51,13 @@ export class ChatMessagesComponent implements OnInit {
       const userUsername = user.username;
 
       if (userUsername == message_.senderUsername) {
-        return "darker";
+        return 'darker';
       } else if (this.username == message_.senderUsername) {
-        return "";
+        return '';
       }
     }
 
-    return "somethingWrong";
+    return 'somethingWrong';
   }
 
   messageTimeSide(message_: Message) {
@@ -70,13 +67,12 @@ export class ChatMessagesComponent implements OnInit {
       const userUsername = user.username;
 
       if (userUsername == message_.senderUsername) {
-        return "time-left";
+        return 'time-left';
       } else if (this.username == message_.senderUsername) {
-        return "time-right";
+        return 'time-right';
       }
     }
 
-    return "somethingWrong";
+    return 'somethingWrong';
   }
-
 }

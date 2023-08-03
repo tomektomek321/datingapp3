@@ -9,7 +9,6 @@ import { RateMemberManagerService } from '../../likes-list/services/rate-member-
   styleUrls: [ './member-card.component.scss' ],
 })
 export class MemberCardComponent {
-
   @Input() member!: Member;
 
   constructor(
