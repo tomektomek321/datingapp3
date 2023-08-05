@@ -6,10 +6,9 @@ import { Member } from 'src/app/shared/models/Member';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LikedByMembersService {
-
   likedByMembers: Member[] = [];
 
   likedByMembers$ = new BehaviorSubject<Member[]>(this.likedByMembers);
@@ -31,13 +30,11 @@ export class LikedByMembersService {
   getLikedByMembers$ = () => this.likedByMembers$.asObservable();
 
   fetchLikedByMembers() {
-
     const userId = this.userService.getUser().id;
 
     this.http.post(environment.apiUrl + 'Member/GetLikedByMembers', { userId })
       .subscribe((response: any) => {
         this.setLikedByMembers(response.data);
       });
-
   }
 }
