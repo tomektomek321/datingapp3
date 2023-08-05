@@ -6,10 +6,12 @@ import { MembersListComponent } from './components/members-list/members-list/mem
 import { LikesListComponent } from './components/likes-list/likes-list/likes-list.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile/edit-profile.component';
 import { MemberDetailComponent } from './components/members-list/member-detail/member-detail.component';
+import { SearchFiltersComponent } from './pages/searchFilters/search-filters/search-filters.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'searchMembers', component: MembersListComponent },
+  { path: 'filters', component: SearchFiltersComponent },
   { path: 'likesList', component: LikesListComponent },
   { path: 'member/edit', component: EditProfileComponent },
   { path: 'members/:username', component: MemberDetailComponent },
@@ -17,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ],
 })
 export class AppRoutingModule { }

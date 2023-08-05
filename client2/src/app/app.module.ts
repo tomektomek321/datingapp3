@@ -13,11 +13,13 @@ import { MembersListModule } from './components/members-list/members-list.module
 import { LikesListModule } from './components/likes-list/likes-list.module';
 import { EditProfileModule } from './components/edit-profile/edit-profile.module';
 import { JwtInterceptor } from './infrastructure/interceptors/jwt.interceptor';
+import { SearchFiltersComponent } from './pages/searchFilters/search-filters/search-filters.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    SearchFiltersComponent,
   ],
   imports: [
     BrowserModule,
