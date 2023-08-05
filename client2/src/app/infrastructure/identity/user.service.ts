@@ -14,7 +14,7 @@ export class UserService {
   user$ = new BehaviorSubject<User>(this.user);
 
   constructor(
-    private _localstoragePersistenceService: LocalstoragePersistenceService
+    private _localstoragePersistenceService: LocalstoragePersistenceService,
   ) {
     const user = this._localstoragePersistenceService.getUser();
 

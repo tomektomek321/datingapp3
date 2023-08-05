@@ -1,4 +1,4 @@
-import { IdName } from "../IdName";
+import { IdName } from "../../../shared/models/IdName";
 
 export interface SearchUserParams {
     gender: 1 | 0;
