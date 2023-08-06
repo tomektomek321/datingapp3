@@ -18,9 +18,7 @@ public class DatingAppContext: IdentityDbContext<AppUser, AppRole, int,
     public DbSet<Hobby> Hobbies { get; set; }
     public DbSet<UserHobby> UserHobbies { get; set; }
     public DbSet<Message> Messages { get; set; }
-
-
-
+    public DbSet<HobbiesCategory> HobbiesCategories { get; set; }
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         foreach (var entry in ChangeTracker.Entries<AuditableEntity>())

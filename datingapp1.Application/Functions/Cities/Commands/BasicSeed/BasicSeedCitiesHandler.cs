@@ -30,7 +30,7 @@ namespace datingapp1.Application.Functions.Cities.Commands.BasicSeed
             var namePass = "Ewa";
             var s = 0;
 
-            var respo = _cityRepository.BasicSeed();
+            // var respo = _cityRepository.BasicSeed();
             var random = new Random();
 
             var lastUser = await _appUserRepository.GetLastUserIdBySex(s);
