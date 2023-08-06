@@ -1,5 +1,6 @@
 .searchBar__Container {
   margin-top: 20px;
+  justify-content: center;
 
   .Age__Wrapper {
     align-items: baseline;
@@ -12,7 +13,7 @@
       }
 
       input {
-        width: 76px;
+        width: 73px;
       }
     }
 
@@ -24,12 +25,13 @@
       }
 
       input {
-        width: 76px;
+        width: 73px;
       }
     }
   }
 
   .Show__Wrapper {
+    margin: 7px 0;
     align-items: baseline;
 
     @media screen and (max-width: 768px) {
@@ -37,13 +39,17 @@
     }
 
     label {
-      width: 70px;
+      width: 110px;
 
       @media screen and (max-width: 768px) {
         width: 110px;
       }
 
       text-align: center;
+    }
+
+    select {
+      width: 200px !important;
     }
 
   }
