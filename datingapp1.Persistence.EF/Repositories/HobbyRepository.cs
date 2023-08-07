@@ -1,5 +1,7 @@
 ﻿using datingapp1.Application.Contracts.Persistance;
+using datingapp1.Domain.Dto.Hobbies;
 using datingapp1.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace datingapp1.Persistence.EF.Repositories;
 
@@ -14,6 +16,10 @@ public class HobbyRepository : BaseRepository<Hobby>, IHobbyRepository
         ).ToList();
         return returnList;
     }
+
+    public async Task<List<Hobby>> GetHobbies() {
+        return await _dbContext.Hobbies.ToListAsync();
+    }  
 
     public Task<bool> BasicSeed()
     {

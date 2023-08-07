@@ -1,5 +1,6 @@
 using datingapp1.Application.Contracts.Persistance;
 using datingapp1.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace datingapp1.Persistence.EF.Repositories
 {
@@ -25,6 +26,9 @@ namespace datingapp1.Persistence.EF.Repositories
 
             return Task.FromResult(true);
         }
-
+        public async Task<List<HobbiesCategory>> GetHobbiesCategories() {
+            return await _dbContext.HobbiesCategories.ToListAsync();
+        }  
     }
+
 }
