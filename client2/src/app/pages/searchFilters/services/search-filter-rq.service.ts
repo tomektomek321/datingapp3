@@ -21,6 +21,7 @@ export class SearchFilterRqService {
 
     this.filteredMembersGatewayService.fetchFilteredMembers(filterParams)
       .subscribe((response: any) => {
+        console.log(response);
         const members: Member[] = response.data;
         this.memberListService.setFilteredMembers(members);
       });

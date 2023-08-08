@@ -15,7 +15,6 @@ interface IdName {
   styleUrls: [ './text-input-with-hints.component.scss' ],
 })
 export class TextInputWithHintsComponent implements AfterViewInit {
-
   @ViewChild('textInput') textInput!: ElementRef;
 
   @Input('URL') URL!: string;
@@ -77,10 +76,10 @@ export class TextInputWithHintsComponent implements AfterViewInit {
   }
 
   setValue(value_: any): void {
-
     this.promptShow = false;
     this.itemToAdd = value_.name;
     this.itemToAddObject = value_;
+
     if (this.setValueToInput) {
       this.valueInput = value_.name;
     }
@@ -97,6 +96,7 @@ export class TextInputWithHintsComponent implements AfterViewInit {
 
   getCSS(): string {
     let response = '';
+
     if (this.fullWidth) { response += 'fullWidth'; }
 
     return response;
@@ -105,5 +105,4 @@ export class TextInputWithHintsComponent implements AfterViewInit {
   getLabelWidth() {
     return this.labelWidth;
   }
-
 }

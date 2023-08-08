@@ -4,10 +4,9 @@ import { SearchUserReqDto } from 'src/app/pages/searchFilters/models/SearchUserD
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FilteredMembersGatewayService {
-
   constructor(
     private http: HttpClient,
   ) { }
@@ -15,9 +14,7 @@ export class FilteredMembersGatewayService {
   public fetchFilteredMembers(filterParams: SearchUserReqDto) {
     return this.http.post<SearchUserReqDto>(
       environment.apiUrl + 'Member/FilterMembers',
-      filterParams
-    )
+      filterParams,
+    );
   }
-
-
 }

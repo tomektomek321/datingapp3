@@ -30,7 +30,7 @@ export class SearchFiltersComponent implements OnInit {
         this.searchUserParams = params_;
       });
 
-    this.loadMembers();
+    // this.loadMembers();
   }
 
   loadMembers(): void {
