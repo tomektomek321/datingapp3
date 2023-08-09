@@ -27,5 +27,5 @@ public class HobbiesCategoryRepository : BaseRepository<HobbiesCategory>, IHobbi
     }
     public async Task<List<HobbiesCategory>> GetHobbiesCategories() {
         return await _dbContext.HobbiesCategories.ToListAsync();
-    }  
+    }
 }

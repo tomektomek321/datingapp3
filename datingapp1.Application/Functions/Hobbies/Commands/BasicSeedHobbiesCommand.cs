@@ -1,9 +1,7 @@
 using MediatR;
 
-namespace datingapp1.Application.Functions.Hobbies.Commands
+namespace datingapp1.Application.Functions.Hobbies.Commands;
+public class BasicSeedHobbiesCommand : IRequest<BaseResponse>
 {
-    public class BasicSeedHobbiesCommand : IRequest<BaseResponse>
-    {
-        
-    }
+
 }

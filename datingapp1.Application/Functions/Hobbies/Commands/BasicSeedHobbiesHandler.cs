@@ -17,34 +17,9 @@ public class BasicSeedHobbiesHandler : IRequestHandler<BasicSeedHobbiesCommand, 
   }
   
   public async Task<BaseResponse> Handle(
-    BasicSeedHobbiesCommand request, 
+    BasicSeedHobbiesCommand request,
     CancellationToken cancellationToken
   ) {
-    var hobbies = await _hobbyRepository.GetHobbies();
-    var hobbiesCategories = await _hobbiesCategoryRepository.GetHobbiesCategories();
-
-    var categoriesWithHobbies = new List<HobbyCategoryDto>();
-
-    foreach(var category in hobbiesCategories) {
-      var tempCategory = new HobbyCategoryDto();
-
-      var tempHobbies = hobbies
-        .Where(h => h.HobbiesCategory.Id == category.Id)
-        .Select(h => new HobbyDto() {
-          Id = h.Id,
-          Name = h.Name,
-        })
-        .ToList();
-
-      tempCategory.Id = category.Id;
-      tempCategory.Name = category.Name;
-      tempCategory.Hobbies = tempHobbies;
-
-      categoriesWithHobbies.Add(tempCategory);
-    }
-
-    // var respo = _hobbyRepository.BasicSeed();
-
     return new BaseResponse();
   }
 }
