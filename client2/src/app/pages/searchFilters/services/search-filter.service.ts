@@ -5,6 +5,7 @@ import { SearchUserOrderByEnum } from '../models/SearchUserOrderByEnum';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/shared/models/identity/User';
 import { IdName } from 'src/app/shared/models/IdName';
+import { FilteredMembersGatewayService } from '../gateway/filtered-members-gateway.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,13 +33,23 @@ export class SearchFilterService {
     this.searchUserParams,
   );
 
-  constructor(private readonly userService: UserService) {
+  constructor(
+    private readonly userService: UserService,
+    private readonly filteredMembersGatewayService: FilteredMembersGatewayService,
+  ) {
     this.userService.getUser$().subscribe((user: User) => {
       if (user.id && user.gender !== undefined) {
         this.searchUserParams.gender = user.gender.toString() == '1' ? 0 : 1;
         this.searchUserParams$.next(this.searchUserParams);
       }
     });
+  }
+
+  getMyFilterSettings() {
+    this. filteredMembersGatewayService.getMyFilterSettings()
+      .subscribe( () => {
+        // this.searchUserParams = filteredMembers;
+      });
   }
 
   getSearchUserParams = (): SearchUserParams => this.searchUserParams;

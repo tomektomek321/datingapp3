@@ -23,8 +23,7 @@ public class MyFilterSettingsHandler : IRequestHandler<MyFilterSettingsQuery, My
   public async Task<MyFilterSettingsResponse> Handle(
     MyFilterSettingsQuery request,
     CancellationToken cancellationToken
-  )
-  {
+  ) {
     var hobbies = await _hobbyRepository.GetHobbies();
     var hobbiesCategories = await _hobbiesCategoryRepository.GetHobbiesCategories();
 

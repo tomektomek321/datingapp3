@@ -3,6 +3,7 @@ import { Member } from 'src/app/shared/models/Member';
 import { SearchFilterRqService } from '../services/search-filter-rq.service';
 import { SearchFilterService } from '../services/search-filter.service';
 import { SearchUserParams } from '../models/SearchUserParams';
+import { FilteredMembersGatewayService } from '../gateway/filtered-members-gateway.service';
 
 @Component({
   selector: 'app-search-filters',
@@ -22,12 +23,18 @@ export class SearchFiltersComponent implements OnInit {
   constructor(
     private searchFilterRqService: SearchFilterRqService,
     private searchBarService: SearchFilterService,
+    private filteredMembersGatewayService: FilteredMembersGatewayService,
   ) { }
 
   ngOnInit(): void {
     this.searchBarService.getSearchUserParams$()
       .subscribe((params_: SearchUserParams) => {
         this.searchUserParams = params_;
+      });
+
+    this.filteredMembersGatewayService.getMyFilterSettings()
+      .subscribe((resp) => {
+        console.log(resp);
       });
 
     // this.loadMembers();
