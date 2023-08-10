@@ -170,6 +170,15 @@
       Find
     </button>
 
+
+    <div *ngIf="categoriesWithHobbies && categoriesWithHobbies.length > 0">
+      <ng-container *ngFor="let category of categoriesWithHobbies">
+        <app-category-with-hobbies
+          [category]="category"
+        ></app-category-with-hobbies>
+      </ng-container>
+    </div>
+
   </form>
 
 </div>

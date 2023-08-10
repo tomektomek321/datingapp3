@@ -15,12 +15,18 @@ import { EditProfileModule } from './components/edit-profile/edit-profile.module
 import { JwtInterceptor } from './infrastructure/interceptors/jwt.interceptor';
 import { SearchFiltersComponent } from './pages/searchFilters/search-filters/search-filters.component';
 import { RateMembersModule } from './pages/rate-members/rate-members.module';
+import { CategoryWithHobbiesComponent } from './pages/searchFilters/search-filters/category-with-hobbies/category-with-hobbies.component';
+import { CategoryWallnameComponent } from './pages/searchFilters/search-filters/category-with-hobbies/category-wallname/category-wallname.component';
+import { HobbyButtonComponent } from './pages/searchFilters/search-filters/category-with-hobbies/hobby-button/hobby-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SearchFiltersComponent,
+    CategoryWithHobbiesComponent,
+    CategoryWallnameComponent,
+    HobbyButtonComponent,
   ],
   imports: [
     BrowserModule,
