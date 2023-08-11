@@ -4,7 +4,7 @@ import { SearchFilterRqService } from '../services/search-filter-rq.service';
 import { SearchFilterService } from '../services/search-filter.service';
 import { SearchUserParams } from '../models/SearchUserParams';
 import { FilteredMembersGatewayService } from '../gateway/filtered-members-gateway.service';
-import { CategoryRs, MyFilterSettingsRs } from '../models/myFilterSettings/MyFilterSettings';
+import { CategoryRs, HobbyRs, MyFilterSettingsRs } from '../models/myFilterSettings/MyFilterSettings';
 
 @Component({
   selector: 'app-search-filters',
@@ -17,6 +17,8 @@ export class SearchFiltersComponent implements OnInit {
   members: Member[] = [];
 
   categoriesWithHobbies?: CategoryRs[];
+
+  userHobbies: HobbyRs[] = [];
 
   genderList = [
     { value: '1', display: 'Males' },

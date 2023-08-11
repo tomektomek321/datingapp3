@@ -11,7 +11,7 @@
     autocomplete="off"
   >
 
-    <div class="d-flex mb-2 AgeShowFind__Container">
+    <div class="d-flex justify-content-center mb-2 AgeShowFind__Container">
 
       <div class="d-flex Age__Wrapper ageFrom">
 
@@ -46,7 +46,7 @@
 
     <div>
 
-      <div class="d-flex Show__Wrapper">
+      <div class="d-flex justify-content-center Show__Wrapper">
 
         <label>Show:</label>
 
@@ -75,7 +75,7 @@
 
     </div>
 
-    <div class="d-flex mb-2">
+    <div class="d-flex justify-content-center mb-2">
 
       <div class="form-group">
 
@@ -96,10 +96,10 @@
         <div
           class="listOfCities__Container"
           [ngClass]="{
-              hidden: !getNumberOfCities(),
-              listOfCitiesShowed: isListOfCitiesVisible()
-            }"
-          >
+            hidden: !getNumberOfCities(),
+            listOfCitiesShowed: isListOfCitiesVisible()
+          }"
+        >
           <div class="listOfCities__Wrapper">
             <!-- <span (click)="closeListOfCities()">+</span> -->
             <ng-container *ngFor="let city of searchUserParams.cities">
@@ -119,7 +119,7 @@
 
     </div>
 
-    <div class="d-flex mb-2">
+    <div class="d-flex justify-content-center mb-2">
 
       <div class="form-group">
 
@@ -141,8 +141,8 @@
           [ngClass]="{
             hidden: !getNumberOfHobbies(),
             listOfHobbiesShowed: isListOfHobbiesVisible()
-            }"
-          >
+          }"
+        >
 
           <div class="listOfHobbies__Wrapper">
             <!-- <span (click)="closeListOfHobbies()">+</span> -->
@@ -175,6 +175,7 @@
       <ng-container *ngFor="let category of categoriesWithHobbies">
         <app-category-with-hobbies
           [category]="category"
+          [userHobbies]="userHobbies"
         ></app-category-with-hobbies>
       </ng-container>
     </div>

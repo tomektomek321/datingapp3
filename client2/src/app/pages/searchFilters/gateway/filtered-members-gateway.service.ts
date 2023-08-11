@@ -21,7 +21,8 @@ export class FilteredMembersGatewayService {
 
   public getMyFilterSettings() {
     return this.http.post<MyFilterSettingsRs>(
-      environment.apiUrl + 'User/GetMyFilterSettings', {},
+      environment.apiUrl + 'MySettingsAndFilters/GetMyFilterSettings',
+      {},
     );
   }
 }

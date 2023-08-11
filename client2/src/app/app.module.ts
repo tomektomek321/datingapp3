@@ -13,20 +13,13 @@ import { MembersListModule } from './components/members-list/members-list.module
 import { LikesListModule } from './components/likes-list/likes-list.module';
 import { EditProfileModule } from './components/edit-profile/edit-profile.module';
 import { JwtInterceptor } from './infrastructure/interceptors/jwt.interceptor';
-import { SearchFiltersComponent } from './pages/searchFilters/search-filters/search-filters.component';
 import { RateMembersModule } from './pages/rate-members/rate-members.module';
-import { CategoryWithHobbiesComponent } from './pages/searchFilters/search-filters/category-with-hobbies/category-with-hobbies.component';
-import { CategoryWallnameComponent } from './pages/searchFilters/search-filters/category-with-hobbies/category-wallname/category-wallname.component';
-import { HobbyButtonComponent } from './pages/searchFilters/search-filters/category-with-hobbies/hobby-button/hobby-button.component';
+import { SearchFiltersModule } from './pages/searchFilters/search-filters.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SearchFiltersComponent,
-    CategoryWithHobbiesComponent,
-    CategoryWallnameComponent,
-    HobbyButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +38,8 @@ import { HobbyButtonComponent } from './pages/searchFilters/search-filters/categ
     SharedInputsModule,
 
     RateMembersModule,
+
+    SearchFiltersModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

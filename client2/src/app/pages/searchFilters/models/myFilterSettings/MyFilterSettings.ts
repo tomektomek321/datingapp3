@@ -1,5 +1,5 @@
 export interface MyFilterSettingsRs {
-  userHobbies: any;
+  userHobbies: HobbyRs[];
   categoriesWithHobbies: CategoryRs[];
 }
 

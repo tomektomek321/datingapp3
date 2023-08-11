@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CategoryRs } from '../../models/myFilterSettings/MyFilterSettings';
+import { CategoryRs, HobbyRs } from '../../models/myFilterSettings/MyFilterSettings';
 
 @Component({
   selector: 'app-category-with-hobbies',
@@ -8,6 +8,7 @@ import { CategoryRs } from '../../models/myFilterSettings/MyFilterSettings';
 })
 export class CategoryWithHobbiesComponent implements OnInit {
   @Input() category!: CategoryRs;
+  @Input() userHobbies!: HobbyRs[];
 
   constructor() { }
 

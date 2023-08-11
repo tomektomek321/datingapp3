@@ -16,13 +16,6 @@ public class UserController : ControllerBase
     }
 
     
-    [HttpPost("GetMyFilterSettings")]
-    public async Task<ActionResult<MyFilterSettingsResponse>> GetMyFilterSettings()
-    {
-        // var userId = User.GetUserId();
-        var user = await _mediator.Send(new MyFilterSettingsQuery() { 
-            UserId = 1424,
-        });
-        return Ok(user);
-    }
+
+
 }
