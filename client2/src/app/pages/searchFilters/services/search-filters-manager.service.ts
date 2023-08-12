@@ -18,7 +18,6 @@ export class SearchFiltersManagerService {
     this.userService.getUser$().subscribe((user: AppUser) => {
       if (user.id && user.gender !== undefined) {
         const searchFilters = this.searchFiltersService.getSearchUserParams();
-
         searchFilters.gender = user.gender.toString() == '1' ? 0 : 1;
         this.searchFiltersService.searchUserParams$.next(searchFilters);
       }

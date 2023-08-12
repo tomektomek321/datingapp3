@@ -2,6 +2,8 @@ using datingapp1.Application.Functions.Users.Queries.MyFIlterSettings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using datingapp1.Domain.Extensions;
+using datingapp1.Application.Functions.MySettingsAndFilters.Commands;
+
 
 namespace datingapp1.ASP_API2.Controllers;
 
@@ -27,14 +29,14 @@ public class MySettingsAndFiltersController : ControllerBase
     return Ok(user);
   }
 
-  [HttpPost("ToggleHobby")]
+  [HttpGet("ToggleHobby/{hobbyId}")]
   public async Task<ActionResult<MyFilterSettingsResponse>> ToggleHobby(int hobbyId)
   {
     var userId = User.GetUserId();
     if(userId == 0) {
       return Unauthorized();
     }
-    var user = await _mediator.Send(new MyFilterSettingsQuery()
+    var user = await _mediator.Send(new ToggleHobbyCommand()
     {
       UserId = userId,
       HobbyId = hobbyId,

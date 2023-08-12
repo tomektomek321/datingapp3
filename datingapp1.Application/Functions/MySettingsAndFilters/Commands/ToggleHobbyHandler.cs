@@ -11,11 +11,13 @@ public class ToggleHobbyHandler : IRequestHandler<ToggleHobbyCommand, BaseRespon
     _userHobbyRepository = userHobbyRepository;
   }
 
-  public Task<BaseResponse> Handle(
+  public async Task<BaseResponse> Handle(
     ToggleHobbyCommand request,
     CancellationToken cancellationToken
-  )
-  {
-    throw new NotImplementedException();
+  ) {
+
+    var resp = await _userHobbyRepository.ToggleHobby(request.UserId, request.HobbyId);
+
+    return new BaseResponse();
   }
 }

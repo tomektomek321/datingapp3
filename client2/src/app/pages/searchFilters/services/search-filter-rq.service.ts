@@ -37,8 +37,11 @@ export class SearchFilterRqService {
   }
 
   toggleHobby(hobbyId: number): void {
+    debugger;
+
     this.filteredMembersGatewayService.toggleHobby(hobbyId)
       .subscribe((response: any) => {
+
         if(!response.success) {
           console.log('SearchFilterRqService.toggleHobby error');
         }

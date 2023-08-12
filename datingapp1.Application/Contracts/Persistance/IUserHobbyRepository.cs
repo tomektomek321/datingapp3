@@ -12,5 +12,6 @@ public interface IUserHobbyRepository : IRepository<UserHobby>
 {
     UserHobby GetUserHobbyByUserIdAndHobbyId(int UserId, int HobbyId);
     Task<List<HobbyDto>> GetUserHobbiesByUserId(int UserId);
+    Task<bool> ToggleHobby(int UserId, int hobbyId);
 }
 

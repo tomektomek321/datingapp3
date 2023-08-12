@@ -3,6 +3,6 @@ using MediatR;
 namespace datingapp1.Application.Functions.MySettingsAndFilters.Commands;
 public class ToggleHobbyCommand: IRequest<BaseResponse>
 {
-    public int hobbyId { get; set; }
-    public int userId { get; set; }
+    public int UserId { get; set; }
+    public int HobbyId { get; set; }
 }
