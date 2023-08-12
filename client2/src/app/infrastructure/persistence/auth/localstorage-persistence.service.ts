@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/shared/models/identity/User';
+import { AppUser } from 'src/app/shared/models/identity/AppUser';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalstoragePersistenceService {
+  constructor() { }
 
-    constructor() { }
+  getUser(): null | AppUser {
+    const user: null | string = localStorage.getItem('user');
 
-    getUser(): null | User {
-        const user: null | string = localStorage.getItem('user');
+    if(user != null) {
+      const parsedUser: AppUser = JSON.parse(user);
 
-        if(user != null) {
-            const parsedUser: User = JSON.parse(user);
-            return parsedUser;
-        } else {
-            return null;
-        }
+      return parsedUser;
+    } else {
+      return null;
     }
+  }
 
-    storeUser(user_: User): void {
-        localStorage.setItem('user', JSON.stringify(user_));
-    }
+  storeUser(user_: AppUser): void {
+    localStorage.setItem('user', JSON.stringify(user_));
+  }
 
-    removeUser() {
-        localStorage.removeItem('user');
-    }
-
+  removeUser() {
+    localStorage.removeItem('user');
+  }
 }

@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
-import { SearchFilterService } from './search-filter.service';
+import { SearchFiltersService } from './search-filters.service';
 import { FilteredMembersGatewayService } from '../gateway/filtered-members-gateway.service';
 import { FilteredMembersService } from 'src/app/components/likes-list/services/filtered-members.service';
 import { createFilterParams } from '../utils/createParamsForRequest';
 import { Member } from 'src/app/shared/models/Member';
+import { SearchFiltersManagerService } from './search-filters-manager.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchFilterRqService {
   constructor(
-    private searchBarService: SearchFilterService,
+    private searchFiltersService: SearchFiltersService,
+    private searchFiltersManagerService: SearchFiltersManagerService,
     private memberListService: FilteredMembersService,
     private filteredMembersGatewayService: FilteredMembersGatewayService,
   ) { }
 
+  getMyFilterSettings() {
+    this. filteredMembersGatewayService.getMyFilterSettings()
+      .subscribe( () => {
+        // this.searchUserParams = filteredMembers;
+      });
+  }
+
   loadMembers(): void {
-    const params = this.searchBarService.getSearchUserParams();
+    const params = this.searchFiltersService.getSearchUserParams();
     const filterParams = createFilterParams(params);
 
     this.filteredMembersGatewayService.fetchFilteredMembers(filterParams)
@@ -24,6 +33,20 @@ export class SearchFilterRqService {
         console.log(response);
         const members: Member[] = response.data;
         this.memberListService.setFilteredMembers(members);
+      });
+  }
+
+  toggleHobby(hobbyId: number): void {
+    this.filteredMembersGatewayService.toggleHobby(hobbyId)
+      .subscribe((response: any) => {
+        if(!response.success) {
+          console.log('SearchFilterRqService.toggleHobby error');
+        }
+
+        this.searchFiltersManagerService.addHobby({
+          id: hobbyId,
+          name: '',
+        });
       });
   }
 }

@@ -25,4 +25,13 @@ export class FilteredMembersGatewayService {
       {},
     );
   }
+
+  public toggleHobby(hobbyId: number) {
+    return this.http.post<MyFilterSettingsRs>(
+      environment.apiUrl + 'MySettingsAndFilters/ToggleHobby',
+      {
+        hobbyId,
+      },
+    );
+  }
 }

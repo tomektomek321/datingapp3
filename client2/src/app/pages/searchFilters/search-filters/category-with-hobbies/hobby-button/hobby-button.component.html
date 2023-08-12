@@ -1,6 +1,7 @@
 <div
   class="hobbyName"
-  [ngClass]="'a'"
+  [ngClass]="[ isHobbySelected() ? '' : '' ]"
+  (click)="toggle();"
 >
   {{ hobby.name }}
 </div>

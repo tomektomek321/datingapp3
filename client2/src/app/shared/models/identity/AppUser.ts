@@ -1,7 +1,7 @@
-import { IdName } from "../IdName";
-import { likedUsers } from "../LikedUsers";
+import { IdName } from '../IdName';
+import { likedUsers } from '../LikedUsers';
 
-export interface User {
+export interface AppUser {
   id: number;
   username?: string;
   knownAs?: string;

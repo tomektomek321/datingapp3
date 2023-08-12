@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from 'src/app/shared/models/Member';
 import { SearchFilterRqService } from '../services/search-filter-rq.service';
-import { SearchFilterService } from '../services/search-filter.service';
 import { SearchUserParams } from '../models/SearchUserParams';
 import { FilteredMembersGatewayService } from '../gateway/filtered-members-gateway.service';
 import { CategoryRs, HobbyRs, MyFilterSettingsRs } from '../models/myFilterSettings/MyFilterSettings';
+import { SearchFiltersService } from '../services/search-filters.service';
+import { SearchFiltersManagerService } from '../services/search-filters-manager.service';
 
 @Component({
   selector: 'app-search-filters',
@@ -13,8 +13,6 @@ import { CategoryRs, HobbyRs, MyFilterSettingsRs } from '../models/myFilterSetti
 })
 export class SearchFiltersComponent implements OnInit {
   searchUserParams?: SearchUserParams;
-
-  members: Member[] = [];
 
   categoriesWithHobbies?: CategoryRs[];
 
@@ -27,12 +25,13 @@ export class SearchFiltersComponent implements OnInit {
 
   constructor(
     private searchFilterRqService: SearchFilterRqService,
-    private searchBarService: SearchFilterService,
+    private searchFiltersManagerService: SearchFiltersManagerService,
+    private searchFiltersService: SearchFiltersService,
     private filteredMembersGatewayService: FilteredMembersGatewayService,
   ) { }
 
   ngOnInit(): void {
-    this.searchBarService.getSearchUserParams$()
+    this.searchFiltersService.getSearchUserParams$()
       .subscribe((params_: SearchUserParams) => {
         this.searchUserParams = params_;
       });
@@ -52,41 +51,41 @@ export class SearchFiltersComponent implements OnInit {
 
   addCity(city_: any): void {
     if (this.searchUserParams) {
-      this.searchBarService.addCity(city_);
+      this.searchFiltersManagerService.addCity(city_);
     }
   }
 
   removeCity(city_: any) {
-    this.searchBarService.removeCity(city_);
+    this.searchFiltersManagerService.removeCity(city_);
   }
 
   addHobby(city_: any): void {
     if (this.searchUserParams) {
-      this.searchBarService.addHobby(city_);
+      this.searchFiltersManagerService.addHobby(city_);
     }
   }
 
   removeHobby(city_: any) {
-    this.searchBarService.removeHobby(city_);
+    this.searchFiltersManagerService.removeHobby(city_);
   }
 
   getNumberOfCities(): number {
-    return this.searchBarService.getNumberOfCities();
+    return this.searchFiltersService.getNumberOfCities();
   }
 
   getNumberOfHobbies(): number {
-    return this.searchBarService.getNumberOfHobbies();
+    return this.searchFiltersService.getNumberOfHobbies();
   }
 
-  closeListOfCities() { this.searchBarService.closeListOfCities(); }
+  closeListOfCities() { this.searchFiltersService.closeListOfCities(); }
 
-  closeListOfHobbies() { this.searchBarService.closeListOfHobbies(); }
+  closeListOfHobbies() { this.searchFiltersService.closeListOfHobbies(); }
 
-  openListOfCities() { this.searchBarService.openListOfCities(); }
+  openListOfCities() { this.searchFiltersService.openListOfCities(); }
 
-  openListOfHobbies() { this.searchBarService.openListOfHobbies(); }
+  openListOfHobbies() { this.searchFiltersService.openListOfHobbies(); }
 
-  isListOfCitiesVisible = () => this.searchBarService.isListOfCitiesVisible();
+  isListOfCitiesVisible = () => this.searchFiltersService.isListOfCitiesVisible();
 
-  isListOfHobbiesVisible = () => this.searchBarService.isListOfHobbiesVisible();
+  isListOfHobbiesVisible = () => this.searchFiltersService.isListOfHobbiesVisible();
 }

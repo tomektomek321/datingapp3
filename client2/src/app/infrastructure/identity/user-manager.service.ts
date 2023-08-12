@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/shared/models/identity/User';
+import { AppUser } from 'src/app/shared/models/identity/AppUser';
 import { IdName } from 'src/app/shared/models/IdName';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
@@ -24,8 +24,8 @@ export class UserManagerService {
       });
   }
 
-  updateUserProfileDetails(user_: User) {
-    const user: User = this.userService.getUser();
+  updateUserProfileDetails(user_: AppUser) {
+    const user: AppUser = this.userService.getUser();
 
     user.city = user_.city;
     user.age = user_.age;
@@ -36,7 +36,7 @@ export class UserManagerService {
   }
 
   addHobby(hobby_: any) {
-    const user: User = this.userService.getUser();
+    const user: AppUser = this.userService.getUser();
 
     user.hobbies?.push(hobby_);
 
@@ -44,9 +44,11 @@ export class UserManagerService {
   }
 
   removeHobby(hobbyId_: any) {
-    const user: User = this.userService.getUser();
+    const user: AppUser = this.userService.getUser();
+
     if (user.hobbies) {
       const index = user.hobbies.findIndex((item) => item.id == hobbyId_);
+
       if (index != -1) {
         user.hobbies.splice(index, 1);
         this.userService.setUser(user);
@@ -55,7 +57,7 @@ export class UserManagerService {
   }
 
   updateCity(cityObject: IdName): void {
-    const user: User = this.userService.getUser();
+    const user: AppUser = this.userService.getUser();
 
     user.city = cityObject.name;
 
@@ -63,7 +65,7 @@ export class UserManagerService {
   }
 
   updateCountry(countryObject: IdName): void {
-    const user: User = this.userService.getUser();
+    const user: AppUser = this.userService.getUser();
 
     user.country = countryObject.name;
 
@@ -71,7 +73,7 @@ export class UserManagerService {
   }
 
   isLikedByUser(memberId: number): boolean {
-    const user: User = this.userService.getUser();
+    const user: AppUser = this.userService.getUser();
 
     if (user.likedUsers)
       return user.likedUsers.some((user_) => user_.likedUserId == memberId);
@@ -80,12 +82,12 @@ export class UserManagerService {
   }
 
   toggleLike(memberId: number): void {
-    const user: User = this.userService.getUser();
+    const user: AppUser = this.userService.getUser();
 
     if (this.isLikedByUser(memberId)) {
       if (user.likedUsers) {
         const index = user.likedUsers.findIndex(
-          (user_) => user_.likedUserId == memberId
+          (user_) => user_.likedUserId == memberId,
         );
         user.likedUsers.splice(index, 1);
         this.userService.setUser(user);
