@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchFilterRqService } from '../services/search-filter-rq.service';
 import { SearchUserParams } from '../models/SearchUserParams';
-import { FilteredMembersGatewayService } from '../gateway/filtered-members-gateway.service';
 import { CategoryRs, HobbyRs, MyFilterSettingsRs } from '../models/myFilterSettings/MyFilterSettings';
 import { SearchFiltersService } from '../services/search-filters.service';
 import { SearchFiltersManagerService } from '../services/search-filters-manager.service';
@@ -27,7 +26,6 @@ export class SearchFiltersComponent implements OnInit {
     private searchFilterRqService: SearchFilterRqService,
     private searchFiltersManagerService: SearchFiltersManagerService,
     private searchFiltersService: SearchFiltersService,
-    private filteredMembersGatewayService: FilteredMembersGatewayService,
   ) { }
 
   ngOnInit(): void {
@@ -36,11 +34,17 @@ export class SearchFiltersComponent implements OnInit {
         this.searchUserParams = params_;
       });
 
-    this.filteredMembersGatewayService.getMyFilterSettings()
-      .subscribe((resp: MyFilterSettingsRs) => {
-        console.log(resp);
-        this.categoriesWithHobbies = resp.categoriesWithHobbies;
+    this.searchFilterRqService.getMyFilterSettings()
+      .subscribe((settings: MyFilterSettingsRs) => {
+        this.searchFiltersManagerService.initFilterSettings(settings);
+        this.categoriesWithHobbies = settings.categoriesWithHobbies;
       });
+
+    // this.filteredMembersGatewayService.getMyFilterSettings()
+    //   .subscribe((resp: MyFilterSettingsRs) => {
+    //     console.log(resp);
+    //     this.categoriesWithHobbies = resp.categoriesWithHobbies;
+    //   });
 
     // this.loadMembers();
   }

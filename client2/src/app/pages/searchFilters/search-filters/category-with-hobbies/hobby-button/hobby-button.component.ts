@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HobbyRs } from '../../../models/myFilterSettings/MyFilterSettings';
 import { SearchFilterRqService } from '../../../services/search-filter-rq.service';
 import { SearchFiltersService } from '../../../services/search-filters.service';
@@ -8,16 +8,12 @@ import { SearchFiltersService } from '../../../services/search-filters.service';
   templateUrl: './hobby-button.component.html',
   styleUrls: [ './hobby-button.component.scss' ],
 })
-export class HobbyButtonComponent implements OnInit {
+export class HobbyButtonComponent {
   @Input() hobby!: HobbyRs;
   constructor(
     private readonly searchFilterRqService: SearchFilterRqService,
     private readonly searchFiltersService: SearchFiltersService,
   ) { }
-
-  ngOnInit(): void {
-
-  }
 
   toggle() {
     this.searchFilterRqService.toggleHobby(this.hobby.id);
@@ -25,9 +21,8 @@ export class HobbyButtonComponent implements OnInit {
 
   isHobbySelected(): boolean {
     const state = this.searchFiltersService.getSearchUserParams();
-
     const hobby = state.hobbies.find((h) => h.id === this.hobby.id);
-
+    console.log(hobby);
     const isSelected = !!hobby;
 
     return isSelected;

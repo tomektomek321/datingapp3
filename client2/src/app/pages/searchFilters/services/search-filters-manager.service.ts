@@ -5,6 +5,7 @@ import { UserService } from 'src/app/infrastructure/identity/user.service';
 import { SearchFiltersService } from './search-filters.service';
 import { AppUser } from 'src/app/shared/models/identity/AppUser';
 import { SearchUserParams } from '../models/SearchUserParams';
+import { MyFilterSettingsRs } from '../models/myFilterSettings/MyFilterSettings';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,6 @@ export class SearchFiltersManagerService {
   constructor(
     private readonly userService: UserService,
     private readonly searchFiltersService: SearchFiltersService,
-
   ) {
     this.userService.getUser$().subscribe((user: AppUser) => {
       if (user.id && user.gender !== undefined) {
@@ -22,6 +22,14 @@ export class SearchFiltersManagerService {
         this.searchFiltersService.searchUserParams$.next(searchFilters);
       }
     });
+  }
+
+  initFilterSettings(settings: MyFilterSettingsRs): void {
+    const searchFilters = this.searchFiltersService.getSearchUserParams();
+
+    searchFilters.hobbies = settings.userHobbies;
+
+    this.searchFiltersService.searchUserParams$.next(searchFilters);
   }
 
   addCity(city_: IdName): void {
