@@ -40,7 +40,7 @@ export class SearchFilterRqService {
           console.log('SearchFilterRqService.toggleHobby error');
         }
 
-        this.searchFiltersManagerService.addHobby({
+        this.searchFiltersManagerService.toggleHobby({
           id: hobbyId,
           name: '',
         });

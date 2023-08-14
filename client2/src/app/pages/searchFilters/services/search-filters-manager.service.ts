@@ -72,8 +72,6 @@ export class SearchFiltersManagerService {
     );
 
     if (added.length > 0) {
-      console.log('Already added');
-
       return;
     }
 
@@ -89,6 +87,24 @@ export class SearchFiltersManagerService {
     );
 
     searchFilters.hobbies = added;
+    this.searchFiltersService.searchUserParams$.next(searchFilters);
+  }
+
+  toggleHobby(city_: IdName) {
+    const searchFilters = this.searchFiltersService.getSearchUserParams();
+
+    const added = searchFilters.hobbies.filter(
+      (item: IdName) => item.id == city_.id,
+    );
+
+    if (added.length > 0) {
+      searchFilters.hobbies = searchFilters.hobbies.filter(
+        (item: IdName) => item.id != city_.id,
+      );
+    } else {
+      searchFilters.hobbies.push(city_);
+    }
+
     this.searchFiltersService.searchUserParams$.next(searchFilters);
   }
 

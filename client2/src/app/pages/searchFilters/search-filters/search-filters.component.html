@@ -123,7 +123,7 @@
 
       <div class="form-group">
 
-        <app-text-input-with-hints
+        <!-- <app-text-input-with-hints
           class="mr-2"
           [label]="'Add Hobby: '"
           [labelWidth]="'110px'"
@@ -131,13 +131,13 @@
           [autoAdd]="true"
           [placeholder]="'Hobby'"
           (callback)="addHobby($event)"
-        ></app-text-input-with-hints>
+        ></app-text-input-with-hints> -->
 
         <!-- <div class="numberOfItems" (click)="openListOfHobbies();">
           {{ getNumberOfHobbies() }}
         </div> -->
 
-        <div class="listOfHobbies__Container"
+        <!--<div class="listOfHobbies__Container"
           [ngClass]="{
             hidden: !getNumberOfHobbies(),
             listOfHobbiesShowed: isListOfHobbiesVisible()
@@ -145,7 +145,7 @@
         >
 
           <div class="listOfHobbies__Wrapper">
-            <!-- <span (click)="closeListOfHobbies()">+</span> -->
+             <span (click)="closeListOfHobbies()">+</span>
             <div *ngFor="let hobby of searchUserParams.hobbies">
 
               <app-badge-item
@@ -156,19 +156,19 @@
             </div>
           </div>
 
-        </div>
+        </div>-->
 
       </div>
 
     </div>
 
-    <button
+    <!-- <button
       class="btn btn-primary findBtn"
       name="testApply"
       type="submit"
     >
       Find
-    </button>
+    </button> -->
 
 
     <div *ngIf="categoriesWithHobbies && categoriesWithHobbies.length > 0">
