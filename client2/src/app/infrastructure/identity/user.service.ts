@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from 'src/app/shared/models/identity/User';
+import { AppUser } from 'src/app/shared/models/identity/AppUser';
 import { LocalstoragePersistenceService } from '../persistence/auth/localstorage-persistence.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  user: User = {
+  user: AppUser = {
     id: 0,
   };
 
-  user$ = new BehaviorSubject<User>(this.user);
+  user$ = new BehaviorSubject<AppUser>(this.user);
 
   constructor(
-    private _localstoragePersistenceService: LocalstoragePersistenceService
+    private _localstoragePersistenceService: LocalstoragePersistenceService,
   ) {
     const user = this._localstoragePersistenceService.getUser();
 
     if (user) this.setUser(user);
   }
 
-  getUser = (): User => this.user;
+  getUser = (): AppUser => this.user;
 
-  setUser = (user_: User) => {
+  setUser = (user_: AppUser) => {
     if (user_.id == 0) {
       this._localstoragePersistenceService.removeUser();
     } else {

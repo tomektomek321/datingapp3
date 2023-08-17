@@ -5,10 +5,9 @@ import { FilteredMembersService } from '../../likes-list/services/filtered-membe
 @Component({
   selector: 'app-members-list',
   templateUrl: './members-list.component.html',
-  styleUrls: ['./members-list.component.scss']
+  styleUrls: [ './members-list.component.scss' ],
 })
 export class MembersListComponent implements OnInit {
-
   membersList: Member[] = [];
 
   constructor(
@@ -17,10 +16,9 @@ export class MembersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredMembersService.getFilteredMembers$()
-    .subscribe((members_: Member[]) => {
-      console.log(members_);
-      this.membersList = members_;
-    });
+      .subscribe((members_: Member[]) => {
+        console.log(members_);
+        this.membersList = members_;
+      });
   }
-
 }

@@ -1,18 +1,61 @@
 <header class="container l-header" id="header">
   <div class="nav bd-container">
-    <a href="#" class="nav__logo" routerLinkActive='active'>Date App</a>
+    <a
+      href="#"
+      class="nav__logo"
+      routerLinkActive='active'
+    >
+      Date App
+    </a>
 
-    <div class="nav__menu" id="nav-menu" [ngClass]="[isMenuShowed()]">
+    <div
+      class="nav__menu"
+      id="nav-menu"
+      [ngClass]="[isMenuShowed()]"
+    >
       <ul class="nav__list">
         <ng-container *ngIf="(user$ | async)?.id != 0">
-          <li class="nav__item"><a class="nav__link active-link" [routerLink]="['/searchMembers']"
-              routerLinkActive='active'>Find</a></li>
-          <li class="nav__item mr-3"><a class="nav__link" [routerLink]="['/likesList']" routerLinkActive='active'>My
-              Likes / Liked By</a></li>
+          <li
+            class="nav__item"
+          >
+            <a
+              class="nav__link"
+              [routerLink]="['/searchMembers']"
+              routerLinkActive='active'
+            >
+              Find
+            </a>
+          </li>
+          <li
+            class="nav__item"
+          >
+            <a
+              class="nav__link"
+              [routerLink]="['/filters']"
+              routerLinkActive='active'
+            >
+              Filter Settings
+            </a>
+          </li>
+          <li
+            class="nav__item mr-3"
+          >
+            <a
+              class="nav__link"
+              [routerLink]="['/likesList']"
+              routerLinkActive='active'
+            >
+              My Likes / Liked By
+            </a>
+          </li>
         </ng-container>
 
         <li class="nav__iteem photo-menu d-flex">
-          <img src="{{ './assets/user.png' }}" alt="{{ 'nophoto' }}" />
+          <img
+            src="{{ './assets/user.png' }}"
+            alt="{{ 'nophoto' }}"
+          />
+
           <div class="drop1 mr-3" *ngIf="(user$ | async)?.id != 0">
 
             <button class="dropbtn" type="button">
@@ -31,11 +74,17 @@
           <app-login></app-login>
         </li>
 
-        <li><i class='bx bx-toggle-left change-theme' id="theme-button"></i></li>
+        <li>
+          <i class='bx bx-toggle-left change-theme' id="theme-button"></i>
+        </li>
       </ul>
     </div>
 
-    <div class="nav__toggle" id="nav-toggle" (click)="openMenu();">
+    <div
+      class="nav__toggle"
+      id="nav-toggle"
+      (click)="openMenu();"
+    >
       <div class="iconContainer">
         <div></div>
         <div></div>

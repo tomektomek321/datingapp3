@@ -1,0 +1,74 @@
+p {
+  width: 100%;
+  height: 50px;
+  background-color: aquamarine;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.hobbies__Container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+$blue: #5f6386;
+$green: #566ded;
+$yellow: #0044ff;
+
+
+// ol.gradient-list {
+//   > li {
+//     @extend %boxshadow;
+//     counter-increment: gradient-counter;
+//     &::before {
+//       align-items: flex-end;
+//       @extend %boxshadow;
+//       content: counter(gradient-counter);
+//       color: $black;
+//       display: flex;
+//       font: 900 1.5em/1 'Montserrat';
+//       justify-content: flex-end;
+//       padding: 0.125em 0.25em;
+//       z-index: 1;
+//     }
+//   }
+// }
+
+
+.gradient-list {
+  list-style: none;
+  margin: 1.75rem 0;
+  padding-left: 1rem;
+
+  > li {
+    background: #23235e;
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    margin: 50px 0;
+    min-height: 3rem;
+    padding: 25px 10px 20px 20px;
+    position: relative;
+
+    > div {
+      position: absolute;
+      height: 3rem;
+      left: -1rem;
+      overflow: hidden;
+      top: -35px;
+      width: 145px;
+      background: linear-gradient(135deg, $blue 0%, $green 100%);
+      border-radius: 1rem 1rem 0 1rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-weight: bold;
+    }
+  }
+}

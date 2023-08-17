@@ -11,5 +11,6 @@ public interface IHobbyRepository : IRepository<Hobby>
 {
     List<Hobby> GetHobbiesByText(string text);
     Task<bool> BasicSeed();
+    Task<List<Hobby>> GetHobbies();
 }
 

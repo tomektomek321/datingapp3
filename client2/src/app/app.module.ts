@@ -13,6 +13,9 @@ import { MembersListModule } from './components/members-list/members-list.module
 import { LikesListModule } from './components/likes-list/likes-list.module';
 import { EditProfileModule } from './components/edit-profile/edit-profile.module';
 import { JwtInterceptor } from './infrastructure/interceptors/jwt.interceptor';
+import { RateMembersModule } from './pages/rate-members/rate-members.module';
+import { SearchFiltersModule } from './pages/searchFilters/search-filters.module';
+import { BottomMenuModule } from './components/bottom-menu/bottom-menu.module';
 
 @NgModule({
   declarations: [
@@ -34,10 +37,16 @@ import { JwtInterceptor } from './infrastructure/interceptors/jwt.interceptor';
     EditProfileModule,
 
     SharedInputsModule,
+
+    RateMembersModule,
+
+    SearchFiltersModule,
+
+    BottomMenuModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ],
 })
 export class AppModule { }

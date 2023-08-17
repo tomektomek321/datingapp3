@@ -1,0 +1,9 @@
+<div class="container mt-1">
+  <div class="memberCards__Container">
+    <ng-container *ngIf="membersList.length > 0">
+      <app-rate-member-card
+        [member]="membersList[0]"
+      ></app-rate-member-card>
+    </ng-container>
+  </div>
+</div>

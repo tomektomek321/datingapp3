@@ -2,21 +2,19 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserManagerService } from 'src/app/infrastructure/identity/user-manager.service';
 import { UserService } from 'src/app/infrastructure/identity/user.service';
-import { User } from 'src/app/shared/models/identity/User';
-import { IdName } from 'src/app/shared/models/IdName';
+import { AppUser } from 'src/app/shared/models/identity/AppUser';
 import { HobbyManagerService } from '../services/hobby-manager.service';
 import { UserProfileManagerService } from '../services/user-profile-manager.service';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: [ './edit-profile.component.scss' ],
 })
 export class EditProfileComponent implements OnInit, AfterViewInit {
-
   @ViewChild('editForm') editForm!: NgForm;
 
-  user?: User;
+  user?: AppUser;
 
   constructor(
     private userService: UserService,
@@ -27,21 +25,21 @@ export class EditProfileComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    console.log(this.editForm)
+    console.log(this.editForm);
   }
 
   ngOnInit(): void {
-    console.log(this.editForm)
+    console.log(this.editForm);
     this.userManagerService.GetUserDetails();
 
-    this.userService.getUser$().subscribe((user: User) => {
+    this.userService.getUser$().subscribe((user: AppUser) => {
       this.user = user;
     });
   }
 
   updateMember() { }
   removeHobby(hobbyId_: number) {
-    let userId = this.userService.getUser().id
+    const userId = this.userService.getUser().id;
 
     this.hobbyManager.removeHobby(hobbyId_, userId).subscribe((response: any) => {
       if (response) {
@@ -55,14 +53,13 @@ export class EditProfileComponent implements OnInit, AfterViewInit {
   }
 
   addHobby(hobbyObject: any): void {
-    let userId = this.userService.getUser().id
+    const userId = this.userService.getUser().id;
 
     this.hobbyManager.addHobby(hobbyObject.id, userId).subscribe((response: any) => {
-      console.log(response)
       if (response.success) {
         this.userManagerService.addHobby(hobbyObject);
-      };
-    })
+      }
+    });
   }
 
   getCity(cityObject: any): void {
@@ -70,10 +67,6 @@ export class EditProfileComponent implements OnInit, AfterViewInit {
   }
 
   changeCity(cityObject: any): void {
-
-
-
-
     this.userProfileManagerService.updateCity(cityObject);
   }
 

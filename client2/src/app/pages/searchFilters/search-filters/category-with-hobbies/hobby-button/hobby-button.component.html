@@ -1,0 +1,7 @@
+<div
+  class="hobbyName"
+  [ngClass]="[ isHobbySelected() ? 'added' : 'notAdded' ]"
+  (click)="toggle();"
+>
+  {{ hobby.name }}
+</div>

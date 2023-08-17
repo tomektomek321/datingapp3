@@ -1,29 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LikesGatewayService } from 'src/app/domains/likes/likes-gateway.service';
-import { UserManagerService } from 'src/app/infrastructure/identity/user-manager.service';
 import { UserService } from 'src/app/infrastructure/identity/user.service';
 import { Member } from 'src/app/shared/models/Member';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LikedMembersService {
-
   likedMembers: Member[] = [];
 
   likedMembers$ = new BehaviorSubject<Member[]>(this.likedMembers);
 
-  constructor(
-    private http: HttpClient,
-    private userService: UserService,
-    private userManagerService: UserManagerService,
-    private likesGatewayService: LikesGatewayService,
-  ) {
-
-  }
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   setLikedMembers(members_: Member[]) {
     this.likedMembers = members_;
@@ -38,26 +28,8 @@ export class LikedMembersService {
     const userId = this.userService.getUser().id;
 
     this.http.post(environment.apiUrl + 'Member/GetLikedMembers', { userId })
-    .subscribe((response: any) => {
-      this.setLikedMembers(response.data);
-    });
+      .subscribe((response: any) => {
+        this.setLikedMembers(response.data);
+      });
   }
-
-  // toggleLike(memberId: number): void {
-  //   const user = this.userService.getUser();
-  //   const userId = user.id;
-  //   console.log(user);
-
-  //   this.likesGatewayService.likeMember({
-  //     sourceUserId: userId,
-  //     targetUserId: memberId
-  //   }).subscribe((response: any) => {
-  //     if (response.success) {
-  //       this.userManagerService.toggleLike(memberId);
-  //       //this.toastr.success("Userlike toggled");
-  //     } else {
-  //       //this.toastr.error("Something bad happened.");
-  //     }
-  //   })
-  // }
 }

@@ -192,7 +192,7 @@ namespace datingapp1.Persistence.EF.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("datingapp1.Domain.Entities.Hobby", b =>
+            modelBuilder.Entity("datingapp1.Domain.Entities.HobbiesCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,6 +204,27 @@ namespace datingapp1.Persistence.EF.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.ToTable("HobbiesCategories");
+                });
+
+            modelBuilder.Entity("datingapp1.Domain.Entities.Hobby", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("HobbiesCategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HobbiesCategoryId");
 
                     b.ToTable("Hobbies");
                 });
@@ -415,6 +436,17 @@ namespace datingapp1.Persistence.EF.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("datingapp1.Domain.Entities.Hobby", b =>
+                {
+                    b.HasOne("datingapp1.Domain.Entities.HobbiesCategory", "HobbiesCategory")
+                        .WithMany("Hobbies")
+                        .HasForeignKey("HobbiesCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HobbiesCategory");
+                });
+
             modelBuilder.Entity("datingapp1.Domain.Entities.Message", b =>
                 {
                     b.HasOne("datingapp1.Domain.Entities.AppUser", "Recipient")
@@ -526,6 +558,11 @@ namespace datingapp1.Persistence.EF.Migrations
                     b.Navigation("UserHobbies");
 
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("datingapp1.Domain.Entities.HobbiesCategory", b =>
+                {
+                    b.Navigation("Hobbies");
                 });
 #pragma warning restore 612, 618
         }

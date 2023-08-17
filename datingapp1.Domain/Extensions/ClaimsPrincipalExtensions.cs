@@ -13,6 +13,9 @@ namespace datingapp1.Domain.Extensions
         {            
             var a = ClaimTypes.Name;
             var b = user.FindFirst(a);
+            if(b == null) {
+                return 0;
+            }
             var c = int.Parse(b?.Value);
             
             return c;

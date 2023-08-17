@@ -4,10 +4,9 @@ import { UserService } from 'src/app/infrastructure/identity/user.service';
 import { FilteredMembersService } from './filtered-members.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RateMemberManagerService {
-
   constructor(
     private userService: UserService,
     private likesGatewayService: LikesGatewayService,
@@ -21,7 +20,7 @@ export class RateMemberManagerService {
     this.likesGatewayService.likeMember({
       sourceUserId: userId,
       targetUserId: memberId,
-      isLiked
+      isLiked,
     }).subscribe((response: any) => {
       if (response.success) {
         const members = this.filteredMembersService.getFilteredMembers();
@@ -31,6 +30,6 @@ export class RateMemberManagerService {
       } else {
         //this.toastr.error("Something bad happened.");
       }
-    })
+    });
   }
 }

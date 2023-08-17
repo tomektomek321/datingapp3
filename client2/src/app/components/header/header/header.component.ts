@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/infrastructure/auth/services/login/login.service';
 import { UserService } from 'src/app/infrastructure/identity/user.service';
-import { User } from 'src/app/shared/models/identity/User';
-
+import { AppUser } from 'src/app/shared/models/identity/AppUser';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: [ './header.component.scss' ],
 })
 export class HeaderComponent implements OnInit {
-
-  user$: Observable<User>;
+  user$: Observable<AppUser>;
 
   menuShowed: boolean = false;
 
@@ -40,5 +38,4 @@ export class HeaderComponent implements OnInit {
       return '';
     }
   }
-
 }

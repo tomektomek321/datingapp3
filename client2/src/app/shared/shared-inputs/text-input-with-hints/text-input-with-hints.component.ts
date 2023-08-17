@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, pluck } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -12,29 +12,28 @@ interface IdName {
 @Component({
   selector: 'app-text-input-with-hints',
   templateUrl: './text-input-with-hints.component.html',
-  styleUrls: ['./text-input-with-hints.component.scss']
+  styleUrls: [ './text-input-with-hints.component.scss' ],
 })
-export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
-
+export class TextInputWithHintsComponent implements AfterViewInit {
   @ViewChild('textInput') textInput!: ElementRef;
 
   @Input('URL') URL!: string;
 
-  @Input('autoAdd') autoAdd: boolean = false;
+  @Input('autoAdd') autoAdd = false;
 
-  @Input('setValueToInput') setValueToInput: boolean = false;
+  @Input('setValueToInput') setValueToInput = false;
 
-  @Input('valueInput') valueInput: undefined | string = "";
+  @Input('valueInput') valueInput: undefined | string = '';
 
-  @Input('placeholder') placeholder: string = "";
+  @Input('placeholder') placeholder = '';
 
   @Input('label') label: string | false = false;
 
-  @Input('fullWidth') fullWidth: boolean = true;
+  @Input('fullWidth') fullWidth = true;
 
-  @Input('labelWidth') labelWidth: string | undefined = "auto";
+  @Input('labelWidth') labelWidth: string | undefined = 'auto';
 
-  @Input('darkMode') darkMode: boolean = false;
+  @Input('darkMode') darkMode = false;
 
   @Output() callback = new EventEmitter<IdName>();
 
@@ -46,24 +45,22 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
 
   itemToAddObject!: IdName;
 
-  promptShow: boolean = false;
+  promptShow = false;
 
   constructor(
     protected http: HttpClient,
   ) { }
 
-  ngOnInit(): void { }
-
   ngAfterViewInit(): void {
     fromEvent(this.textInput.nativeElement, 'input').pipe(
-      pluck("target", "value"),
+      pluck('target', 'value'),
       debounceTime(400),
     ).subscribe((data: any) => {
       this.request();
-    })
+    });
   }
 
-  @HostListener('window:click', ['$event'])
+  @HostListener('window:click', [ '$event' ])
   handleKeyDown(event: KeyboardEvent) {
     if (this.promptShow)
       this.promptShow = false;
@@ -75,14 +72,14 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
     this.http.get(url).subscribe((response: any) => {
       this.allItems = response.data;
       this.promptShow = true;
-    })
+    });
   }
 
   setValue(value_: any): void {
-
     this.promptShow = false;
     this.itemToAdd = value_.name;
     this.itemToAddObject = value_;
+
     if (this.setValueToInput) {
       this.valueInput = value_.name;
     }
@@ -98,9 +95,9 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
   }
 
   getCSS(): string {
-    let response = "";
-    if (this.fullWidth) { response += "fullWidth" }
+    let response = '';
 
+    if (this.fullWidth) { response += 'fullWidth'; }
 
     return response;
   }
@@ -108,5 +105,4 @@ export class TextInputWithHintsComponent implements OnInit, AfterViewInit {
   getLabelWidth() {
     return this.labelWidth;
   }
-
 }

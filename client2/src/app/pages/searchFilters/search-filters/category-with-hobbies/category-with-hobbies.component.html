@@ -1,0 +1,24 @@
+<!-- <p>
+  {{ category.name }}
+</p> -->
+
+<!-- <div class="hobbies__Container">
+  <ng-container *ngFor="let hobby of category.hobbies">
+    <app-hobby-button
+      [hobby]="hobby"
+    ></app-hobby-button>
+  </ng-container>
+</div> -->
+
+
+<ol class="gradient-list ">
+
+  <li class="hobbies__Container">
+    <div>{{ category.name }}</div>
+    <ng-container *ngFor="let hobby of category.hobbies">
+      <app-hobby-button
+        [hobby]="hobby"
+      ></app-hobby-button>
+    </ng-container>
+  </li>
+</ol>
