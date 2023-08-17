@@ -1,6 +1,5 @@
 using datingapp1.Application.Contracts.Persistance;
 using datingapp1.Domain.Dto.Hobbies;
-
 using MediatR;
 
 namespace datingapp1.Application.Functions.Users.Queries.MyFIlterSettings;

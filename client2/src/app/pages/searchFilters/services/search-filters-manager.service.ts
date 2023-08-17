@@ -64,45 +64,45 @@ export class SearchFiltersManagerService {
     this.searchFiltersService.searchUserParams$.next(searchFilters);
   }
 
-  addHobby(city_: IdName): void {
+  addHobby(hobby: IdName): void {
     const searchFilters = this.searchFiltersService.getSearchUserParams();
 
     const added = searchFilters.hobbies.filter(
-      (item: IdName) => item.id == city_.id,
+      (item: IdName) => item.id == hobby.id,
     );
 
     if (added.length > 0) {
       return;
     }
 
-    searchFilters.hobbies.push(city_);
+    searchFilters.hobbies.push(hobby);
     this.searchFiltersService.searchUserParams$.next(searchFilters);
   }
 
-  removeHobby(city_: IdName): void {
+  removeHobby(hobby: IdName): void {
     const searchFilters = this.searchFiltersService.getSearchUserParams();
 
     const added = searchFilters.hobbies.filter(
-      (item) => item.id != city_.id,
+      (item) => item.id != hobby.id,
     );
 
     searchFilters.hobbies = added;
     this.searchFiltersService.searchUserParams$.next(searchFilters);
   }
 
-  toggleHobby(city_: IdName) {
+  toggleHobby(hobby: IdName) {
     const searchFilters = this.searchFiltersService.getSearchUserParams();
 
     const added = searchFilters.hobbies.filter(
-      (item: IdName) => item.id == city_.id,
+      (item: IdName) => item.id == hobby.id,
     );
 
     if (added.length > 0) {
       searchFilters.hobbies = searchFilters.hobbies.filter(
-        (item: IdName) => item.id != city_.id,
+        (item: IdName) => item.id != hobby.id,
       );
     } else {
-      searchFilters.hobbies.push(city_);
+      searchFilters.hobbies.push(hobby);
     }
 
     this.searchFiltersService.searchUserParams$.next(searchFilters);

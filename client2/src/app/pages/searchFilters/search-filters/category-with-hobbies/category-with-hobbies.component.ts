@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CategoryRs, HobbyRs } from '../../models/myFilterSettings/MyFilterSettings';
 
 @Component({
@@ -6,13 +6,7 @@ import { CategoryRs, HobbyRs } from '../../models/myFilterSettings/MyFilterSetti
   templateUrl: './category-with-hobbies.component.html',
   styleUrls: [ './category-with-hobbies.component.scss' ],
 })
-export class CategoryWithHobbiesComponent implements OnInit {
+export class CategoryWithHobbiesComponent {
   @Input() category!: CategoryRs;
   @Input() userHobbies!: HobbyRs[];
-
-  constructor() { }
-
-  ngOnInit(): void {
-    console.log(this.category);
-  }
 }

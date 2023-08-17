@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { HobbyRs } from '../../../models/myFilterSettings/MyFilterSettings';
 import { SearchFilterRqService } from '../../../services/search-filter-rq.service';
 import { SearchFiltersService } from '../../../services/search-filters.service';
+import { IdName } from 'src/app/shared/models/IdName';
 
 @Component({
   selector: 'app-hobby-button',
@@ -21,8 +22,7 @@ export class HobbyButtonComponent {
 
   isHobbySelected(): boolean {
     const state = this.searchFiltersService.getSearchUserParams();
-    const hobby = state.hobbies.find((h) => h.id === this.hobby.id);
-    console.log(hobby);
+    const hobby = state.hobbies.find((h: IdName) => h.id === this.hobby.id);
     const isSelected = !!hobby;
 
     return isSelected;

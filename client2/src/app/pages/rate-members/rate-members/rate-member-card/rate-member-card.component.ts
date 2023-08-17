@@ -14,7 +14,7 @@ export class RateMemberCardComponent {
     private userManagerService: UserManagerService,
     private rateMemberManagerService: RateMemberManagerService,
   ) {
-    console.log(this.member);
+
   }
 
   toggleLike(isLiked: boolean) {

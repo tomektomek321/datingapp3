@@ -10,8 +10,8 @@ import { CategoryRs } from '../models/myFilterSettings/MyFilterSettings';
 export class SearchFiltersService {
   searchUserParams: SearchUserParams = {
     gender: 0,
-    minAge: 32,
-    maxAge: 37,
+    minAge: 21,
+    maxAge: 23,
     cities: [],
     hobbies: [],
     orderBy: SearchUserOrderByEnum.lastActive,

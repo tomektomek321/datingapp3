@@ -39,14 +39,6 @@ export class SearchFiltersComponent implements OnInit {
         this.searchFiltersManagerService.initFilterSettings(settings);
         this.categoriesWithHobbies = settings.categoriesWithHobbies;
       });
-
-    // this.filteredMembersGatewayService.getMyFilterSettings()
-    //   .subscribe((resp: MyFilterSettingsRs) => {
-    //     console.log(resp);
-    //     this.categoriesWithHobbies = resp.categoriesWithHobbies;
-    //   });
-
-    // this.loadMembers();
   }
 
   loadMembers(): void {

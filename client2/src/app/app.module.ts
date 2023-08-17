@@ -15,6 +15,7 @@ import { EditProfileModule } from './components/edit-profile/edit-profile.module
 import { JwtInterceptor } from './infrastructure/interceptors/jwt.interceptor';
 import { RateMembersModule } from './pages/rate-members/rate-members.module';
 import { SearchFiltersModule } from './pages/searchFilters/search-filters.module';
+import { BottomMenuModule } from './components/bottom-menu/bottom-menu.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,8 @@ import { SearchFiltersModule } from './pages/searchFilters/search-filters.module
     RateMembersModule,
 
     SearchFiltersModule,
+
+    BottomMenuModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
